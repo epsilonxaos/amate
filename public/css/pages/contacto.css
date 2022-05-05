@@ -1,0 +1,177 @@
+/*-------------------------------------------------
+COLORES
+-------------------------------------------------*/
+
+/*-------------------------------------------------
+Fuentes tipograficas
+-------------------------------------------------*/
+
+@media screen and (max-width: 991px) {
+  body {
+    padding-top: 80px;
+  }
+}
+
+.custom-checkbox {
+  display: none;
+}
+
+.custom-checkbox + label {
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.custom-checkbox + label span {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  position: relative;
+  border: 1px solid #EAECEF;
+  background-color: #ffffff;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+.custom-checkbox + label span::before {
+  content: "";
+  opacity: 0;
+  width: 12px;
+  height: 12px;
+  background-color: #000000;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  right: auto;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s;
+  border-radius: 2px;
+}
+
+.custom-checkbox:checked + label span::before {
+  opacity: 1;
+}
+
+.custom-checkbox:disabled + label {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.custom-checkbox:disabled + label span {
+  cursor: default;
+}
+
+.contacto-informacion {
+  background-color: #ffffff;
+  padding-bottom: 30px;
+}
+
+@media screen and (min-width: 992px) {
+  .contacto-informacion {
+    padding-bottom: 50px;
+  }
+}
+
+.contacto-formulario {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: #ffffff;
+}
+
+@media screen and (min-width: 992px) {
+  .contacto-formulario {
+    padding-top: 50px;
+    padding-bottom: 40px;
+  }
+}
+
+.contacto-formulario input.in {
+  padding: 12px 15px;
+  border: 1px solid #000000;
+  border-radius: 0px;
+  box-shadow: none;
+  color: #000000;
+  width: 100%;
+}
+
+.contacto-formulario input.in::-moz-placeholder {
+  color: #000000;
+}
+
+.contacto-formulario input.in:-ms-input-placeholder {
+  color: #000000;
+}
+
+.contacto-formulario input.in::placeholder {
+  color: #000000;
+}
+
+.contacto-formulario textarea.tx {
+  padding: 12px 15px;
+  border: 1px solid #000000;
+  border-radius: 0px;
+  box-shadow: none;
+  color: #000000;
+  width: 100%;
+  resize: none;
+}
+
+.contacto-formulario textarea.tx::-moz-placeholder {
+  color: #000000;
+}
+
+.contacto-formulario textarea.tx:-ms-input-placeholder {
+  color: #000000;
+}
+
+.contacto-formulario textarea.tx::placeholder {
+  color: #000000;
+}
+
+.contacto-mapa {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.contacto-mapa #mapa {
+  height: 280px;
+  width: 100%;
+}
+
+@media screen and (min-width: 992px) {
+  .contacto-mapa {
+    padding-top: 40px;
+    padding-bottom: 30px;
+  }
+}
+
+.contacto-ruta {
+  padding-top: 20px;
+  padding-bottom: 40px;
+  background-color: #ffffff;
+}
+
+.contacto-ruta h4 {
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.09px;
+}
+
+.contacto-ruta h6 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.88;
+}
+
+@media screen and (min-width: 992px) {
+  .contacto-ruta {
+    padding-top: 40px;
+    padding-bottom: 80px;
+  }
+}
+

@@ -1,0 +1,88 @@
+@import '../../variables';
+@import '~@fancyapps/fancybox/dist/jquery.fancybox.css';
+@import '~owl.carousel/dist/assets/owl.carousel.css';
+@import '~owl.carousel/dist/assets/owl.theme.default.css';
+@import '../../components/padding_top_body';
+
+.artes {
+    &-giras {
+        padding-bottom: 50px;
+        background-color: $blanco;
+
+        @import './components/card_bg';
+    }
+
+    &-galeria {
+        padding-bottom: 40px;
+
+        .bg {
+            border-radius: 15px;
+        }
+
+        @import '../../components/tema_navegacion_galerias_negro';
+    }
+
+    &-informacion-1 {
+        padding-bottom: 60px;
+
+        .tags {
+            list-style: none;
+            padding-left: 0px;
+            margin-bottom: 0px;
+
+            display: flex;
+            flex-wrap: wrap;
+
+            li {
+                background-color: $negro;
+                color: $blanco;
+                padding: 6px 14px;
+                font-size: 10px;
+                font-weight: 600;
+                line-height: 1.2;
+                letter-spacing: 0.7px;
+                border-radius: 2px;
+                margin-left: 10px;
+
+                &:nth-child(1) {
+                    margin-left: 0px;
+                }
+            }
+        }
+
+        .card {
+            background-color: $cF9F9F9;
+            border: none;
+            border-radius: 0px;
+
+            .card-body {
+                p {
+                    margin-bottom: 6px;
+
+                    b {
+                        font-weight: 600;
+                    }
+                }
+
+                @media screen and (min-width: 992px) {
+                    padding: 30px 25px;
+                }
+            }
+        }
+    }
+
+    &-eventos-presentados {
+        background-color: $c232323;
+        padding-top: 60px;
+        padding-bottom: 60px;
+
+        h4 {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.5;
+            color: $blanco;
+        }
+
+        @import './components/card_bg';
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "/css/pages/lugares.css": "/css/pages/lugares.css",
+    "/css/pages/pago.css": "/css/pages/pago.css",
+    "/css/pages/eventos.css": "/css/pages/eventos.css",
+    "/panel/css/app.css": "/panel/css/app.css",
+    "/js/pages/asiento.js": "/js/pages/asiento.js",
+    "/js/pages/eventos.js": "/js/pages/eventos.js",
+    "/js/pages/pagos.js": "/js/pages/pagos.js",
+    "/panel/js/main.js": "/panel/js/main.js"
+}

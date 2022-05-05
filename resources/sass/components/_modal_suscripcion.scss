@@ -1,0 +1,65 @@
+#mdSuscripcion {
+
+    .modal-dialog {
+        @media screen and (min-width: 600px) {
+            max-width: 600px;
+        }
+    }
+
+    .modal-content {
+        border: none;
+        border-radius: 0px;
+    }
+
+    .modal-header {
+        border: none;
+        background-color: $negro;
+        border-radius: 0px;
+        position: relative;
+
+        img.cerrar {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.56;
+            letter-spacing: -0.43px;
+            text-align: center;
+            color: $blanco;
+        }
+
+        @import './form_suscripcion';
+    }
+
+    .modal-body {
+        input.in {
+            padding: 6px 15px;
+            border: 1px solid $negro;
+            border-radius: 0px;
+            box-shadow: none;
+            color: $negro;
+            width: 100%;
+
+            &::placeholder {
+                color: $negro;
+            }
+        }
+    }
+
+    .btn-negro {
+        background-color: $negro;
+        color: $blanco;
+        padding: 9px 17px;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        border: none;
+        border-radius: 0px;
+    }
+}

@@ -1,0 +1,21 @@
+footer.footer {
+    padding-top: 55px;
+    background-color: $c232323;
+
+    p {
+        line-height: 2.07;
+        color: $blanco;
+    }
+
+    a.redes {
+        & + .redes {
+            margin-left: 20px;
+        }
+    }
+
+    @import '../components/form_suscripcion';
+
+    .bg-black {
+        background-color: $negro;
+    }
+}

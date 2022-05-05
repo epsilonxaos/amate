@@ -1,0 +1,65 @@
+.swiper-button-prev,
+.swiper-button-next {
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    border: 1px solid $negro;
+    border-radius: 0px;
+    height: 40px;
+    width: 40px;
+
+    &::after {
+        opacity: 0;
+    }
+}
+
+.swiper-button-prev {
+    background-image: url(/img/icons/icon-prev-arrow-negro.png);
+
+    @media screen and (min-width: 576px) {
+        left: -60px;
+    }
+}
+.swiper-button-next {
+    background-image: url(/img/icons/icon-next-arrow-negro.png);
+
+    @media screen and (min-width: 576px) {
+        right: -60px;
+    }
+}
+
+.swiper-container {
+    width: 100%;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+
+
+    &.gallery-top {
+        height: 80%;
+        width: 100%;
+
+        .bg {
+            border-radius: 15px;
+        }
+    }
+
+    &.gallery-thumbs {
+        height: auto;
+        box-sizing: border-box;
+        padding: 10px 0;
+
+        .swiper-slide {
+            width: 20%;
+            height: 87px;
+            border: 1px solid $blanco;
+            cursor: pointer;
+        }
+
+        .swiper-slide-thumb-active {
+            transition: border 350ms;
+            border: solid 1.4px #238fcd;
+        }
+    }
+}

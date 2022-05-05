@@ -1,0 +1,48 @@
+.nav a {
+  background: $secondary;
+  display: inline-block;
+  height: 44px;
+  position: relative;
+  width: 150px;
+  color: $blanco;
+  text-align: center;
+  line-height: 1.8;
+  font-weight: 700;
+
+  &:nth-child(2), &:nth-child(3){
+    border: 22px solid $secondary;
+    border-left: 22px solid transparent;
+    border-right: 0px;
+    width: 150px;
+    height: 44px;
+    padding: inherit;
+    line-height: 0.2;
+    background: inherit;
+    margin-left: 20px;
+    &:before{
+      left: 128px;
+      width: 0;
+      top: -22px;
+    }
+  }
+
+  &:before {
+    border-top: 22px solid transparent;
+    border-left: 22px solid $secondary;
+    border-bottom: 22px solid transparent;
+    content: "";
+    height: 0;
+    position: absolute;
+    left: 150px;
+    width: 0;
+    top: 0;
+  }
+}
+
+.countdown{
+  color: $blanco;
+  #getting-started{
+    font-size: 24px;
+    letter-spacing: 5px;
+  }
+}

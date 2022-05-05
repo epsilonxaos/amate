@@ -1,0 +1,34 @@
+.loading {
+    background-color: $negro;
+    position: fixed;
+    z-index: 2500;
+    display: flex;
+    flex-wrap: wrap;
+    color: $blanco;
+    top: 0px;
+    left: 0px;
+
+    .spinner {
+        width: 40px;
+        height: 40px;
+        margin: 100px auto;
+        background-color: $blanco;
+        border-radius: 100%;
+        animation: skscaleout 1.0s infinite ease-in-out;
+        position: absolute;
+        // top: 120px;
+        top: -70px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+    }
+    @keyframes skscaleout {
+        0% {
+            transform: scale(0);
+        } 100% {
+            transform: scale(1.0);
+            opacity: 0;
+        }
+    }
+}

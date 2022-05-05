@@ -1,0 +1,151 @@
+@import '../variables';
+@import '~@fancyapps/fancybox/dist/jquery.fancybox.css';
+@import '~owl.carousel/dist/assets/owl.carousel.css';
+@import '~owl.carousel/dist/assets/owl.theme.default.css';
+@import '../components/buttons';
+@import '../components/inputs';
+#mapa{width: 100%; height: 300px;}
+.eventos {
+    color: #fff;
+    &-banner {
+        padding-top: 130px;
+        padding-bottom: 60px;
+        position: relative;
+
+        /*&::before {
+            content: "";
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.69);
+            z-index: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }*/
+
+        h3 {
+            position: relative;
+            z-index: 2;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.14px;
+            color: $blanco;
+
+            @media screen and (min-width: 992px) {
+                font-size: 38px;
+            }
+        }
+
+        @media screen and (min-width: 992px) {
+            padding-top: 200px;
+            padding-bottom: 130px;
+        }
+    }
+
+    &-content{
+        .cover{
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .footer{
+            background-color: #1d222b;
+            padding: 15px 10px;
+        }
+    }
+
+    &-portada{
+        margin-bottom: 35px;
+        img{max-width: 700px; }
+    }
+
+    &-informacion {
+        padding: 40px 0px;
+        background-color: $primary;
+
+        p {
+            color: $blanco;
+            line-height: 1.88;
+        }
+        h5{
+            font-size: 20px;
+            color: $blanco;
+            font-weight: 700;
+        }
+    }
+
+    &-listados {
+        padding-bottom: 40px;
+        background-color: $primary;
+
+        @import './artes/components/card_bg';
+
+        @media screen and (min-width: 992px) {
+            padding-bottom: 60px;
+        }
+    }
+
+    &-galeria {
+        padding-bottom: 40px;
+
+        .bg {
+            border-radius: 15px;
+        }
+
+        @import '../components/tema_navegacion_galerias_negro';
+
+        @media screen and (max-width: 991px) {
+            padding-top: 80px;
+        }
+    }
+
+    &-informacion-1 {
+        padding-bottom: 60px;
+
+        .tags {
+            list-style: none;
+            padding-left: 0px;
+            margin-bottom: 0px;
+
+            display: flex;
+            flex-wrap: wrap;
+
+            li {
+                background-color: $negro;
+                color: $blanco;
+                padding: 6px 14px;
+                font-size: 10px;
+                font-weight: 600;
+                line-height: 1.2;
+                letter-spacing: 0.7px;
+                border-radius: 2px;
+                margin-left: 10px;
+
+                &:nth-child(1) {
+                    margin-left: 0px;
+                }
+            }
+        }
+
+        .card {
+            background-color: #141A23;
+            border: none;
+            border-radius: 0px;
+
+            .card-body {
+                color: $blanco;
+                p {
+                    margin-bottom: 6px;
+
+                    b {
+                        font-weight: 600;
+                    }
+                }
+
+                @media screen and (min-width: 992px) {
+                    padding: 30px 25px;
+                }
+            }
+        }
+    }
+}

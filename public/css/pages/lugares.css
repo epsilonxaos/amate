@@ -1,0 +1,135 @@
+/*-------------------------------------------------
+COLORES
+-------------------------------------------------*/
+
+/*-------------------------------------------------
+Fuentes tipograficas
+-------------------------------------------------*/
+
+.btn-primary {
+  color: #fff;
+  background-color: #2792F6;
+  border-color: #2792F6;
+}
+
+.btn-primary:hover {
+  color: #2792F6;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.nav a {
+  background: #141A23;
+  display: inline-block;
+  height: 44px;
+  position: relative;
+  width: 150px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.nav a:nth-child(2),
+.nav a:nth-child(3) {
+  border: 22px solid #141A23;
+  border-left: 22px solid transparent;
+  border-right: 0px;
+  width: 150px;
+  height: 44px;
+  padding: inherit;
+  line-height: 0.2;
+  background: inherit;
+  margin-left: 20px;
+}
+
+.nav a:nth-child(2):before,
+.nav a:nth-child(3):before {
+  left: 128px;
+  width: 0;
+  top: -22px;
+}
+
+.nav a:before {
+  border-top: 22px solid transparent;
+  border-left: 22px solid #141A23;
+  border-bottom: 22px solid transparent;
+  content: "";
+  height: 0;
+  position: absolute;
+  left: 150px;
+  width: 0;
+  top: 0;
+}
+
+.countdown {
+  color: #ffffff;
+}
+
+.countdown #getting-started {
+  font-size: 24px;
+  letter-spacing: 5px;
+}
+
+.lugares {
+  padding: 40px 0;
+}
+
+.lugares .batch_reserved {
+  fill: red;
+  pointer-events: none;
+}
+
+.lugares .batch_enabled {
+  fill: #3cce12;
+}
+
+.lugares .batch_enabled.on {
+  fill: #0d8ede;
+}
+
+.lugares .batch_disabled {
+  fill: #8c8e90;
+  pointer-events: none;
+}
+
+.lugares .footer-svg {
+  border-radius: 50px;
+  background-color: #ffffff;
+  height: auto;
+  width: 100%;
+  padding: 30px 50px;
+}
+
+.lugares .footer-svg label {
+  margin-left: 15px;
+}
+
+@media screen and (max-width: 1024px) {
+  .lugares .footer-svg {
+    padding: 30px 15px;
+  }
+
+  .lugares .footer-svg label {
+    margin-left: 5px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .lugares .footer-svg {
+    padding: 20px 15px;
+  }
+
+  .lugares .footer-svg label {
+    margin-left: 0px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .lugares {
+    padding-top: 80px;
+  }
+}
+

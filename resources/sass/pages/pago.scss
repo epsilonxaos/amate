@@ -1,0 +1,62 @@
+@import '../variables';
+@import '../components/buttons';
+@import '../components/nav';
+@import '../components/custom-radios';
+.pago{
+  padding: 40px 0;
+  h3{
+    color: $blanco;
+    font-size: 20px;
+  }
+  h1{
+    color: $blanco;
+    line-height: 2;
+    span{
+      letter-spacing: 15px;
+    }
+  }
+  hr{
+    margin: 50px 0px;
+    border-top: 1px solid $blanco;
+  }
+  .card{
+    border: 0px;
+    border-radius: 0px;
+    .card-text{
+      line-height: 1.9;
+      color: $primary;
+    }
+    .card-footer{
+      border-radius: 0px;
+      background-color: $secondary;
+    }
+  }
+  input, input:focus, input:active{
+    height: 47px;
+    background-color: transparent;
+    color: $blanco;
+  }
+
+  .content-cupon{
+    background-color: $secondary;
+    padding: 15px;
+    input, input:focus, input:active{
+      background-color: $blanco;
+      color: $primary;
+    }
+    button{
+      color: #000;
+      background-color: $blanco;
+      border-color: $blanco;
+      height: 47px;
+      border-radius: 50px;
+      padding: 0px 30px;
+      &:hover{
+        color: $blanco;
+        background-color: $primary;
+        border-color: $primary;
+      }
+    }
+  }
+
+}

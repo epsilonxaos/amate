@@ -1,0 +1,56 @@
+.owl-carousel .owl-video-tn {
+    background-size: cover;
+}
+
+.owl-theme .owl-nav {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+
+    @media screen and (min-width: 768px) {
+        justify-content: space-around;
+    }
+}
+
+.owl-carousel .owl-nav button.owl-prev,
+.owl-carousel .owl-nav button.owl-next {
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    border: 1px solid $blanco;
+    border-radius: 0px;
+    height: 40px;
+    width: 40px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+    span {
+        opacity: 0;
+    }
+}
+
+.owl-carousel .owl-nav button.owl-prev {
+    background-image: url(/img/icons/icon-prev-arrow-blanco.png);
+}
+.owl-carousel .owl-nav button.owl-next {
+    background-image: url(/img/icons/icon-next-arrow-blanco.png);
+}
+
+.owl-theme .owl-dots {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    z-index: 1;
+}
+
+.owl-theme .owl-dots .owl-dot span {
+    background-color: transparent;
+    border: 1px solid $blanco;
+    margin: 5px 3px;
+}
+
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+    background-color: $blanco;
+}

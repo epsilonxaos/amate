@@ -1,0 +1,147 @@
+/*-------------------------------------------------
+COLORES
+-------------------------------------------------*/
+
+/*-------------------------------------------------
+Fuentes tipograficas
+-------------------------------------------------*/
+
+@media screen and (max-width: 991px) {
+  body {
+    padding-top: 80px;
+  }
+}
+
+.blog input[name=busqueda] {
+  width: 100%;
+  padding: 6px 15px;
+  border: 2px solid #000000;
+  box-shadow: none;
+  color: #000000;
+  border-radius: 0px;
+}
+
+.blog input[name=busqueda]::-moz-placeholder {
+  color: #000000;
+  font-weight: 500;
+}
+
+.blog input[name=busqueda]:-ms-input-placeholder {
+  color: #000000;
+  font-weight: 500;
+}
+
+.blog input[name=busqueda]::placeholder {
+  color: #000000;
+  font-weight: 500;
+}
+
+.blog-principal {
+  padding-bottom: 40px;
+  background-color: #ffffff;
+}
+
+.blog-principal .categorias a.active {
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.blog-principal .categorias a + a {
+  margin-left: 20px;
+}
+
+@media screen and (min-width: 992px) {
+  .blog-principal .categorias a + a {
+    margin-left: 30px;
+  }
+}
+
+.blog-principal .bg {
+  height: 247px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.blog-principal small {
+  font-size: 12px;
+  line-height: 1.67;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.blog-principal h5 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.06px;
+}
+
+@media screen and (min-width: 992px) {
+  .blog-principal {
+    padding-bottom: 60px;
+  }
+}
+
+.blog-detalle {
+  padding-bottom: 40px;
+  background-color: #ffffff;
+}
+
+.blog-detalle .bg {
+  max-height: 430px;
+}
+
+.blog-detalle h4 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.blog-detalle h4,
+.blog-detalle p {
+  line-height: 1.88;
+}
+
+.blog-detalle img {
+  width: 100%;
+}
+
+.blog-detalle .ultimos-post .bg {
+  height: 247px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.blog-detalle .ultimos-post small {
+  font-size: 12px;
+  line-height: 1.67;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.blog-detalle .ultimos-post h5 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.06px;
+}
+
+.blog-detalle .ultimos-post p {
+  line-height: 1.5;
+}
+
+.blog-detalle h5.tlo {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.67;
+}
+
+.blog-detalle hr {
+  border-color: #000000;
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 992px) {
+  .blog-detalle {
+    padding-bottom: 60px;
+  }
+}
+

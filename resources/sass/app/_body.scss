@@ -1,0 +1,164 @@
+body {
+    background-color: $primary;
+    min-height: 100vh;
+    width: 100%;
+	position: relative;
+    font-family: $font-family-open-sans;
+
+	* {
+		outline: none !important;
+	}
+
+    @import '../components/custom-margin';
+    @import '../components/custom-max-width';
+    @import '../components/custom-width';
+
+	a:hover,
+	a:focus,
+	a:active,
+	a {
+		color: inherit;
+		text-decoration: none;
+    }
+
+    .pointer {
+        cursor: pointer;
+    }
+
+    .bg {
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+		width: 100%;
+		height: auto;
+
+		img {
+			width: 100%;
+			height: auto;
+			visibility: hidden;
+		}
+
+		&.bg-size-contain {
+			background-size: contain;
+		}
+
+		&.bg-size-auto {
+			background-size: auto;
+		}
+
+		&.bg-size-cover {
+			background-size: cover;
+		}
+	}
+
+	.btn {
+        &.btn-blanco-negro,
+        &.btn-blanco-negro-invert {
+            padding: 6px 4px;
+            border-radius: 0px;
+            min-width: 120px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+
+            @media screen and (min-width: 1200px) {
+                font-size: 14px;
+            }
+        }
+
+        &.btn-blanco-negro {
+            position: relative;
+            border: solid 2px $negro;
+            background-color: $blanco;
+            color: $negro;
+
+            &::before {
+                content: "";
+                width: 45px;
+                border-left: 6px solid $blanco;
+                border-right: 6px solid $blanco;
+                position: absolute;
+                bottom: -2px;
+                left: 50%;
+                height: 3px;
+                transform: translate(-50%, 0%);
+            }
+        }
+
+        &.btn-blanco-negro-invert {
+            position: relative;
+            border: solid 2px $blanco;
+            background-color: $negro;
+            color: $blanco;
+
+            &::before {
+                content: "";
+                width: 45px;
+                border-left: 6px solid $negro;
+                border-right: 6px solid $negro;
+                position: absolute;
+                bottom: -2px;
+                left: 50%;
+                height: 3px;
+                transform: translate(-50%, 0%);
+            }
+        }
+
+        &.btn-blanco-negro,
+        &.btn-blanco-negro-invert {
+            &.transparent {
+                background-color: transparent;
+            }
+        }
+    }
+
+    p {
+        font-family: $font-family-open-sans;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.5;
+        color: $blanco;
+
+        @media screen and (min-width: 992px) {
+            font-size: 16px;
+        }
+    }
+
+    .titulo {
+        font-family: $font-family-open-sans;
+        font-size: 28px;
+        letter-spacing: -0.1px;
+        color: $blanco;
+    }
+
+    .btn-murmurante-online {
+        position: fixed;
+        top: 200px;
+        right: 0px;
+        z-index: 100;
+        background-color: #E51E29;
+        color: $blanco;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+        padding: 0px 18px;
+        padding-right: 32px;
+        box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.13);
+
+        &:hover,
+        &:active,
+        &:focus {
+            color: $blanco;
+        }
+
+        @media screen and (max-width: 1199px) {
+            transform: rotate(-90deg) translate(0px, 75px);
+        }
+    }
+
+    .modal {
+        background: rgba(41, 41, 41, 0.89);
+    }
+
+    @import '../components/modal_suscripcion';
+}

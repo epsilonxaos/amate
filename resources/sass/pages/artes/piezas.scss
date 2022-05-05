@@ -1,0 +1,67 @@
+@import '../../variables';
+@import '~@fancyapps/fancybox/dist/jquery.fancybox.css';
+@import '../../components/padding_top_body';
+@import '~swiper/swiper-bundle.css';
+
+.artes {
+    &-piezas {
+        padding-bottom: 50px;
+        background-color: $blanco;
+
+        @import './components/card_bg';
+    }
+
+    &-informacion-1 {
+        background-color: $blanco;
+        padding-bottom: 40px;
+
+        h5 {
+            font-family: $font-family-prata;
+            font-size: 22px;
+        }
+
+        p {
+            margin-bottom: 6px;
+        }
+
+        @import '../../components/tema_thumbs_swiper';
+    }
+
+    &-informacion-2 {
+        background-color: #fcfcfc;
+        padding-top: 40px;
+        padding-bottom: 50px;
+
+        p {
+            line-height: 1.88;
+        }
+
+        .nav-pills {
+            a {
+                font-size: 16px;
+                line-height: 1.88;
+                color: $negro;
+                padding: 20px 25px;
+                background-color: #f1f1f1;
+                border: none;
+                border-radius: 0px;
+                background-image: url(/img/icons/icon-caret.png);
+                background-repeat: no-repeat;
+                background-position: 95%;
+                background-size: auto;
+
+                &.active {
+                    background-image: url(/img/icons/icon-caret-active.png);
+                    background-color: $negro;
+                    color: $blanco;
+                }
+            }
+        }
+
+        .tab-content {
+            img {
+                width: 100%;
+            }
+        }
+    }
+}

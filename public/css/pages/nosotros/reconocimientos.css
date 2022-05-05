@@ -1,0 +1,145 @@
+/*-------------------------------------------------
+COLORES
+-------------------------------------------------*/
+
+/*-------------------------------------------------
+Fuentes tipograficas
+-------------------------------------------------*/
+
+@media screen and (max-width: 991px) {
+  body {
+    padding-top: 80px;
+  }
+}
+
+.nosotros {
+  background-color: #ffffff;
+}
+
+.nosotros-reconocimientos {
+  padding-bottom: 50px;
+}
+
+.nosotros-reconocimientos p {
+  line-height: 2;
+}
+
+.nosotros-reconocimientos + .nosotros-reconocimientos {
+  padding-top: 50px;
+}
+
+.nosotros-reconocimientos.fondo-gris {
+  background-image: url(/img/nosotros/reconocimientos/fondo-gris.png);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: auto;
+}
+
+@media screen and (min-width: 1500px) {
+  .nosotros-reconocimientos.fondo-gris {
+    background-size: 100%;
+  }
+}
+
+.nosotros-encuentro {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: #f9f9f9;
+}
+
+.nosotros-encuentro .grid-sizer {
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .nosotros-encuentro .grid-sizer {
+    width: 48%;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .nosotros-encuentro .grid-sizer {
+    width: 30%;
+  }
+}
+
+.nosotros-encuentro .card {
+  border-radius: 0px;
+  border: none;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.nosotros-encuentro .card p {
+  line-height: 1.88;
+}
+
+.nosotros-encuentro .card p.bold {
+  font-weight: 700;
+}
+
+.nosotros-encuentro .card p.semi-bold {
+  font-weight: 500;
+}
+
+.nosotros-encuentro .card a {
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 768px) {
+  .nosotros-encuentro .card {
+    width: 48%;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .nosotros-encuentro .card {
+    width: 30%;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .nosotros #mdComentarios .modal-dialog {
+    max-width: 600px;
+  }
+}
+
+.nosotros #mdComentarios .modal-content {
+  border: none;
+  border-radius: 0px;
+}
+
+.nosotros #mdComentarios .modal-header {
+  border: none;
+  background-color: #000000;
+  border-radius: 0px;
+  position: relative;
+}
+
+.nosotros #mdComentarios .modal-header img.cerrar {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.nosotros #mdComentarios .modal-body p {
+  line-height: 1.88;
+}
+
+.nosotros #mdComentarios .modal-footer {
+  border: none;
+}
+
+.nosotros #mdComentarios .btn-negro {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 9px 17px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 0px;
+}
+

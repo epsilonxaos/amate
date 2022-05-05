@@ -1,0 +1,112 @@
+/*-------------------------------------------------
+COLORES
+-------------------------------------------------*/
+
+/*-------------------------------------------------
+Fuentes tipograficas
+-------------------------------------------------*/
+
+@media screen and (max-width: 991px) {
+  body {
+    padding-top: 80px;
+  }
+}
+
+.nosotros-murmurantes .bg-gris {
+  padding-top: 40px;
+  min-height: 600px;
+  position: relative;
+  z-index: 1;
+}
+
+.nosotros-murmurantes .bg-gris::before {
+  content: "";
+  width: 100%;
+  background-color: #F9F9F9;
+  height: 50%;
+  max-height: 800px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+}
+
+.nosotros-murmurantes-detalle {
+  background-color: #000000;
+  padding-top: 40px;
+  padding-bottom: 70px;
+}
+
+.nosotros-murmurantes-detalle h3 {
+  font-family: "Prata", serif;
+  font-size: 40px;
+  line-height: 0.85;
+  margin-bottom: 10px;
+}
+
+.nosotros-murmurantes-detalle h5 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.44;
+}
+
+.nosotros-murmurantes-detalle .redes + .redes {
+  margin-left: 20px;
+}
+
+.nosotros-murmurantes a,
+.nosotros-murmurantes-detalle-info a {
+  max-width: 282px;
+}
+
+.nosotros-murmurantes h4,
+.nosotros-murmurantes-detalle-info h4 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.05;
+  color: #232323;
+  margin-bottom: 5px;
+}
+
+.nosotros-murmurantes h6,
+.nosotros-murmurantes-detalle-info h6 {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.77;
+  color: #000000;
+  text-transform: uppercase;
+}
+
+.nosotros-murmurantes-detalle-info {
+  padding-top: 65px;
+  padding-bottom: 85px;
+  background-color: #ffffff;
+}
+
+.nosotros-murmurantes-detalle-info p {
+  line-height: 1.88;
+  color: #232323;
+}
+
+.nosotros-murmurantes-detalle-info p b {
+  font-weight: 600;
+}
+
+.nosotros-murmurantes-detalle-info h3 {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.67;
+}
+
+.nosotros-murmurantes-detalle-info hr {
+  margin-top: 0px;
+  margin-bottom: 30px;
+  border-color: #000;
+  border-width: 2px;
+}
+
+.nosotros-murmurantes-detalle-info .btn.btn-blanco-negro {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+

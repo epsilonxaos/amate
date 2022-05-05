@@ -1,0 +1,110 @@
+/*-------------------------------------------------
+COLORES
+-------------------------------------------------*/
+
+/*-------------------------------------------------
+Fuentes tipograficas
+-------------------------------------------------*/
+
+@media screen and (max-width: 991px) {
+  body {
+    padding-top: 80px;
+  }
+}
+
+.nosotros-aliados {
+  padding-bottom: 30px;
+  background-color: #ffffff;
+}
+
+.nosotros-aliados p {
+  line-height: 1.88;
+}
+
+@media screen and (min-width: 992px) {
+  .nosotros-aliados {
+    padding-bottom: 60px;
+  }
+}
+
+.nosotros-informacion {
+  padding-top: 20px;
+  padding-bottom: 40px;
+  background-color: #ffffff;
+}
+
+@media screen and (min-width: 992px) {
+  .nosotros-informacion {
+    padding-top: 60px;
+    padding-bottom: 100px;
+  }
+}
+
+.nosotros-formulario {
+  padding: 40px 0px;
+}
+
+.nosotros-formulario h4 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.69;
+  letter-spacing: -0.07px;
+}
+
+@media screen and (min-width: 992px) {
+  .nosotros-formulario h4 {
+    font-size: 20px;
+  }
+}
+
+.nosotros-formulario input.in {
+  padding: 12px 15px;
+  border: 1px solid #ffffff;
+  border-radius: 0px;
+  box-shadow: none;
+  color: #ffffff;
+  width: 100%;
+  background-color: transparent;
+}
+
+.nosotros-formulario input.in::-moz-placeholder {
+  color: #ffffff;
+}
+
+.nosotros-formulario input.in:-ms-input-placeholder {
+  color: #ffffff;
+}
+
+.nosotros-formulario input.in::placeholder {
+  color: #ffffff;
+}
+
+.nosotros-formulario textarea.tx {
+  padding: 12px 15px;
+  border: 1px solid #ffffff;
+  border-radius: 0px;
+  box-shadow: none;
+  color: #ffffff;
+  width: 100%;
+  background-color: transparent;
+  resize: none;
+}
+
+.nosotros-formulario textarea.tx::-moz-placeholder {
+  color: #ffffff;
+}
+
+.nosotros-formulario textarea.tx:-ms-input-placeholder {
+  color: #ffffff;
+}
+
+.nosotros-formulario textarea.tx::placeholder {
+  color: #ffffff;
+}
+
+@media screen and (min-width: 992px) {
+  .nosotros-formulario {
+    padding: 60px 0px;
+  }
+}
+
