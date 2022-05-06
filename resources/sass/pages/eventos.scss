@@ -1,12 +1,63 @@
 @import '../variables';
 @import '~@fancyapps/fancybox/dist/jquery.fancybox.css';
-@import '~owl.carousel/dist/assets/owl.carousel.css';
-@import '~owl.carousel/dist/assets/owl.theme.default.css';
+// @import '~owl.carousel/dist/assets/owl.carousel.css';
+// @import '~owl.carousel/dist/assets/owl.theme.default.css';
+@import '~swiper/swiper-bundle.min.css';
 @import '../components/buttons';
 @import '../components/inputs';
+
 #mapa{width: 100%; height: 300px;}
+
 .eventos {
-    color: #fff;
+    &-slide {
+        .swiper {
+            height: calc(100vh - 60px);
+
+            @media screen and (min-width: 992px) {
+                height: calc(100vh - 80px);
+            }
+        }
+
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .info {
+            position: absolute;
+            bottom: 80px;
+            left: 0;
+            width: 100%;
+            z-index: 2;
+
+            h2 {
+               font-size: 30px;
+               color: $blanco;
+               font-weight: bold;
+
+                @media screen and (min-width: 992px) {
+                    font-size: 40px;
+                }
+                @media screen and (min-width: 992px) {
+                    font-size: 48px;
+                }
+            }
+        }
+
+        .swiper-pagination-bullet {
+            opacity: 1;
+            background-color: transparent;
+            border: 1px solid $blanco;
+            width: 20px;
+            height: 20px;
+        }
+        .swiper-pagination-bullet-active {
+            background-color: $main;
+        }
+    }
+
+
     &-banner {
         padding-top: 130px;
         padding-bottom: 60px;

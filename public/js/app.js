@@ -42924,6 +42924,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   document.getElementById('btn-menu-toggle').addEventListener('click', function () {
     this.classList.toggle('active');
     document.querySelector('.sidebar-left').classList.toggle('active');
+    document.querySelector('body').classList.toggle('overflow-hidden');
   }, false);
   setTimeout(function () {
     $('.loading').fadeOut(350);
@@ -43033,21 +43034,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/sass/panel/app.scss":
-/*!***************************************!*\
-  !*** ./resources/sass/panel/app.scss ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ 0:
-/*!******************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/pages/lugares.scss ./resources/sass/pages/pago.scss ./resources/sass/pages/eventos.scss ./resources/sass/panel/app.scss ***!
-  \******************************************************************************************************************************************************************************************************/
+/*!**********************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/pages/lugares.scss ./resources/sass/pages/pago.scss ./resources/sass/pages/eventos.scss ***!
+  \**********************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43055,8 +43045,7 @@ __webpack_require__(/*! D:\Proyectos D\Locker\amate\resources\js\app.js */"./res
 __webpack_require__(/*! D:\Proyectos D\Locker\amate\resources\sass\app.scss */"./resources/sass/app.scss");
 __webpack_require__(/*! D:\Proyectos D\Locker\amate\resources\sass\pages\lugares.scss */"./resources/sass/pages/lugares.scss");
 __webpack_require__(/*! D:\Proyectos D\Locker\amate\resources\sass\pages\pago.scss */"./resources/sass/pages/pago.scss");
-__webpack_require__(/*! D:\Proyectos D\Locker\amate\resources\sass\pages\eventos.scss */"./resources/sass/pages/eventos.scss");
-module.exports = __webpack_require__(/*! D:\Proyectos D\Locker\amate\resources\sass\panel\app.scss */"./resources/sass/panel/app.scss");
+module.exports = __webpack_require__(/*! D:\Proyectos D\Locker\amate\resources\sass\pages\eventos.scss */"./resources/sass/pages/eventos.scss");
 
 
 /***/ })

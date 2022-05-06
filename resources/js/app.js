@@ -1,10 +1,12 @@
 require('./bootstrap');
 global.$ = global.jQuery = require('jquery');
 require('@fancyapps/fancybox');
+
 document.addEventListener("DOMContentLoaded", function (event) {
     document.getElementById('btn-menu-toggle').addEventListener('click', function(){
         this.classList.toggle('active');
         document.querySelector('.sidebar-left').classList.toggle('active');
+        document.querySelector('body').classList.toggle('overflow-hidden');
     }, false);
 
 	setTimeout(() => {

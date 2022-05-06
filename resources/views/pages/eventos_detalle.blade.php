@@ -102,11 +102,12 @@
 @endsection
 
 @push('js')
-    <script src="{{mix('js/pages/eventos.js')}}"></script>
     <script type="text/javascript">
         var lat = {{$evento -> latitud}},
-            lng = {{$evento -> longitud}};
+        lng = {{$evento -> longitud}};
+        const EVENTO_VIEW_DETAIL = true;
     </script>
+    <script src="{{mix('js/pages/eventos.js')}}"></script>
     <script src="{{asset('js/mapa.js')}}?v=5524"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuu1Q0hHmlO30h7YRDZ0mWYof-SM-edns&callback=initMap"></script>
 @endpush

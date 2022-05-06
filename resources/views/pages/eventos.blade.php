@@ -6,9 +6,34 @@
 
 @section('contenido')
     <div class="section eventos">
-        <div class="eventos-banner text-center bg" style="background-image: url({{asset('img/eventos/banner.jpg')}})">
-            <h3>Eventos</h3>
+        <div class="eventos-slide overflow-hidden position-relative">
+            <div class="swiper" id="swiperSlide">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                  <!-- Slides -->
+                  <div class="swiper-slide">
+                      <img src="{{asset('img/slide01.jpg')}}" alt="Galeria">
+                  </div>
+                  <div class="swiper-slide">
+                      <img src="{{asset('img/slide01.jpg')}}" alt="Galeria">
+                  </div>
+                  <div class="swiper-slide">
+                      <img src="{{asset('img/slide01.jpg')}}" alt="Galeria">
+                  </div>
+                </div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+
+            <div class="info text-center pl-3 pr-3 pl-md-5 pr-md-5">
+                <h2 class="mb-4">Introducción a la Apnea</h2>
+                <a href="#" class="btn btn-white fw-500">¡Quiero ir!</a>
+            </div>
         </div>
+
+        {{-- <div class="eventos-banner text-center bg" style="background-image: url({{asset('img/eventos/banner.jpg')}})">
+            <h3>Eventos</h3>
+        </div> --}}
 
         <div class="eventos-informacion">
             <div class="container">
@@ -43,3 +68,10 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script>
+        const EVENTO_VIEW_DETAIL = false;
+    </script>
+    <script src="{{mix('js/pages/eventos.js')}}"></script>
+@endpush

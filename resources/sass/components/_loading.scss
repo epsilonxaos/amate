@@ -1,5 +1,5 @@
 .loading {
-    background-color: $negro;
+    background-color: $main;
     position: fixed;
     z-index: 2500;
     display: flex;
@@ -7,6 +7,10 @@
     color: $blanco;
     top: 0px;
     left: 0px;
+
+    img {
+        margin-bottom: 15px;
+    }
 
     .spinner {
         width: 40px;
