@@ -1,37 +1,47 @@
-{{--<footer class="footer">
-    <div class="container-fluid w15 m40">
-        <div class="row justify-content-between align-items-center">
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 text-center text-sm-left col-xl-4 m30 mb-lg-0">
-                <div class="row">
-                    <div class="col-12 col-md-6">
-                        <img src="{{asset('img/menu/logo-blanco.png')}}" alt="" class="w-max-100">
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <p>D. C. 9 entre 18 y Av. 20.<br>Col. México Norte<br>T. 2908 239</p>
-                    </div>
+<footer>
+    <div class="ft-telefonos pt-5 pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-6 text-center text-white mb-4 mb-sm-0">
+                    <img src="{{asset('img/61.png')}}" alt="61" class="mb-3">
+                    <p class="mb-0">Lets get in touch</p>
+                    <p class="mb-0">+52 (999) 2712813</p>
+                    <p class="mb-0">61@casaamate.mx</p>
                 </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-5 col-lg-4 text-center text-sm-left col-xl-3 m30 mb-lg-0">
-                <p class="mb-0"><a href="mailto:comunidadmurmurante@gmail.com">comunidadmurmurante@gmail.com</a></p>
-                <p class="mb-1"><a href="#">Aviso de Privacidad</a></p>
-                <a class="redes" href="#"><img src="{{asset('img/footer/facebook.png')}}" alt="Facebook"></a>
-                <a class="redes" href="#"><img src="{{asset('img/footer/instagram.png')}}" alt="Instagram"></a>
-                <a class="redes" href="#"><img src="{{asset('img/footer/twitter.png')}}" alt="Twitter"></a>
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 m30 mb-lg-0">
-                <div class="input-group input-group-suscripcion">
-                    <form action="" id="form-suscribe">
-                        <input type="mail" class="form-control" required placeholder="E-mail" name="subscribe_mail" aria-label="E-mail" aria-describedby="enviar-suscripcion-footer">
-                        <div class="input-group-append">
-                            <button class="btn btn-blanco-negro text-uppercase" data-url="" type="button" id="enviar-suscripcion-footer">Suscribirse</button>
-                        </div>
-                    </form>
+                <div class="col-12 col-sm-6 text-center text-white">
+                    <img src="{{asset('img/62.png')}}" alt="62" class="mb-3">
+                    <p class="mb-0">Lets get in touch</p>
+                    <p class="mb-0">+52 (999) 2712813</p>
+                    <p class="mb-0">62@casaamate.mx</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="bg-black text-center py-1">
-        <p class="mb-0">©{{Date('Y')}} - Murmurante. Todos los derechos reservados</p>
+    <div class="ft-redes-sociales pt-4 pb-4 bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <img src="{{asset('img/logo-footer.png')}}" alt="Casa Amate" class="mb-4">
+                    <div class="d-block">
+                        <a href="#" target="_blank" rel="noopener noreferrer"><img src="{{asset('img/twitter.png')}}" alt="Twitter"></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer"><img class="ml-3" src="{{asset('img/facebook.png')}}" alt="Facebook"></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer"><img class="ml-3" src="{{asset('img/googleplus.png')}}" alt="Google Plus"></a>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <ul class="list-unstyled d-md-flex justify-content-md-center text-center">
+                        <li class="mb-2 mb-md-0"><a href="#">Aviso de privacidad</a></li>
+                        <li class="mb-2 mb-md-0 ml-md-3 ml-lg-5"><a href="#">Reservaciones</a></li>
+                        <li class="mb-2 mb-md-0 ml-md-3 ml-lg-5"><a href="#">Cancelaciones</a></li>
+                        <li class="mb-2 mb-md-0 ml-md-3 ml-lg-5"><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-</footer>--}}
+
+    <div class="ft-copy pt-3 pb-3 text-center">
+        <p class="mb-0">© {{Date('Y')}}. Casa Amate</p>
+    </div>
+</footer>

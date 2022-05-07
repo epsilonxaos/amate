@@ -1,21 +1,18 @@
-footer.footer {
-    padding-top: 55px;
-    background-color: $c232323;
-
-    p {
-        line-height: 2.07;
-        color: $blanco;
+footer {
+    .ft-telefonos {
+        background-color: #AC7A43;
+        background-image: linear-gradient(270deg, rgba(172,122,67,0.9) 0%, rgba(172,122,67,0.9) 100%), url(https://images.pexels.com/photos/12041967/pexels-photo-12041967.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        // background-blend-mode: multiply;
     }
 
-    a.redes {
-        & + .redes {
-            margin-left: 20px;
-        }
+    .ft-redes-sociales {
+        color: $main;
     }
 
-    @import '../components/form_suscripcion';
-
-    .bg-black {
-        background-color: $negro;
+    .ft-copy {
+        background-color: $main;
     }
 }

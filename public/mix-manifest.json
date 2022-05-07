@@ -6,5 +6,6 @@
     "/css/pages/eventos.css": "/css/pages/eventos.css",
     "/js/pages/asiento.js": "/js/pages/asiento.js",
     "/js/pages/eventos.js": "/js/pages/eventos.js",
-    "/js/pages/pagos.js": "/js/pages/pagos.js"
+    "/js/pages/pagos.js": "/js/pages/pagos.js",
+    "/plugins/swiper/swiper-bundle.min.css": "/plugins/swiper/swiper-bundle.min.css"
 }

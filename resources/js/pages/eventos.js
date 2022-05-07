@@ -64,4 +64,11 @@ if(EVENTO_VIEW_DETAIL) {
             clickable: true
         },
     });
+
+    const swiperComentarios = new Swiper('#swipercomentarios', {
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
 }

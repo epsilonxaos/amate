@@ -549,10 +549,35 @@ body p {
 }
 
 body .titulo {
-  font-family: "Open Sans", sans-serif;
-  font-size: 28px;
-  letter-spacing: -0.1px;
-  color: #ffffff;
+  font-size: 48px;
+  color: #AC7A43;
+  font-weight: 400;
+}
+
+body .titulo.decoracion {
+  position: realtive;
+}
+
+body .titulo.decoracion::before,
+body .titulo.decoracion::after {
+  display: inline-block;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  max-width: 138px;
+  width: 100%;
+  height: 15px;
+  content: "";
+}
+
+body .titulo.decoracion::before {
+  background-image: url("/img/deco-left.svg");
+  margin-right: 20px;
+}
+
+body .titulo.decoracion::after {
+  background-image: url("/img/deco-right.svg");
+  margin-left: 20px;
 }
 
 body .btn-murmurante-online {
@@ -903,55 +928,20 @@ nav.menu-escritorio ul.menu li.active {
   color: #AC7A43;
 }
 
-footer.footer {
-  padding-top: 55px;
-  background-color: #232323;
-}
-
-footer.footer p {
-  line-height: 2.07;
-  color: #ffffff;
-}
-
-footer.footer a.redes + .redes {
-  margin-left: 20px;
-}
-
-footer.footer .input-group-suscripcion {
-  border-radius: 4px;
-  overflow: hidden;
-  padding: 4px 4px 4px 10px;
-  border: solid 1px #ffffff;
-  background-color: #ffffff;
-}
-
-footer.footer .input-group-suscripcion input {
-  border-radius: 0px;
-  border: 0px;
-  box-shadow: none;
-  background-image: url(/img/icons/search.png);
-  background-size: 18px;
-  background-position: 0px;
+footer .ft-telefonos {
+  background-color: #AC7A43;
+  background-image: linear-gradient(270deg, rgba(172, 122, 67, 0.9) 0%, rgba(172, 122, 67, 0.9) 100%), url(https://images.pexels.com/photos/12041967/pexels-photo-12041967.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+  background-position: center;
   background-repeat: no-repeat;
-  padding-left: 30px;
-  line-height: 1.71;
-  letter-spacing: normal;
+  background-size: cover;
 }
 
-footer.footer .input-group-suscripcion input::-moz-placeholder {
-  color: #000000;
+footer .ft-redes-sociales {
+  color: #153D3C;
 }
 
-footer.footer .input-group-suscripcion input:-ms-input-placeholder {
-  color: #000000;
-}
-
-footer.footer .input-group-suscripcion input::placeholder {
-  color: #000000;
-}
-
-footer.footer .bg-black {
-  background-color: #000000;
+footer .ft-copy {
+  background-color: #153D3C;
 }
 
 .loading {

@@ -12318,6 +12318,12 @@ if (EVENTO_VIEW_DETAIL) {
       clickable: true
     }
   });
+  var swiperComentarios = new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__["default"]('#swipercomentarios', {
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    }
+  });
 }
 
 /***/ }),

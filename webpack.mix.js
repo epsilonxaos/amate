@@ -18,11 +18,12 @@ mix.js('resources/js/pages/eventos.js', 'public/js/pages');
 
 
 // mix.copy('node_modules/bootstrap/dist/css/bootstrap.min.css', 'public/plugins/bootstrap');
+mix.copy('node_modules/swiper/swiper-bundle.min.css', 'public/plugins/swiper');
 
-mix.sass('resources/sass/app.scss', 'public/css')
-.sass('resources/sass/pages/lugares.scss', 'public/css/pages')
-.sass('resources/sass/pages/pago.scss', 'public/css/pages')
-.sass('resources/sass/pages/eventos.scss', 'public/css/pages');
+mix.sass('resources/sass/app.scss', 'public/css');
+mix.sass('resources/sass/pages/lugares.scss', 'public/css/pages');
+mix.sass('resources/sass/pages/pago.scss', 'public/css/pages');
+mix.sass('resources/sass/pages/eventos.scss', 'public/css/pages');
 
 // mix.version();
 
@@ -35,7 +36,15 @@ mix.sass('resources/sass/app.scss', 'public/css')
 // mix.copy('node_modules/trumbowyg/dist/ui/icons.svg', 'public/panel/vendor/trumbowyg/dist/ui/icons.svg');
 // mix.styles(['resources/vendor/panel.css'], 'public/panel/css/main.css');
 
-// mix.browserSync('http://localhost:8000/');
+mix.browserSync({
+    ghostMode: false,
+    proxy: 'http://localhost:8000',
+    notify: false,
+    ignore: ['/node_modules/'],
+    open: false,
+});
+
+mix.disableNotifications();
 // mix.browserSync({
 //     proxy: "http://localhost:8000",
 //     files: [ //Files for watching

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @push('link')
+    <link rel="stylesheet" href="{{asset('plugins/swiper/swiper-bundle.min.css')}}">
     <link rel="stylesheet" href="{{mix('css/pages/eventos.css')}}">
 @endpush
 
@@ -31,12 +32,191 @@
             </div>
         </div>
 
-        {{-- <div class="eventos-banner text-center bg" style="background-image: url({{asset('img/eventos/banner.jpg')}})">
-            <h3>Eventos</h3>
-        </div> --}}
+        <div class="eventos-informacion position-relative pb-0">
+            <div class="container-fluid w16 pt-4">
 
-        <div class="eventos-informacion">
-            <div class="container">
+                <h2 class="titulo decoracion text-center d-flex align-items-center justify-content-center w-100 mb-4">EXPERIENCIAS</h2>
+
+                <h5 class="text-center text-white font-weight-bold mb-4">Del 6 al 12 de Abril</h5>
+
+                {{-- Calendario --}}
+                <div class="bg-main">
+                    <div class="calendar-week deco">
+                        <div class="calendar-week-header d-flex">
+                            <div class="calendar-week-title">
+                                <h5>lun.<span>01</span></h5>
+                            </div>
+                            <div class="calendar-week-title">
+                                <h5>mar.<span>02</span></h5>
+                            </div>
+                            <div class="calendar-week-title">
+                                <h5>mie.<span>03</span></h5>
+                            </div>
+                            <div class="calendar-week-title">
+                                <h5>jue.<span>04</span></h5>
+                            </div>
+                            <div class="calendar-week-title">
+                                <h5>vie.<span>05</span></h5>
+                            </div>
+                            <div class="calendar-week-title">
+                                <h5>sab.<span>06</span></h5>
+                            </div>
+                            <div class="calendar-week-title">
+                                <h5>dom.<span>07</span></h5>
+                            </div>
+                        </div>
+                        <div class="calendar-week-body d-flex">
+                            <div class="calendar-week-pilar">
+                                <div class="calendar-week-card off-time">
+                                    <a href="{{url('reservar/clase/detalle')}}" class="d-block">
+                                        <h6 class="rojo">Classic Barre</h6>
+                                        <p class="instructor">Caro</p>
+                                        <p class="time">7:10 AM</p>
+                                    </a>
+                                </div>
+                                <div class="calendar-week-card off-time">
+                                    <a href="{{url('reservar/clase/detalle')}}" class="d-block">
+                                        <h6>Classic Barre</h6>
+                                        <p class="instructor">Caro</p>
+                                        <p class="time">7:10 AM</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="calendar-week-pilar">
+                                <div class="calendar-week-card">
+                                    <a href="{{url('reservar/clase/detalle')}}" class="d-block">
+                                        <h6 class="azul">Classic Barre</h6>
+                                        <p class="instructor">Caro</p>
+                                        <p class="time">7:10 AM</p>
+                                    </a>
+                                </div>
+                                <div class="calendar-week-card">
+                                    <a href="{{url('reservar/clase/detalle')}}" class="d-block">
+                                        <h6 class="verde">Classic Barre</h6>
+                                        <p class="instructor">Caro</p>
+                                        <p class="time">7:10 AM</p>
+                                    </a>
+                                </div>
+                                <div class="calendar-week-card full">
+                                    <a href="{{url('reservar/clase/detalle')}}" class="d-block">
+                                        <h6>Classic Barre</h6>
+                                        <p class="instructor">Caro</p>
+                                        <p class="time">7:10 AM</p>
+                                    </a>
+                                </div>
+                                <div class="calendar-week-card off-time">
+                                    <a href="{{url('reservar/clase/detalle')}}" class="d-block">
+                                        <h6>Classic Barre</h6>
+                                        <p class="instructor">Caro</p>
+                                        <p class="time">7:10 AM</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="calendar-week-pilar">
+                                <div class="calendar-week-card">
+                                    <a href="{{url('reservar/clase/detalle')}}" class="d-block">
+                                        <h6 class="verde">Classic Barre</h6>
+                                        <p class="instructor">Caro</p>
+                                        <p class="time">7:10 AM</p>
+                                    </a>
+                                </div>
+                                <div class="calendar-week-card full">
+                                    <a href="{{url('reservar/clase/detalle')}}" class="d-block">
+                                        <h6 class="azul">Classic Barre</h6>
+                                        <p class="instructor">Caro</p>
+                                        <p class="time">7:10 AM</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="calendar-week-pilar">
+                                <div class="calendar-week-card off-time">
+                                    <a href="{{url('reservar/clase/detalle')}}" class="d-block">
+                                        <h6 class="rojo">Classic Barre</h6>
+                                        <p class="instructor">Caro</p>
+                                        <p class="time">7:10 AM</p>
+                                    </a>
+                                </div>
+                                <div class="calendar-week-card">
+                                    <a href="{{url('reservar/clase/detalle')}}" class="d-block">
+                                        <h6 class="rojo">Classic Barre</h6>
+                                        <p class="instructor">Caro</p>
+                                        <p class="time">7:10 AM</p>
+                                    </a>
+                                </div>
+                                <div class="calendar-week-card">
+                                    <a href="{{url('reservar/clase/detalle')}}" class="d-block">
+                                        <h6>Classic Barre</h6>
+                                        <p class="instructor">Caro</p>
+                                        <p class="time">7:10 AM</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="calendar-week-pilar">
+                                <div class="calendar-week-card full">
+                                    <a href="{{url('reservar/clase/detalle')}}" class="d-block">
+                                        <h6 class="verde">Classic Barre</h6>
+                                        <p class="instructor">Caro</p>
+                                        <p class="time">7:10 AM</p>
+                                    </a>
+                                </div>
+                                <div class="calendar-week-card">
+                                    <a href="{{url('reservar/clase/detalle')}}" class="d-block">
+                                        <h6 class="azul">Classic Barre</h6>
+                                        <p class="instructor">Caro</p>
+                                        <p class="time">7:10 AM</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="calendar-week-pilar">
+                                <div class="calendar-week-card">
+                                    <a href="{{url('reservar/clase/detalle')}}" class="d-block">
+                                        <h6 class="rojo">Classic Barre</h6>
+                                        <p class="instructor">Caro</p>
+                                        <p class="time">7:10 AM</p>
+                                    </a>
+                                </div>
+                                <div class="calendar-week-card full">
+                                    <a href="{{url('reservar/clase/detalle')}}" class="d-block">
+                                        <h6>Classic Barre</h6>
+                                        <p class="instructor">Caro</p>
+                                        <p class="time">7:10 AM</p>
+                                    </a>
+                                </div>
+                                <div class="calendar-week-card full">
+                                    <a href="{{url('reservar/clase/detalle')}}" class="d-block">
+                                        <h6 class="azul">Classic Barre</h6>
+                                        <p class="instructor">Caro</p>
+                                        <p class="time">7:10 AM</p>
+                                    </a>
+                                </div>
+                                <div class="calendar-week-card">
+                                    <a href="{{url('reservar/clase/detalle')}}" class="d-block">
+                                        <h6 class="rojo">Classic Barre</h6>
+                                        <p class="instructor">Caro</p>
+                                        <p class="time">7:10 AM</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="calendar-week-pilar">
+                                <div class="calendar-week-card">
+                                    <a href="{{url('reservar/clase/detalle')}}" class="d-block">
+                                        <h6 class="verde">Classic Barre</h6>
+                                        <p class="instructor">Caro</p>
+                                        <p class="time">7:10 AM</p>
+                                    </a>
+                                </div>
+                                <div class="calendar-week-card full">
+                                    <a href="{{url('reservar/clase/detalle')}}" class="d-block">
+                                        <h6 class="verde">Classic Barre</h6>
+                                        <p class="instructor">Caro</p>
+                                        <p class="time">7:10 AM</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
 
 
@@ -63,6 +243,49 @@
                 </div>
                 <div class="row">
                     {{ $eventos->links() }}
+                </div>
+            </div>
+
+            <div class="bg-verde">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-lg-3 col-xl-2 mb-4 text-center mb-lg-0 text-lg-left">
+                            <h5 class="text-white font-weight-bold">Buscar por tipo de Evento</h5>
+                        </div>
+                        <div class="col-12 col-lg-9 col-xl-10">
+                            <ul class="list-unstyled d-flex justify-content-between justify-content-sm-center justify-content-md-between">
+                                <li class="card text-center align-items-center"> <img class="mb-2" src="{{asset('img/frame-0.svg')}}" alt="Aventura"> <p>Aventura</p> </li>
+                                <li class="card text-center align-items-center"> <img class="mb-2" src="{{asset('img/frame-1.svg')}}" alt="Gastronomia"> <p>Gastronomia</p> </li>
+                                <li class="card text-center align-items-center"> <img class="mb-2" src="{{asset('img/frame-2.svg')}}" alt="Naturaleza"> <p>Naturaleza</p> </li>
+                                <li class="card text-center align-items-center"> <img class="mb-2" src="{{asset('img/frame-3.svg')}}" alt="Ciudad"> <p>Ciudad</p> </li>
+                                <li class="card text-center align-items-center"> <img class="mb-2" src="{{asset('img/frame-4.svg')}}" alt="Wellness"> <p>Wellness</p> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="eventos-comentarios pt-5 pb-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-11 col-md-10 col-lg-9">
+                        <div class="swiper overflow-hidden" id="swipercomentarios">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide text-center text-white">
+                                    Ad culpa sunt voluptate exercitation dolor veniam occaecat cupidatat officia cupidatat id et. Pariatur incididunt proident dolor ea elit nulla cillum quis ipsum. Nostrud culpa veniam ullamco fugiat id. <br><br>
+                                    Eu ex cillum magna incididunt magna exercitation culpa ad ex commodo. Exercitation nulla officia ut elit enim excepteur Lorem Lorem ullamco esse. Mollit ea sit ex culpa Lorem commodo amet est tempor commodo tempor fugiat et. Deserunt incididunt ullamco ea tempor est Lorem veniam aute aliquip reprehenderit. Exercitation laborum incididunt deserunt eu deserunt quis. Dolor officia sit elit laboris sunt dolore cillum nisi nostrud eu.</div>
+                                <div class="swiper-slide text-center text-white">
+                                    Enim non ullamco labore consectetur esse. Id dolor esse aute anim. Consequat laborum ut cupidatat sunt cupidatat duis. Commodo do officia aliquip enim officia pariatur. Nulla pariatur ullamco quis consequat ullamco enim. <br><br>
+                                    Irure anim do pariatur elit sunt adipisicing do aliquip nisi anim ut veniam consequat. Duis cupidatat esse incididunt dolore. Amet laborum esse minim deserunt anim in officia sint pariatur quis irure consectetur. Reprehenderit eiusmod enim est sit ut proident tempor quis reprehenderit ea tempor est.</div>
+                                <div class="swiper-slide text-center text-white">
+                                    Irure in quis do qui quis ullamco fugiat. Fugiat aliquip nisi nisi in ullamco est. Aute deserunt nostrud adipisicing quis enim laborum proident laborum laborum. <br><br>
+                                    Magna enim nulla non excepteur aliqua sunt anim amet. Esse laborum duis aute dolore nulla ut amet enim commodo ad quis in. Nostrud ad anim dolor veniam ad sit consectetur labore.</div>
+                            </div>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
