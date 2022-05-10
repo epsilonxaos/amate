@@ -244,6 +244,7 @@ select .is_valid {
 
 .calendar-week-card.full {
   pointer-events: none;
+  background-color: antiquewhite;
 }
 
 .calendar-week-card.full h6,
@@ -330,15 +331,57 @@ select .is_valid {
   z-index: 1;
 }
 
-.eventos-informacion::before {
+.eventos-informacion .eventos-content {
+  background-color: #ffffff;
+  box-shadow: 0px 10px 33px rgba(0, 0, 0, 0.05);
+}
+
+@media (pointer: fine) {
+  .eventos-informacion .eventos-content:hover {
+    box-shadow: 0px 10px 33px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.eventos-informacion .eventos-content img.cover {
+  width: 100%;
+  height: 210px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.eventos-informacion .eventos-content h5 {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.eventos-informacion .eventos-content h6 {
+  color: #AC7A43;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+}
+
+.eventos-informacion .eventos-content small {
+  color: #BEBEBE;
+}
+
+.eventos-informacion .eventos-content p {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23px;
+  color: #000000;
+}
+
+.eventos-informacion .fondo-verde::before {
   content: "";
   background-color: #153D3C;
   width: 100%;
-  height: 35%;
+  height: 150px;
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 0;
+  z-index: -1;
 }
 
 .eventos-informacion .bg-main {

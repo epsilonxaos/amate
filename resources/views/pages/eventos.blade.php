@@ -32,10 +32,67 @@
             </div>
         </div>
 
-        <div class="eventos-informacion position-relative pb-0">
-            <div class="container-fluid w16 pt-4">
+        <div class="eventos-informacion position-relative p-0">
 
+            <div class="bg-verde">
                 <h2 class="titulo decoracion text-center d-flex align-items-center justify-content-center w-100 mb-4">EXPERIENCIAS</h2>
+            </div>
+
+            <div class="container-fluid w12 pt-4 pb-4" id="eventosContainer">
+                <div class="text-center mb-4">
+                    <button class="btn btn-gold" id="testBtn">Ver Calendario</button>
+                </div>
+                <div class="row">
+                    @for ($i = 0; $i < 10; $i++)
+                        <div class="col-12 col-md-4 col-lg-3 mb-3">
+                            {{-- <a href="{{route('front.eventos.detalle', [$evento -> id, $evento -> url_amigable])}}"> --}}
+                            <a href="#">
+                                <div class="eventos-content">
+                                    <img src="{{asset('img/slide01.jpg')}}" alt="Introducción a la apnea" class="cover">
+                                    <div class="footer text-left p-3">
+                                        <h5>Introducción a la apnea</h5>
+                                        <h6 class="mb-1">Fecha: 29 Marzo 2022</h6>
+                                        <small>Precio</small>
+                                        <p class="font-weight-bold text-black mb-0">$400 MXN por persona</p>
+                                        {{-- <a href="#" class="btn btn-primary rounded-pill mt-2">Vér Más</a> --}}
+                                        {{-- <h5>{{$evento -> titulo}}</h5>
+                                        <a href="{{route('front.eventos.detalle', [$evento -> id, $evento -> url_amigable])}}" class="btn btn-primary rounded-pill mt-2">Vér Más</a> --}}
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endfor
+                </div>
+            </div>
+
+            <div class="row">
+                @foreach($eventos as $evento)
+                    <div class="col-12 col-md-4 col-lg-3 mb-3">
+                        {{-- <a href="{{route('front.eventos.detalle', [$evento -> id, $evento -> url_amigable])}}"> --}}
+                        <a href="#">
+                            <div class="eventos-content">
+                                <img src="{{asset('img/slide01.jpg')}}" alt="Introducción a la apnea" class="cover">
+                                <div class="footer text-left p-3">
+                                    <h5>Introducción a la apnea</h5>
+                                    <h6 class="mb-1">Fecha: 29 Marzo 2022</h6>
+                                    <small>Precio</small>
+                                    <p class="font-weight-bold text-black mb-0">$400 MXN por persona</p>
+                                    {{-- <a href="#" class="btn btn-primary rounded-pill mt-2">Vér Más</a> --}}
+                                    {{-- <h5>{{$evento -> titulo}}</h5>
+                                    <a href="{{route('front.eventos.detalle', [$evento -> id, $evento -> url_amigable])}}" class="btn btn-primary rounded-pill mt-2">Vér Más</a> --}}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="row">
+                {{ $eventos->links() }}
+            </div>
+
+
+            <div class="container-fluid w16 pt-4 position-relative fondo-verde d-none" id="CalendarioContainer">                
 
                 <h5 class="text-center text-white font-weight-bold mb-4">Del 6 al 12 de Abril</h5>
 
@@ -218,32 +275,6 @@
                 </div>
 
                 <div class="row">
-
-
-                @foreach($eventos as $evento)
-                   {{-- <div class="col-12 col-sm-12 col-md-12 m30 text-center">
-                        <img src="{{asset('storage/evento/'.$evento->portada)}}" class="w-100" alt="{{$evento -> titulo}}">
-                        <h5 class="mt-3">{{$evento -> titulo}}</h5>
-                        <a href="{{route('front.eventos.detalle', [$evento -> id, $evento -> url_amigable])}}" class="btn btn-primary rounded-pill mt-2">Vér Más</a>
-                    </div>--}}
-                    <div class="col-12 col-md-4">
-                        <a href="{{route('front.eventos.detalle', [$evento -> id, $evento -> url_amigable])}}">
-                            <div class="eventos-content">
-                                <div class="cover" style="background-image: url({{asset('storage/evento/'.$evento->portada)}})">
-                                    <img src="https://dummyimage.com/270x340/a19fa1/4a50a8.gif" class="invisible w-100" alt="">
-                                </div>
-                                <div class="footer text-center">
-                                    <h5>{{$evento -> titulo}}</h5>
-                                    <a href="{{route('front.eventos.detalle', [$evento -> id, $evento -> url_amigable])}}" class="btn btn-primary rounded-pill mt-2">Vér Más</a>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                @endforeach
-                </div>
-                <div class="row">
-                    {{ $eventos->links() }}
-                </div>
             </div>
 
             <div class="bg-verde">
@@ -295,6 +326,10 @@
 @push('js')
     <script>
         const EVENTO_VIEW_DETAIL = false;
+        document.getElementById('testBtn').addEventListener('click', function() {
+            document.getElementById('eventosContainer').classList.toggle('d-none')
+            document.getElementById('CalendarioContainer').classList.toggle('d-none')
+        });
     </script>
     <script src="{{mix('js/pages/eventos.js')}}"></script>
 @endpush
