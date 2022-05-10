@@ -262,7 +262,7 @@ class FrontController extends Controller
         }
         return view('pages.eventos', ['eventos' => $eventos]);
     }
-    public function eventos_detalle($id, Optimus $optimus){
+    public function eventos_detalleOld($id, Optimus $optimus){
         $original_id = $id;
         $id = $optimus -> decode($id);
         $evento = Evento::find($id);
@@ -271,6 +271,11 @@ class FrontController extends Controller
         $url_amigable = Str::slug($evento -> titulo);
         return view('pages.eventos_detalle', ['original_id' => $original_id, 'url_amigable' => $url_amigable, 'evento' => $evento, 'galeria' => $galeria, 'horarios' => $horarios]);
         //return view('pages.eventos_detalle');
+    }
+
+    public function eventos_detalle()
+    {
+        return view('pages.eventos_detalle');
     }
 
     public function eventos_butacas(Request $request, Optimus $optimus){

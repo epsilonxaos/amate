@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'FrontController@eventos') -> name('eventos');
 Route::name('front.') -> group(function(){
     Route::get('/eventos', 'FrontController@eventos') -> name('eventos');
-    Route::get('/eventos/detalle/{id}/{titulo}', 'FrontController@eventos_detalle') -> name('eventos.detalle');
-   /* Route::get('/eventos/detalle', 'FrontController@eventos_detalle') -> name('eventos.detalle');*/
+    Route::get('/eventos/detalle', 'FrontController@eventos_detalle') -> name('eventos.detalle');
+    // Route::get('/eventos/detalle/{id}/{titulo}', 'FrontController@eventos_detalle') -> name('eventos.detalle');
     /*Route::get('/eventos/detalle/{id}/{titulo}', 'FrontController@eventos_detalle') -> name('eventos.detalle');*/
     Route::post('eventos/butacas', 'FrontController@eventos_butacas')->name('eventos.butacas');
 

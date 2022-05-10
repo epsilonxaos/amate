@@ -17,8 +17,10 @@ mix.js('resources/js/pages/eventos.js', 'public/js/pages');
 
 
 
-// mix.copy('node_modules/bootstrap/dist/css/bootstrap.min.css', 'public/plugins/bootstrap');
+mix.copy('node_modules/bootstrap/dist/css/bootstrap.min.css', 'public/plugins/bootstrap');
 mix.copy('node_modules/swiper/swiper-bundle.min.css', 'public/plugins/swiper');
+mix.copy('node_modules/@fancyapps/*/**', 'public/plugins/@fancyapps');
+mix.copy('node_modules/owl.carousel/*/**', 'public/plugins/owl.carousel');
 
 mix.sass('resources/sass/app.scss', 'public/css');
 mix.sass('resources/sass/pages/lugares.scss', 'public/css/pages');

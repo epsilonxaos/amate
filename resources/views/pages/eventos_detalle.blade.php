@@ -5,27 +5,32 @@
 @endpush
 @section('contenido')
     <section class="eventos">
-        {{--<div class="eventos-galeria">
+        <div class="eventos-galeria">
             <div class="container-fluid w15">
                 <div class="owl-carousel owl-theme">
-                    @foreach ($galeria as $gal)
+                    <div class="item">
+                        <div class="bg pointer" data-fancybox data-src="{{asset('img/slide01.jpg')}}" style="background-image: url({{asset('img/slide01.jpg')}})">
+                            <img src="{{asset('img/slide01.jpg')}}" alt="">
+                        </div>
+                    </div>
+                    {{-- @foreach ($galeria as $gal)
                         <div class="item">
                             <div class="bg pointer" data-fancybox data-src="{{asset('storage/evento/galeria/'.$gal -> imagen)}}" style="background-image: url({{asset('storage/evento/galeria/'.$gal -> imagen)}})">
                                 <img src="{{asset('img/nosotros/quienes_somos/mascara-galeria.png')}}" alt="">
                             </div>
                         </div>
-                    @endforeach
+                    @endforeach --}}
                 </div>
             </div>
-        </div>--}}
-        <div class="container">
+        </div>
+        {{-- <div class="container">
             <div class="col-12 col-md-8 offset-md-2">
                 <div class="eventos-portada">
                     <img src="{{asset('storage/evento/'.$evento->portada)}}" class="w-100" alt="">
                 </div>
             </div>
-        </div>
-        <form action="{{$evento -> tipo == 0 ? route('front.eventos.boletos') : route('front.eventos.butacas')}}" method="post">
+        </div> --}}
+        {{--<form action="{{$evento -> tipo == 0 ? route('front.eventos.boletos') : route('front.eventos.butacas')}}" method="post">
             {{csrf_field()}}
             <input type="hidden" name="evento_id" value="{{$evento -> id}}">
 
@@ -60,7 +65,6 @@
                         <p>{{$evento -> lugar}} | {{date('H:i', strtotime($horarios[0] -> hora))}} hrs</p>
                     @endif
                         <div class="comprar text-center pt-2 pb-5">
-                            {{--<a href="{{route('front.eventos.comprar', ['id' => $original_id, 'titulo' => $url_amigable])}}" class="btn btn-blanco-negro text-uppercase">Comprar boletos</a>--}}
                             <button class="btn btn-primary rounded-pill mt-2">Comprar Boleto</button>
                         </div>
                 </div>
@@ -74,16 +78,6 @@
                     <div class="card">
                         <div class="card-body">
                             {!! $evento -> descripcion_2 !!}
-                            {{--<p><b>Dirección:</b> *Ariadna Medina  & David Avilés</p>
-                            <p><b>Producción ejecutiva:</b> Ariadna Medina</p>
-                            <p><b>Fotografía, edición y corrección de color:</b> David Avilés</p>
-                            <p><b>Sonido:</b> Marilyn Fruto Domínguez</p>
-                            <p><b>Testimonios:</b> Rosa Pinzón Frias, Fátima Santos Pacheco, Carlos Montero Ávila,</p>
-                            <p>Irma Mexicano Hernández y Manuel Aldana Nic.</p>
-                            <p>Fragmento de "El médico a la fuerza" de Moliere.</p>
-                            <p><b>Lectura interpretada por:</b> *Ariadna Medina y Juan de Dios Rath / *Creadora escénica con trayectoria del Fonca 2019</p>
-                            <br>
-                            <p>**Proyecto apoyado por la Policía Municipal de Mérida, Yucatán y el proyecto Fortaseg en colaboración Yaxché A.C. Asociación Mexicana para la igualdad y el bienestar. </p>--}}
                         </div>
                     </div>
                 </div>
@@ -95,19 +89,7 @@
 
             <div class="comprar text-center pt-2 pb-5">
                 <button class="btn btn-primary rounded-pill mt-2">Comprar Boleto</button>
-                {{--<a href="{{route('front.eventos.comprar', ['id' => $original_id, 'titulo' => $url_amigable])}}" class="btn btn-blanco-negro text-uppercase">Comprar boletos</a>--}}
             </div>
-        </form>
+        </form> --}}
     </section>
 @endsection
-
-@push('js')
-    <script type="text/javascript">
-        var lat = {{$evento -> latitud}},
-        lng = {{$evento -> longitud}};
-        const EVENTO_VIEW_DETAIL = true;
-    </script>
-    <script src="{{mix('js/pages/eventos.js')}}"></script>
-    <script src="{{asset('js/mapa.js')}}?v=5524"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuu1Q0hHmlO30h7YRDZ0mWYof-SM-edns&callback=initMap"></script>
-@endpush
