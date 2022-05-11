@@ -238,19 +238,9 @@
 
             .swiper-button-next {
                 background-image: url(/img/arrow-next.svg);
-                right: -10px;
-
-                @media screen and (min-width: 768px) {
-                    right: -40px;
-                }
             }
             .swiper-button-prev {
                 background-image: url(/img/arrow-prev.svg);
-                left: -10px;
-
-                @media screen and (min-width: 768px) {
-                    left: -40px;
-                }
             }
             
             .swiper-slide {

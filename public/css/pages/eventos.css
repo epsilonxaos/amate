@@ -436,24 +436,10 @@ Fuentes tipograficas
 
 .eventos-galeria .swiper-container .swiper-button-next {
   background-image: url(/img/arrow-next.svg);
-  right: -10px;
-}
-
-@media screen and (min-width: 768px) {
-  .eventos-galeria .swiper-container .swiper-button-next {
-    right: -40px;
-  }
 }
 
 .eventos-galeria .swiper-container .swiper-button-prev {
   background-image: url(/img/arrow-prev.svg);
-  left: -10px;
-}
-
-@media screen and (min-width: 768px) {
-  .eventos-galeria .swiper-container .swiper-button-prev {
-    left: -40px;
-  }
 }
 
 .eventos-galeria .swiper-container .swiper-slide img {
