@@ -1,37 +1,30 @@
-// import 'owl.carousel';
 import Swiper from 'swiper/bundle';
 
-// $('.owl-carousel').owlCarousel({
-//     center: true,
-//     items: 1,
-//     loop: true,
-//     margin: 30,
-//     nav: true,
-//     responsive:{
-//         600:{
-//             items: 2
-//         }
-//     }
-// });
-
 if(EVENTO_VIEW_DETAIL) {
-    $(function(){
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $('select[name=dia]').trigger('change');
+    const swiperSlide = new Swiper('#swiperSlide', {
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+        },
+    });
+
+    // $(function(){
+    //     $.ajaxSetup({
+    //         headers: {
+    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //         }
+    //     });
+    //     $('select[name=dia]').trigger('change');
     
-        $('select[name=dia]').on('change', function(){
-            getHours();
-            showData();
-        });
+    //     $('select[name=dia]').on('change', function(){
+    //         getHours();
+    //         showData();
+    //     });
     
-        $('select[name=horario]').on('change', function(){
-            showData();
-        });
-    })
+    //     $('select[name=horario]').on('change', function(){
+    //         showData();
+    //     });
+    // })
     
     function getHours(){
         let _evento_id = $('input[name=evento_id]').val(),

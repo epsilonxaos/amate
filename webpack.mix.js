@@ -18,9 +18,8 @@ mix.js('resources/js/pages/eventos.js', 'public/js/pages');
 
 
 mix.copy('node_modules/bootstrap/dist/css/bootstrap.min.css', 'public/plugins/bootstrap');
-mix.copy('node_modules/swiper/swiper-bundle.min.css', 'public/plugins/swiper');
-mix.copy('node_modules/@fancyapps/*/**', 'public/plugins/@fancyapps');
-mix.copy('node_modules/owl.carousel/*/**', 'public/plugins/owl.carousel');
+mix.copy('node_modules/swiper/**', 'public/plugins/swiper');
+mix.copy('node_modules/@fancyapps/**', 'public/plugins/@fancyapps');
 
 mix.sass('resources/sass/app.scss', 'public/css');
 mix.sass('resources/sass/pages/lugares.scss', 'public/css/pages');
@@ -39,11 +38,14 @@ mix.sass('resources/sass/pages/eventos.scss', 'public/css/pages');
 // mix.styles(['resources/vendor/panel.css'], 'public/panel/css/main.css');
 
 mix.browserSync({
-    ghostMode: false,
     proxy: 'http://localhost:8000',
+    watch: true,
+    watchOptions: {
+        ignored: '/node_modules/'
+    },
     notify: false,
-    ignore: ['/node_modules/'],
-    open: false,
+    ghostMode: false,
+    open: 'local',
 });
 
 mix.disableNotifications();

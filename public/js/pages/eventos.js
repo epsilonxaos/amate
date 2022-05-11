@@ -12248,21 +12248,24 @@ _esm_components_core_core_class__WEBPACK_IMPORTED_MODULE_0__["default"].use(comp
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var swiper_bundle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! swiper/bundle */ "./node_modules/swiper/swiper-bundle.esm.js");
-// import 'owl.carousel';
- // $('.owl-carousel').owlCarousel({
-//     center: true,
-//     items: 1,
-//     loop: true,
-//     margin: 30,
-//     nav: true,
-//     responsive:{
-//         600:{
-//             items: 2
-//         }
-//     }
-// });
+
 
 if (EVENTO_VIEW_DETAIL) {
+  // $(function(){
+  //     $.ajaxSetup({
+  //         headers: {
+  //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  //         }
+  //     });
+  //     $('select[name=dia]').trigger('change');
+  //     $('select[name=dia]').on('change', function(){
+  //         getHours();
+  //         showData();
+  //     });
+  //     $('select[name=horario]').on('change', function(){
+  //         showData();
+  //     });
+  // })
   var getHours = function getHours() {
     var _evento_id = $('input[name=evento_id]').val(),
         _select_day = $('select[name=dia]').find('option:selected').val(),
@@ -12296,28 +12299,20 @@ if (EVENTO_VIEW_DETAIL) {
     $('#s_boletos').text(_boletos.val());
   };
 
-  $(function () {
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
-    $('select[name=dia]').trigger('change');
-    $('select[name=dia]').on('change', function () {
-      getHours();
-      showData();
-    });
-    $('select[name=horario]').on('change', function () {
-      showData();
-    });
-  });
-} else {
   var swiperSlide = new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__["default"]('#swiperSlide', {
     pagination: {
       el: '.swiper-pagination',
       clickable: true
     }
   });
+} else {
+  var _swiperSlide = new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__["default"]('#swiperSlide', {
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true
+    }
+  });
+
   var swiperComentarios = new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__["default"]('#swipercomentarios', {
     navigation: {
       nextEl: '.swiper-button-next',
