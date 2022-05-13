@@ -30,7 +30,7 @@
                         <h2 class="titulo mb-3">Introducción a la Apnea</h2>
                         <p class="mb-4">Prepárate a descubrir el mágico mundo subacuático a través de una experiencia inolvidable con un
                             instructor de apnea certificado</p>
-                        <button class="btn btn-gold">¡Quiero ir!</button>
+                        <a class="btn btn-gold" href="{{route('front.pagos')}}">¡Quiero ir!</a>
                     </div>
                     <div class="col-12 col-md-6">
                         <p class="date mb-0">27 Marzo 2022</p>

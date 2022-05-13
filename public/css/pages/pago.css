@@ -147,6 +147,132 @@ Fuentes tipograficas
   cursor: default;
 }
 
+.pagos {
+  background-color: #F7F7F7;
+}
+
+.pagos h3.titulo {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  color: #AC7A43;
+}
+
+@media screen and (min-width: 768px) {
+  .pagos h3.titulo {
+    font-size: 35px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .pagos h3.titulo {
+    font-size: 48px;
+  }
+}
+
+.pagos h4 {
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  color: #AC7A43;
+}
+
+@media screen and (min-width: 768px) {
+  .pagos h4 {
+    font-size: 22px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .pagos h4 {
+    font-size: 24px;
+  }
+}
+
+.pagos label.dorado {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  letter-spacing: 0.5px;
+  color: #AC7A43;
+}
+
+.pagos label.grey {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  letter-spacing: 0.5px;
+  color: #979797;
+}
+
+.pagos input.in {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  letter-spacing: 0.5px;
+  color: #153D3C;
+  border: none;
+  background-color: #ffffff;
+  height: 48px;
+  border-radius: 5px;
+}
+
+.pagos input.in::-moz-placeholder {
+  color: #979797;
+}
+
+.pagos input.in:-ms-input-placeholder {
+  color: #979797;
+}
+
+.pagos input.in::placeholder {
+  color: #979797;
+}
+
+.pagos textarea.tx {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  letter-spacing: 0.5px;
+  color: #153D3C;
+  border: none;
+  background-color: #ffffff;
+  resize: none;
+  border-radius: 5px;
+}
+
+.pagos textarea.tx::-moz-placeholder {
+  color: #979797;
+}
+
+.pagos textarea.tx:-ms-input-placeholder {
+  color: #979797;
+}
+
+.pagos textarea.tx::placeholder {
+  color: #979797;
+}
+
+.pagos .card-body p {
+  color: #153D3C;
+  font-size: 15px;
+  line-height: 28px;
+  letter-spacing: 0.5px;
+}
+
+.pagos .card-footer {
+  background-color: #153D3C;
+}
+
+.pagos .card-footer table {
+  color: #ffffff;
+  font-size: 15px;
+  line-height: 28px;
+  letter-spacing: 0.5px;
+}
+
 .pago {
   padding: 40px 0;
 }

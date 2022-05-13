@@ -415,6 +415,10 @@ class FrontController extends Controller
         }
     }
 
+    public function pago() {
+        return view('pages.compra.pago');
+    }
+
     public function eventos_pago_view(){
         if(Session::exists('orden_id')){
             if(self::validateTimeSession(Session::get('orden_id'))) {

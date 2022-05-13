@@ -2,6 +2,113 @@
 @import '../components/buttons';
 @import '../components/nav';
 @import '../components/custom-radios';
+
+.pagos {
+	background-color: #F7F7F7;
+
+	h3.titulo {
+		font-style: normal;
+		font-weight: 700;
+		font-size: 48px;
+		text-align: center;
+		letter-spacing: 0.5px;
+		color: $gold;
+
+		@media screen and (min-width: 768px) {
+			font-size: 35px;
+		}
+		@media screen and (min-width: 992px) {
+			font-size: 48px;
+		}
+	}
+
+	h4 {
+		font-weight: 500;
+		font-size: 18px;
+		letter-spacing: 0.5px;
+		color: $gold;
+
+		@media screen and (min-width: 768px) {
+			font-size: 22px;
+		}
+		@media screen and (min-width: 992px) {
+			font-size: 24px;
+		}
+	}
+
+	label {
+		&.dorado {
+			font-weight: 500;
+			font-size: 18px;
+			line-height: 21px;
+			letter-spacing: 0.5px;
+			color: $gold;
+		}
+
+		&.grey {
+			font-weight: 500;
+			font-size: 18px;
+			line-height: 21px;
+			letter-spacing: 0.5px;
+			color: #979797;
+		}
+	}
+
+	input.in {
+		font-weight: 500;
+		font-size: 18px;
+		line-height: 21px;
+		letter-spacing: 0.5px;
+		color: $main;
+		border: none;
+		background-color: $blanco;
+		height: 48px;
+		border-radius: 5px;
+
+		&::placeholder {
+			color: #979797
+		}
+	}
+
+	textarea.tx {
+		font-weight: 500;
+		font-size: 18px;
+		line-height: 21px;
+		letter-spacing: 0.5px;
+		color: $main;
+		border: none;
+		background-color: $blanco;
+		resize: none;
+		border-radius: 5px;
+
+		&::placeholder {
+			color: #979797
+		}
+	}
+
+	.card {
+		&-body {
+			p {
+				color: $main;
+				font-size: 15px;
+				line-height: 28px;
+				letter-spacing: 0.5px;
+			}
+		}
+
+		&-footer {
+			background-color: $main;
+
+			table {
+				color: $blanco;
+				font-size: 15px;
+				line-height: 28px;
+				letter-spacing: 0.5px;
+			}
+		}
+	}
+}
+
 .pago{
   padding: 40px 0;
   h3{
