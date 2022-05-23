@@ -22,6 +22,7 @@
                         <form action="{{ route('panel.evento.update', ['id' => $evento -> id]) }}" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
                             {{ csrf_field() }}
                             <input type="hidden" name="_method" value="PUT">
+                            <input type="hidden" id="tipo" name="tipo" value="0">
                             <div class="nav-wrapper">
                                 <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
                                     <li class="nav-item">
@@ -55,12 +56,22 @@
                                                             <input type="file" name="portada" class="filestyle" data-text="Portada" id="portada" accept="image/x-png,image/gif,image/jpeg">
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-12">
+                                                    {{-- <div class="col-lg-12">
                                                         <div class="form-group">
                                                             <label for="tipo">Tipo de Evento</label>
                                                             <select class="form-control" id="tipo" name="tipo">
                                                                 <option value="0" {{$evento -> tipo == 0 ? 'selected' : '' }} >Solo boletos</option>
                                                                 <option value="1" {{$evento -> tipo == 1 ? 'selected' : '' }} >Con seleccion de lugares</option>
+                                                            </select>
+                                                        </div>
+                                                    </div> --}}
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label for="tipo">Categoria</label>
+                                                            <select class="form-control" id="categoria_id" name="categoria_id">
+                                                                @foreach ($evento_categoria as $item)
+                                                                    <option value="{{$item -> id}}" {{$item -> id == $evento -> categoria_id ? 'selected' : '' }} >{{$item -> titulo}}</option>
+                                                                @endforeach
                                                             </select>
                                                         </div>
                                                     </div>

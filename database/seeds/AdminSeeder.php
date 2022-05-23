@@ -19,7 +19,7 @@ class AdminSeeder extends Seeder
             "name" => "Locker Ag",
             "email" => "soporte@locker.com.mx",
             'email_verified_at' => now(),
-            'password' => Hash::make('123'),
+            'password' => Hash::make('password'),
             'remember_token' => Str::random(10)
         ]);
         $rol = Role::create(['name' => 'Administrador', 'guard_name' => 'admin']);

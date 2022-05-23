@@ -6,6 +6,7 @@ use App\Asiento;
 use App\Concurso;
 use App\Documental;
 use App\Evento;
+use App\EventoCategoria;
 use App\EventoHorario;
 use App\EventoPrecio;
 use App\Galeria;
@@ -255,12 +256,76 @@ class FrontController extends Controller
         return view('pages.concursos.consurso_detalle', ['concurso' => $concurso, 'galerias' => $galerias]);
     }
     public function eventos(Optimus $optimus){
-        $eventos = Evento::where('status', 1)->paginate(9);
+        $eventos = Evento::from('evento as ev')
+            -> select('ev.*', 'evh.fecha as fechaEvento', 'evh.hora as horaEvento', 'evp.precio as precioEvento', 'evc.titulo as categoriaEvento')
+            -> leftJoin('evento_horarios as evh', 'ev.id', '=', 'evh.evento_id')
+            -> leftJoin('evento_precios as evp', 'ev.id', '=', 'evp.evento_id')
+            -> leftJoin('evento_categorias as evc', 'ev.categoria_id', '=', 'evc.id')
+            -> where([
+                ['ev.status', '=', 1],
+                ['evc.status', '=', 1]
+            ]) -> paginate(12);
+
         foreach ($eventos as $pr){
             $pr -> id = $optimus -> encode($pr -> id);
             $pr -> url_amigable = Str::slug($pr -> titulo);
         }
-        return view('pages.eventos', ['eventos' => $eventos]);
+
+        $eventoCategorias = EventoCategoria::from('evento_categorias as evc')
+            -> select('evc.*')
+            -> join('evento as ev', 'evc.id', '=', 'ev.categoria_id')
+            -> where([
+                ['ev.status', '=', 1],
+                ['evc.status', '=', 1]
+            ])
+            -> groupBy('evc.id')
+            -> orderBy('evc.orden', 'ASC') -> get();
+
+
+        $now    = Date::parse('today') -> format('Y-m-d');
+        $future = Date::parse("+7 days") -> format('Y-m-d');
+        $params = Evento::from('evento as ev')
+            -> select('ev.*', 'evh.fecha as fechaEvento', 'evh.hora as horaEvento', 'evp.precio as precioEvento', 'evc.id as idCategoriaEvento', 'evc.titulo as categoriaEvento')
+            -> leftJoin('evento_horarios as evh', 'ev.id', '=', 'evh.evento_id')
+            -> leftJoin('evento_precios as evp', 'ev.id', '=', 'evp.evento_id')
+            -> leftJoin('evento_categorias as evc', 'ev.categoria_id', '=', 'evc.id')
+            -> whereRaw("evh.fecha >= CAST('".$now."' AS DATE) AND evh.fecha <= CAST('".$future."' AS DATE) ")
+            -> where([
+                ['ev.status', '=', 1],
+                ['evc.status', '=', 1]
+            ])
+            -> orderBy('evh.fecha', 'ASC')
+            -> get();
+
+        foreach ($params as $pr){
+            $pr -> id = $optimus -> encode($pr -> id);
+            $pr -> url_amigable = Str::slug($pr -> titulo);
+        }
+        //dd(DB::getQueryLog());
+        $fechas = [Date::parse('today')->format('d'),Date::parse("+6 days")->format('d')];
+        $mes = Date::parse("+6 days")->format('F');
+       
+
+        $calendario =[
+            [Date::now()->format('D'),Date::now()->format('d')],
+            [Date::parse('+1 day')->format('D'),Date::parse('+1 day')->format('d')],
+            [Date::parse('+2 day')->format('D'),Date::parse('+2 day')->format('d')],
+            [Date::parse('+3 day')->format('D'),Date::parse('+3 day')->format('d')],
+            [Date::parse('+4 day')->format('D'),Date::parse('+4 day')->format('d')],
+            [Date::parse('+5 day')->format('D'),Date::parse('+5 day')->format('d')],
+            [Date::parse('+6 day')->format('D'),Date::parse('+6 day')->format('d')],
+        ];
+
+
+
+        return view('pages.eventos', [
+            'eventos' => $eventos,
+            'calendario' => $calendario,
+            'fechas' => $fechas,
+            'mes' => $mes,
+            'params' => $params,
+            'categorias' => $eventoCategorias
+        ]);
     }
     public function eventos_detalleOld($id, Optimus $optimus){
         $original_id = $id;

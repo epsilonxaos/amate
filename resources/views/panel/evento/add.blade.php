@@ -21,6 +21,7 @@
                     <div class="card-body">
                         <form action="{{ route('panel.evento.store') }}" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
                             {{ csrf_field() }}
+                            <input type="hidden" id="tipo" name="tipo" value="0">
                             <div class="nav-wrapper">
                                 <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
                                     <li class="nav-item">
@@ -49,12 +50,22 @@
                                                             <input type="file" name="portada" class="filestyle" data-text="Portada" id="portada" accept="image/x-png,image/gif,image/jpeg">
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-12">
+                                                    {{-- <div class="col-lg-12">
                                                         <div class="form-group">
                                                             <label for="tipo">Tipo de Evento</label>
                                                             <select class="form-control" id="tipo" name="tipo">
                                                                 <option value="0">Solo boletos</option>
                                                                 <option value="1">Con seleccion de lugares</option>
+                                                            </select>
+                                                        </div>
+                                                    </div> --}}
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label for="tipo">Categoria</label>
+                                                            <select class="form-control" id="categoria_id" name="categoria_id">
+                                                                @foreach ($evento_categoria as $idx => $item)
+                                                                    <option value="{{$item ->  id}}" {{$idx == 0 ? 'selected' : ''}}>{{$item -> titulo}}</option>
+                                                                @endforeach
                                                             </select>
                                                         </div>
                                                     </div>

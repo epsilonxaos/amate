@@ -40,236 +40,169 @@
 
             <div class="container-fluid w12 pt-4 pb-4" id="eventosContainer">
                 <div class="text-center mb-4">
-                    <button class="btn btn-gold" id="testBtn">Ver Calendario</button>
+                    <button class="btn btn-gold toggleEventos">Ver Calendario</button>
                 </div>
-                <div class="row">
-                    @for ($i = 0; $i < 10; $i++)
-                        <div class="col-12 col-md-4 col-lg-3 mb-3">
-                            {{-- <a href="{{route('front.eventos.detalle', [$evento -> id, $evento -> url_amigable])}}"> --}}
-                            <a href="{{route('front.eventos.detalle')}}">
-                                <div class="eventos-content">
-                                    <img src="{{asset('img/slide01.jpg')}}" alt="Introducción a la apnea" class="cover">
-                                    <div class="footer text-left p-3">
-                                        <h5>Introducción a la apnea</h5>
-                                        <h6 class="mb-1">Fecha: 29 Marzo 2022</h6>
-                                        <small>Precio</small>
-                                        <p class="font-weight-bold text-black mb-0">$400 MXN por persona</p>
-                                        {{-- <a href="#" class="btn btn-primary rounded-pill mt-2">Vér Más</a> --}}
-                                        {{-- <h5>{{$evento -> titulo}}</h5>
-                                        <a href="{{route('front.eventos.detalle', [$evento -> id, $evento -> url_amigable])}}" class="btn btn-primary rounded-pill mt-2">Vér Más</a> --}}
+                <div class="row mb-3">
+                    @if (count($eventos) > 0)
+                        @foreach ($eventos as $evento)
+                            <div class="col-12 col-md-4 col-lg-3 mb-3">
+                                <a href="{{route('front.eventos.detalle', [$evento -> id, $evento -> url_amigable])}}">
+                                    <div class="eventos-content">
+                                        <img src="{{asset('storage/evento/'.$evento -> portada)}}" alt="{{$evento -> titulo}}" class="cover">
+                                        <div class="footer text-left p-3">
+                                            <h5>{{$evento -> titulo}}</h5>
+                                            <h6 class="mb-1">Fecha: {{\App\Helpers::dateSpanishComplete($evento -> fechaEvento)}}</h6>
+                                            <small>Precio</small>
+                                            <p class="font-weight-bold text-black mb-0">${{number_format($evento -> precioEvento)}} MXN por persona</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
+                        @endforeach
+                    @else
+                        <div class="col-12 text-center d-flex align-items-center justify-content-center" style="min-height: 300px">
+                            <h3>Sin eventos por el momento</h3>
                         </div>
-                    @endfor
+                    @endif
+                </div>
+                <div class="d-flex align-items-center justify-content-center mb-3">
+                    {{ $eventos->links() }}
                 </div>
             </div>
 
-            <div class="row">
-                @foreach($eventos as $evento)
-                    <div class="col-12 col-md-4 col-lg-3 mb-3">
-                        {{-- <a href="{{route('front.eventos.detalle', [$evento -> id, $evento -> url_amigable])}}"> --}}
-                        <a href="{{route('front.eventos.detalle')}}">
-                            <div class="eventos-content">
-                                <img src="{{asset('img/slide01.jpg')}}" alt="Introducción a la apnea" class="cover">
-                                <div class="footer text-left p-3">
-                                    <h5>Introducción a la apnea</h5>
-                                    <h6 class="mb-1">Fecha: 29 Marzo 2022</h6>
-                                    <small>Precio</small>
-                                    <p class="font-weight-bold text-black mb-0">$400 MXN por persona</p>
-                                    {{-- <a href="#" class="btn btn-primary rounded-pill mt-2">Vér Más</a> --}}
-                                    {{-- <h5>{{$evento -> titulo}}</h5>
-                                    <a href="{{route('front.eventos.detalle', [$evento -> id, $evento -> url_amigable])}}" class="btn btn-primary rounded-pill mt-2">Vér Más</a> --}}
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
-
-            <div class="row">
-                {{ $eventos->links() }}
-            </div>
 
 
             <div class="fondo-verde position-relative overflow-hidden" style="z-index: 1">
-                <div class="container-fluid w16 pt-2 pb-5 position-relative d-none" id="CalendarioContainer">                
+                <div class="container-fluid w16 pt-2 pb-5 position-relative d-none" id="CalendarioContainer">
+
+                    <div class="row justify-content-end align-items-center">
+                        <div class="col-12 col-md-6 mb-3">
+                            <h5 class="text-center text-white font-weight-bold">Del {{$fechas[0]}} al {{$fechas[1]}} de {{$mes}}</h5>
+                        </div>
+                        <div class="col-12 col-md-3 text-center mb-3">
+                            <button class="btn btn-gold toggleEventos">Ver Listado</button>
+                        </div>
+                    </div>
+
     
-                    <h5 class="text-center text-white font-weight-bold mb-4">Del 6 al 12 de Abril</h5>
     
                     {{-- Calendario --}}
                     <div class="bg-main">
                         <div class="calendar-week deco">
                             <div class="calendar-week-header d-flex">
                                 <div class="calendar-week-title">
-                                    <h5>lun.<span>01</span></h5>
+                                    <h5>{{$calendario[0][0]}}.<span>{{$calendario[0][1]}}</span></h5>
                                 </div>
                                 <div class="calendar-week-title">
-                                    <h5>mar.<span>02</span></h5>
+                                    <h5>{{$calendario[1][0]}}.<span>{{$calendario[1][1]}}</span></h5>
                                 </div>
                                 <div class="calendar-week-title">
-                                    <h5>mie.<span>03</span></h5>
+                                    <h5>{{$calendario[2][0]}}.<span>{{$calendario[2][1]}}</span></h5>
                                 </div>
                                 <div class="calendar-week-title">
-                                    <h5>jue.<span>04</span></h5>
+                                    <h5>{{$calendario[3][0]}}.<span>{{$calendario[3][1]}}</span></h5>
                                 </div>
                                 <div class="calendar-week-title">
-                                    <h5>vie.<span>05</span></h5>
+                                    <h5>{{$calendario[4][0]}}.<span>{{$calendario[4][1]}}</span></h5>
                                 </div>
                                 <div class="calendar-week-title">
-                                    <h5>sab.<span>06</span></h5>
+                                    <h5>{{$calendario[5][0]}}.<span>{{$calendario[5][1]}}</span></h5>
                                 </div>
                                 <div class="calendar-week-title">
-                                    <h5>dom.<span>07</span></h5>
+                                    <h5>{{$calendario[6][0]}}.<span>{{$calendario[6][1]}}</span></h5>
                                 </div>
                             </div>
                             <div class="calendar-week-body d-flex">
                                 <div class="calendar-week-pilar">
-                                    <div class="calendar-week-card off-time">
-                                        <a href="{{route('front.eventos.detalle')}}" class="d-block">
-                                            <h6 class="rojo">Classic Barre</h6>
-                                            <p class="instructor">Caro</p>
-                                            <p class="time">7:10 AM</p>
-                                        </a>
-                                    </div>
-                                    <div class="calendar-week-card off-time">
-                                        <a href="{{route('front.eventos.detalle')}}" class="d-block">
-                                            <h6>Classic Barre</h6>
-                                            <p class="instructor">Caro</p>
-                                            <p class="time">7:10 AM</p>
-                                        </a>
-                                    </div>
+                                    @foreach ($params as $ev)
+                                        @if (date('d', strtotime($ev -> fechaEvento)) === $calendario[0][1])
+                                            <div class="calendar-week-card {{App\Helpers::inTime($evento -> fechaEvento.' '.$evento -> horaEvento)}}">
+                                                <a href="{{route('front.eventos.detalle')}}" class="d-block">
+                                                    <h6 class="{{App\Helpers::colorCategoriaEvento($ev -> idCategoriaEvento)}}">{{$ev -> categoriaEvento}}</h6>
+                                                    <p class="instructor">{{$ev -> titulo}}</p>
+                                                    <p class="time">{{date("g:i a", strtotime($ev -> horaEvento))}}</p>
+                                                </a>
+                                            </div>
+                                        @endif
+                                    @endforeach
                                 </div>
                                 <div class="calendar-week-pilar">
-                                    <div class="calendar-week-card">
-                                        <a href="{{route('front.eventos.detalle')}}" class="d-block">
-                                            <h6 class="azul">Classic Barre</h6>
-                                            <p class="instructor">Caro</p>
-                                            <p class="time">7:10 AM</p>
-                                        </a>
-                                    </div>
-                                    <div class="calendar-week-card">
-                                        <a href="{{route('front.eventos.detalle')}}" class="d-block">
-                                            <h6 class="verde">Classic Barre</h6>
-                                            <p class="instructor">Caro</p>
-                                            <p class="time">7:10 AM</p>
-                                        </a>
-                                    </div>
-                                    <div class="calendar-week-card full">
-                                        <a href="{{route('front.eventos.detalle')}}" class="d-block">
-                                            <h6>Classic Barre</h6>
-                                            <p class="instructor">Caro</p>
-                                            <p class="time">7:10 AM</p>
-                                        </a>
-                                    </div>
-                                    <div class="calendar-week-card off-time">
-                                        <a href="{{route('front.eventos.detalle')}}" class="d-block">
-                                            <h6>Classic Barre</h6>
-                                            <p class="instructor">Caro</p>
-                                            <p class="time">7:10 AM</p>
-                                        </a>
-                                    </div>
+                                    @foreach ($params as $ev)
+                                        @if (date('d', strtotime($ev -> fechaEvento)) === $calendario[1][1])
+                                            <div class="calendar-week-card {{App\Helpers::inTime($evento -> fechaEvento.' '.$evento -> horaEvento)}}">
+                                                <a href="{{route('front.eventos.detalle')}}" class="d-block">
+                                                    <h6 class="{{App\Helpers::colorCategoriaEvento($ev -> idCategoriaEvento)}}">{{$ev -> categoriaEvento}}</h6>
+                                                    <p class="instructor">{{$ev -> titulo}}</p>
+                                                    <p class="time">{{date("g:i a", strtotime($ev -> horaEvento))}}</p>
+                                                </a>
+                                            </div>
+                                        @endif
+                                    @endforeach
                                 </div>
                                 <div class="calendar-week-pilar">
-                                    <div class="calendar-week-card">
-                                        <a href="{{route('front.eventos.detalle')}}" class="d-block">
-                                            <h6 class="verde">Classic Barre</h6>
-                                            <p class="instructor">Caro</p>
-                                            <p class="time">7:10 AM</p>
-                                        </a>
-                                    </div>
-                                    <div class="calendar-week-card full">
-                                        <a href="{{route('front.eventos.detalle')}}" class="d-block">
-                                            <h6 class="azul">Classic Barre</h6>
-                                            <p class="instructor">Caro</p>
-                                            <p class="time">7:10 AM</p>
-                                        </a>
-                                    </div>
+                                    @foreach ($params as $ev)
+                                        @if (date('d', strtotime($ev -> fechaEvento)) === $calendario[2][1])
+                                            <div class="calendar-week-card {{App\Helpers::inTime($evento -> fechaEvento.' '.$evento -> horaEvento)}}">
+                                                <a href="{{route('front.eventos.detalle')}}" class="d-block">
+                                                    <h6 class="{{App\Helpers::colorCategoriaEvento($ev -> idCategoriaEvento)}}">{{$ev -> categoriaEvento}}</h6>
+                                                    <p class="instructor">{{$ev -> titulo}}</p>
+                                                    <p class="time">{{date("g:i a", strtotime($ev -> horaEvento))}}</p>
+                                                </a>
+                                            </div>
+                                        @endif
+                                    @endforeach
                                 </div>
                                 <div class="calendar-week-pilar">
-                                    <div class="calendar-week-card off-time">
-                                        <a href="{{route('front.eventos.detalle')}}" class="d-block">
-                                            <h6 class="rojo">Classic Barre</h6>
-                                            <p class="instructor">Caro</p>
-                                            <p class="time">7:10 AM</p>
-                                        </a>
-                                    </div>
-                                    <div class="calendar-week-card">
-                                        <a href="{{route('front.eventos.detalle')}}" class="d-block">
-                                            <h6 class="rojo">Classic Barre</h6>
-                                            <p class="instructor">Caro</p>
-                                            <p class="time">7:10 AM</p>
-                                        </a>
-                                    </div>
-                                    <div class="calendar-week-card">
-                                        <a href="{{route('front.eventos.detalle')}}" class="d-block">
-                                            <h6>Classic Barre</h6>
-                                            <p class="instructor">Caro</p>
-                                            <p class="time">7:10 AM</p>
-                                        </a>
-                                    </div>
+                                    @foreach ($params as $ev)
+                                        @if (date('d', strtotime($ev -> fechaEvento)) === $calendario[3][1])
+                                            <div class="calendar-week-card {{App\Helpers::inTime($evento -> fechaEvento.' '.$evento -> horaEvento)}}">
+                                                <a href="{{route('front.eventos.detalle')}}" class="d-block">
+                                                    <h6 class="{{App\Helpers::colorCategoriaEvento($ev -> idCategoriaEvento)}}">{{$ev -> categoriaEvento}}</h6>
+                                                    <p class="instructor">{{$ev -> titulo}}</p>
+                                                    <p class="time">{{date("g:i a", strtotime($ev -> horaEvento))}}</p>
+                                                </a>
+                                            </div>
+                                        @endif
+                                    @endforeach
                                 </div>
                                 <div class="calendar-week-pilar">
-                                    <div class="calendar-week-card full">
-                                        <a href="{{route('front.eventos.detalle')}}" class="d-block">
-                                            <h6 class="verde">Classic Barre</h6>
-                                            <p class="instructor">Caro</p>
-                                            <p class="time">7:10 AM</p>
-                                        </a>
-                                    </div>
-                                    <div class="calendar-week-card">
-                                        <a href="{{route('front.eventos.detalle')}}" class="d-block">
-                                            <h6 class="azul">Classic Barre</h6>
-                                            <p class="instructor">Caro</p>
-                                            <p class="time">7:10 AM</p>
-                                        </a>
-                                    </div>
+                                    @foreach ($params as $ev)
+                                        @if (date('d', strtotime($ev -> fechaEvento)) === $calendario[4][1])
+                                            <div class="calendar-week-card {{App\Helpers::inTime($evento -> fechaEvento.' '.$evento -> horaEvento)}}">
+                                                <a href="{{route('front.eventos.detalle')}}" class="d-block">
+                                                    <h6 class="{{App\Helpers::colorCategoriaEvento($ev -> idCategoriaEvento)}}">{{$ev -> categoriaEvento}}</h6>
+                                                    <p class="instructor">{{$ev -> titulo}}</p>
+                                                    <p class="time">{{date("g:i a", strtotime($ev -> horaEvento))}}</p>
+                                                </a>
+                                            </div>
+                                        @endif
+                                    @endforeach
                                 </div>
                                 <div class="calendar-week-pilar">
-                                    <div class="calendar-week-card">
-                                        <a href="{{route('front.eventos.detalle')}}" class="d-block">
-                                            <h6 class="rojo">Classic Barre</h6>
-                                            <p class="instructor">Caro</p>
-                                            <p class="time">7:10 AM</p>
-                                        </a>
-                                    </div>
-                                    <div class="calendar-week-card full">
-                                        <a href="{{route('front.eventos.detalle')}}" class="d-block">
-                                            <h6>Classic Barre</h6>
-                                            <p class="instructor">Caro</p>
-                                            <p class="time">7:10 AM</p>
-                                        </a>
-                                    </div>
-                                    <div class="calendar-week-card full">
-                                        <a href="{{route('front.eventos.detalle')}}" class="d-block">
-                                            <h6 class="azul">Classic Barre</h6>
-                                            <p class="instructor">Caro</p>
-                                            <p class="time">7:10 AM</p>
-                                        </a>
-                                    </div>
-                                    <div class="calendar-week-card">
-                                        <a href="{{route('front.eventos.detalle')}}" class="d-block">
-                                            <h6 class="rojo">Classic Barre</h6>
-                                            <p class="instructor">Caro</p>
-                                            <p class="time">7:10 AM</p>
-                                        </a>
-                                    </div>
+                                    @foreach ($params as $ev)
+                                        @if (date('d', strtotime($ev -> fechaEvento)) === $calendario[5][1])
+                                            <div class="calendar-week-card {{App\Helpers::inTime($evento -> fechaEvento.' '.$evento -> horaEvento)}}">
+                                                <a href="{{route('front.eventos.detalle')}}" class="d-block">
+                                                    <h6 class="{{App\Helpers::colorCategoriaEvento($ev -> idCategoriaEvento)}}">{{$ev -> categoriaEvento}}</h6>
+                                                    <p class="instructor">{{$ev -> titulo}}</p>
+                                                    <p class="time">{{date("g:i a", strtotime($ev -> horaEvento))}}</p>
+                                                </a>
+                                            </div>
+                                        @endif
+                                    @endforeach
                                 </div>
                                 <div class="calendar-week-pilar">
-                                    <div class="calendar-week-card">
-                                        <a href="{{route('front.eventos.detalle')}}" class="d-block">
-                                            <h6 class="verde">Classic Barre</h6>
-                                            <p class="instructor">Caro</p>
-                                            <p class="time">7:10 AM</p>
-                                        </a>
-                                    </div>
-                                    <div class="calendar-week-card full">
-                                        <a href="{{route('front.eventos.detalle')}}" class="d-block">
-                                            <h6 class="verde">Classic Barre</h6>
-                                            <p class="instructor">Caro</p>
-                                            <p class="time">7:10 AM</p>
-                                        </a>
-                                    </div>
+                                    @foreach ($params as $ev)
+                                        @if (date('d', strtotime($ev -> fechaEvento)) === $calendario[6][1])
+                                            <div class="calendar-week-card {{App\Helpers::inTime($evento -> fechaEvento.' '.$evento -> horaEvento)}}">
+                                                <a href="{{route('front.eventos.detalle')}}" class="d-block">
+                                                    <h6 class="{{App\Helpers::colorCategoriaEvento($ev -> idCategoriaEvento)}}">{{$ev -> categoriaEvento}}</h6>
+                                                    <p class="instructor">{{$ev -> titulo}}</p>
+                                                    <p class="time">{{date("g:i a", strtotime($ev -> horaEvento))}}</p>
+                                                </a>
+                                            </div>
+                                        @endif
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -287,11 +220,13 @@
                         </div>
                         <div class="col-12 col-lg-9 col-xl-10">
                             <ul class="list-unstyled d-flex justify-content-between justify-content-sm-center justify-content-md-between">
-                                <li class="card text-center align-items-center"> <img class="mb-2" src="{{asset('img/frame-0.svg')}}" alt="Aventura"> <p>Aventura</p> </li>
-                                <li class="card text-center align-items-center"> <img class="mb-2" src="{{asset('img/frame-1.svg')}}" alt="Gastronomia"> <p>Gastronomia</p> </li>
+                                @foreach ($categorias as $item)
+                                    <li class="card text-center align-items-center"> <img class="mb-2" src="{{asset($item -> portada)}}" alt="{{$item -> titulo}}"> <p>{{$item -> titulo}}</p> </li>
+                                @endforeach
+                                {{-- <li class="card text-center align-items-center"> <img class="mb-2" src="{{asset('img/frame-1.svg')}}" alt="Gastronomia"> <p>Gastronomia</p> </li>
                                 <li class="card text-center align-items-center"> <img class="mb-2" src="{{asset('img/frame-2.svg')}}" alt="Naturaleza"> <p>Naturaleza</p> </li>
                                 <li class="card text-center align-items-center"> <img class="mb-2" src="{{asset('img/frame-3.svg')}}" alt="Ciudad"> <p>Ciudad</p> </li>
-                                <li class="card text-center align-items-center"> <img class="mb-2" src="{{asset('img/frame-4.svg')}}" alt="Wellness"> <p>Wellness</p> </li>
+                                <li class="card text-center align-items-center"> <img class="mb-2" src="{{asset('img/frame-4.svg')}}" alt="Wellness"> <p>Wellness</p> </li> --}}
                             </ul>
                         </div>
                     </div>
@@ -328,10 +263,14 @@
 @push('js')
     <script>
         const EVENTO_VIEW_DETAIL = false;
-        document.getElementById('testBtn').addEventListener('click', function() {
-            document.getElementById('eventosContainer').classList.toggle('d-none')
-            document.getElementById('CalendarioContainer').classList.toggle('d-none')
+        document.querySelectorAll('.toggleEventos').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.getElementById('eventosContainer').classList.toggle('d-none');
+                document.getElementById('CalendarioContainer').classList.toggle('d-none');
+            });
         });
+        
+        
     </script>
     <script src="{{mix('js/pages/eventos.js')}}"></script>
 @endpush

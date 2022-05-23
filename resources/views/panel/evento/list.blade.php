@@ -17,8 +17,8 @@
                             <thead class="thead-light">
                             <tr>
                                 <th scope="col" class="sort" data-sort="status">Portada</th>
-                                <th>Publicación</th>
-                                <th scope="col">Acciones</th>
+                                <th width="200px">Publicación</th>
+                                <th scope="col" width="250px">Acciones</th>
                             </tr>
                             </thead>
                             <tbody class="list">
@@ -29,7 +29,7 @@
                                             <img src="">
                                             <div class="media align-items-center">
                                                 <div class="avatar rounded-circle mr-3">
-                                                    <img alt="Image placeholder" src="{{asset('storage/evento/'.$row->portada)}}">
+                                                    <img alt="Image placeholder" style="height: 48px; width: 48px; object-fit: cover;" src="{{asset('storage/evento/'.$row->portada)}}">
                                                 </div>
                                                 <div class="media-body">
                                                     <span class="name mb-0 text-sm">{{ $row->titulo }}</span>

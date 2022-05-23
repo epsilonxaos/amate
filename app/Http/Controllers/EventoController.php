@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Asiento;
 use App\Evento;
+use App\EventoCategoria;
 use App\EventoHorario;
 use App\EventoPrecio;
 use App\Exports\HorarioExport;
@@ -91,6 +92,10 @@ class EventoController extends Controller
                 ]
             ]
         ];
+        
+        $evento_categorias = EventoCategoria::where('status', 1) -> get();
+
+        $info['evento_categoria'] = $evento_categorias;
         return view('panel.evento.add', $info);
     }
 
@@ -111,6 +116,7 @@ class EventoController extends Controller
         $evento = Evento::create([
             'titulo' => $request -> titulo,
             'tipo'   => $request -> tipo,
+            'categoria_id'   => $request -> categoria_id,
             'lugar' => $request -> lugar,
             'latitud' => $request -> latitud,
             'longitud' => $request -> longitud,
@@ -189,6 +195,7 @@ class EventoController extends Controller
     {
         $evento = Evento::find($id);
         $galeria = Galeria::where('rel_id', $id) -> where('tipo',1)->get();
+        $evento_categorias = EventoCategoria::where('status', 1) -> get();
 
         $info = [
             'title' => 'Evento',
@@ -207,6 +214,7 @@ class EventoController extends Controller
         ];
 
         $info['evento'] = $evento;
+        $info['evento_categoria'] = $evento_categorias;
         $info['galeria'] = $galeria;
         $info['evento_horario'] = Evento::find($id)->horarios;
         $info['evento_precio'] = Evento::find($id)->precios;
@@ -232,6 +240,7 @@ class EventoController extends Controller
         $evento = Evento::find($id);
         $evento -> titulo           = $request -> titulo;
         $evento -> tipo             = $request -> tipo;
+        $evento -> categoria_id     = $request -> categoria_id;
         $evento -> lugar            = $request -> lugar;
         $evento -> latitud          = $request -> latitud;
         $evento -> longitud         = $request -> longitud;
