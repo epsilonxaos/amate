@@ -34,9 +34,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-4-tab" data-toggle="tab" href="#tabs-icons-text-4" role="tab" aria-controls="tabs-icons-text-4" aria-selected="false"><i class="ni ni-bell-55 mr-2"></i>Precios</a>
                                     </li>
-                                   {{-- <li class="nav-item">
+                                   <li class="nav-item">
                                         <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false"><i class="ni ni-bell-55 mr-2"></i>Galería</a>
-                                    </li>--}}
+                                    </li>
                                 </ul>
                             </div>
                             <div class="card shadow">
@@ -88,7 +88,34 @@
                                                             <input type="text" name="lugar" id="lugar" class="form-control" autocomplete="off" value="{{ old('lugar') ? old('lugar') : $evento -> lugar  }}">
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-12">
+                                                    <div class="col-12 col-md-4 mb-3">
+                                                        @if ($evento -> imagen_lateral_1)
+                                                            <img src="{{asset($evento -> imagen_lateral_1)}}" alt="" class="w-100 mb-2" style="object-fit: contain; height: 120px">
+                                                        @endif
+                                                        <div class="custom-file">
+                                                            <label for="imagen_1" class="form-control-label">Imagen lateral</label>
+                                                            <input type="file" name="imagen_1" class="filestyle" data-text="Imagen" id="imagen_1" accept="image/x-png,image/gif,image/jpeg">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-4 mb-3">
+                                                        @if ($evento -> imagen_lateral_2)
+                                                            <img src="{{asset($evento -> imagen_lateral_2)}}" alt="" class="w-100 mb-2" style="object-fit: contain; height: 120px">
+                                                        @endif
+                                                        <div class="custom-file">
+                                                            <label for="imagen_2" class="form-control-label">Imagen lateral</label>
+                                                            <input type="file" name="imagen_2" class="filestyle" data-text="Imagen" id="imagen_2" accept="image/x-png,image/gif,image/jpeg">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-4 mb-3">
+                                                        @if ($evento -> imagen_lateral_3)
+                                                            <img src="{{asset($evento -> imagen_lateral_3)}}" alt="" class="w-100 mb-2" style="object-fit: contain; height: 120px">
+                                                        @endif
+                                                        <div class="custom-file">
+                                                            <label for="imagen_3" class="form-control-label">Imagen lateral</label>
+                                                            <input type="file" name="imagen_3" class="filestyle" data-text="Imagen" id="imagen_3" accept="image/x-png,image/gif,image/jpeg">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 mb-3">
                                                         <fieldset class="gllpLatlonPicker">
                                                             <legend style="margin: 0;padding-top: 20px;padding-bottom: 20px;text-align: center;"><small>Arrastre el pin a la ubicación del evento ó utilice el buscador</small></legend>
                                                             <div class="input-group mb-3">

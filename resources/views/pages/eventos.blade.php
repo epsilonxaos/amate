@@ -116,11 +116,11 @@
                                     <div class="calendar-week-pilar">
                                         @foreach ($params as $ev)
                                             @if (date('d', strtotime($ev -> fechaEvento)) === $calendario[0][1])
-                                                <div class="calendar-week-card {{App\Helpers::inTime($evento -> fechaEvento.' '.$evento -> horaEvento)}}">
-                                                    <a href="{{route('front.eventos.detalle')}}" class="d-block">
+                                                <div class="calendar-week-card {{App\Helpers::inTime($ev -> fechaEvento.' '.$ev -> horaEvento)}}">
+                                                    <a href="{{route('front.eventos.detalle', [$ev -> id, $ev -> url_amigable])}}" class="d-block">
                                                         <h6 class="{{App\Helpers::colorCategoriaEvento($ev -> idCategoriaEvento)}}">{{$ev -> categoriaEvento}}</h6>
                                                         <p class="instructor">{{$ev -> titulo}}</p>
-                                                        <p class="time">{{date("g:i a", strtotime($ev -> horaEvento))}}</p>
+                                                        <p class="time">{{App\Helpers::dateTo12Hrs($ev -> horaEvento)}}</p>
                                                     </a>
                                                 </div>
                                             @endif
@@ -129,11 +129,11 @@
                                     <div class="calendar-week-pilar">
                                         @foreach ($params as $ev)
                                             @if (date('d', strtotime($ev -> fechaEvento)) === $calendario[1][1])
-                                                <div class="calendar-week-card {{App\Helpers::inTime($evento -> fechaEvento.' '.$evento -> horaEvento)}}">
-                                                    <a href="{{route('front.eventos.detalle')}}" class="d-block">
+                                                <div class="calendar-week-card {{App\Helpers::inTime($ev -> fechaEvento.' '.$ev -> horaEvento)}}">
+                                                    <a href="{{route('front.eventos.detalle', [$ev -> id, $ev -> url_amigable])}}" class="d-block">
                                                         <h6 class="{{App\Helpers::colorCategoriaEvento($ev -> idCategoriaEvento)}}">{{$ev -> categoriaEvento}}</h6>
                                                         <p class="instructor">{{$ev -> titulo}}</p>
-                                                        <p class="time">{{date("g:i a", strtotime($ev -> horaEvento))}}</p>
+                                                        <p class="time">{{App\Helpers::dateTo12Hrs($ev -> horaEvento)}}</p>
                                                     </a>
                                                 </div>
                                             @endif
@@ -142,11 +142,11 @@
                                     <div class="calendar-week-pilar">
                                         @foreach ($params as $ev)
                                             @if (date('d', strtotime($ev -> fechaEvento)) === $calendario[2][1])
-                                                <div class="calendar-week-card {{App\Helpers::inTime($evento -> fechaEvento.' '.$evento -> horaEvento)}}">
-                                                    <a href="{{route('front.eventos.detalle')}}" class="d-block">
+                                                <div class="calendar-week-card {{App\Helpers::inTime($ev -> fechaEvento.' '.$ev -> horaEvento)}}">
+                                                    <a href="{{route('front.eventos.detalle', [$ev -> id, $ev -> url_amigable])}}" class="d-block">
                                                         <h6 class="{{App\Helpers::colorCategoriaEvento($ev -> idCategoriaEvento)}}">{{$ev -> categoriaEvento}}</h6>
                                                         <p class="instructor">{{$ev -> titulo}}</p>
-                                                        <p class="time">{{date("g:i a", strtotime($ev -> horaEvento))}}</p>
+                                                        <p class="time">{{App\Helpers::dateTo12Hrs($ev -> horaEvento)}}</p>
                                                     </a>
                                                 </div>
                                             @endif
@@ -155,11 +155,11 @@
                                     <div class="calendar-week-pilar">
                                         @foreach ($params as $ev)
                                             @if (date('d', strtotime($ev -> fechaEvento)) === $calendario[3][1])
-                                                <div class="calendar-week-card {{App\Helpers::inTime($evento -> fechaEvento.' '.$evento -> horaEvento)}}">
-                                                    <a href="{{route('front.eventos.detalle')}}" class="d-block">
+                                                <div class="calendar-week-card {{App\Helpers::inTime($ev -> fechaEvento.' '.$ev -> horaEvento)}}">
+                                                    <a href="{{route('front.eventos.detalle', [$ev -> id, $ev -> url_amigable])}}" class="d-block">
                                                         <h6 class="{{App\Helpers::colorCategoriaEvento($ev -> idCategoriaEvento)}}">{{$ev -> categoriaEvento}}</h6>
                                                         <p class="instructor">{{$ev -> titulo}}</p>
-                                                        <p class="time">{{date("g:i a", strtotime($ev -> horaEvento))}}</p>
+                                                        <p class="time">{{App\Helpers::dateTo12Hrs($ev -> horaEvento)}}</p>
                                                     </a>
                                                 </div>
                                             @endif
@@ -168,11 +168,11 @@
                                     <div class="calendar-week-pilar">
                                         @foreach ($params as $ev)
                                             @if (date('d', strtotime($ev -> fechaEvento)) === $calendario[4][1])
-                                                <div class="calendar-week-card {{App\Helpers::inTime($evento -> fechaEvento.' '.$evento -> horaEvento)}}">
-                                                    <a href="{{route('front.eventos.detalle')}}" class="d-block">
+                                                <div class="calendar-week-card {{App\Helpers::inTime($ev -> fechaEvento.' '.$ev -> horaEvento)}}">
+                                                    <a href="{{route('front.eventos.detalle', [$ev -> id, $ev -> url_amigable])}}" class="d-block">
                                                         <h6 class="{{App\Helpers::colorCategoriaEvento($ev -> idCategoriaEvento)}}">{{$ev -> categoriaEvento}}</h6>
                                                         <p class="instructor">{{$ev -> titulo}}</p>
-                                                        <p class="time">{{date("g:i a", strtotime($ev -> horaEvento))}}</p>
+                                                        <p class="time">{{App\Helpers::dateTo12Hrs($ev -> horaEvento)}}</p>
                                                     </a>
                                                 </div>
                                             @endif
@@ -181,11 +181,11 @@
                                     <div class="calendar-week-pilar">
                                         @foreach ($params as $ev)
                                             @if (date('d', strtotime($ev -> fechaEvento)) === $calendario[5][1])
-                                                <div class="calendar-week-card {{App\Helpers::inTime($evento -> fechaEvento.' '.$evento -> horaEvento)}}">
-                                                    <a href="{{route('front.eventos.detalle')}}" class="d-block">
+                                                <div class="calendar-week-card {{App\Helpers::inTime($ev -> fechaEvento.' '.$ev -> horaEvento)}}">
+                                                    <a href="{{route('front.eventos.detalle', [$ev -> id, $ev -> url_amigable])}}" class="d-block">
                                                         <h6 class="{{App\Helpers::colorCategoriaEvento($ev -> idCategoriaEvento)}}">{{$ev -> categoriaEvento}}</h6>
                                                         <p class="instructor">{{$ev -> titulo}}</p>
-                                                        <p class="time">{{date("g:i a", strtotime($ev -> horaEvento))}}</p>
+                                                        <p class="time">{{App\Helpers::dateTo12Hrs($ev -> horaEvento)}}</p>
                                                     </a>
                                                 </div>
                                             @endif
@@ -194,11 +194,11 @@
                                     <div class="calendar-week-pilar">
                                         @foreach ($params as $ev)
                                             @if (date('d', strtotime($ev -> fechaEvento)) === $calendario[6][1])
-                                                <div class="calendar-week-card {{App\Helpers::inTime($evento -> fechaEvento.' '.$evento -> horaEvento)}}">
-                                                    <a href="{{route('front.eventos.detalle')}}" class="d-block">
+                                                <div class="calendar-week-card {{App\Helpers::inTime($ev -> fechaEvento.' '.$ev -> horaEvento)}}">
+                                                    <a href="{{route('front.eventos.detalle', [$ev -> id, $ev -> url_amigable])}}" class="d-block">
                                                         <h6 class="{{App\Helpers::colorCategoriaEvento($ev -> idCategoriaEvento)}}">{{$ev -> categoriaEvento}}</h6>
                                                         <p class="instructor">{{$ev -> titulo}}</p>
-                                                        <p class="time">{{date("g:i a", strtotime($ev -> horaEvento))}}</p>
+                                                        <p class="time">{{App\Helpers::dateTo12Hrs($ev -> horaEvento)}}</p>
                                                     </a>
                                                 </div>
                                             @endif

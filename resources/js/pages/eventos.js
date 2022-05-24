@@ -2,9 +2,9 @@ import Swiper from 'swiper/bundle';
 
 if(EVENTO_VIEW_DETAIL) {
     const swiperSlide = new Swiper('#swiperSlide', {
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
         },
     });
 

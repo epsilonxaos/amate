@@ -8,100 +8,47 @@
     <section class="eventos">
         <div class="eventos-galeria pt-3">
             <div class="container-fluid w15">
-                <div class="swiper-container" id="swiperSlide">
-                    <div class="swiper-wrapper">
-                        @for ($i = 0; $i < 3; $i++)
-                            <div class="swiper-slide">
-                                <img src="{{ asset('img/slide01.jpg') }}" alt="galeria">
-                            </div>
-                        @endfor
-                    </div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
-                </div>
+                @if (count($galeria) > 0)
+                    <div class="swiper-container" id="swiperSlide">
+                        <div class="swiper-wrapper">
+                            @foreach ($galeria as $item)
+                                <div class="swiper-slide">
+                                    <img src="{{ asset('storage/evento/galeria/'.$item -> imagen) }}" alt="galeria">
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>                    
+                @else
+                    <img src="{{asset('storage/evento/'.$evento -> portada)}}" alt="{{$evento -> titulo}}" class="w-100" style="height: 80vh; object-fit: cover">
+                @endif
             </div>
         </div>
 
 
         <div class="eventos-detalle pt-5">
             <div class="container-fluid w12">
-                <div class="row">
+                <div class="row justify-content-center">
                     <div class="col-12 text-center mb-5">
-                        <h2 class="titulo mb-3">Introducción a la Apnea</h2>
-                        <p class="mb-4">Prepárate a descubrir el mágico mundo subacuático a través de una experiencia inolvidable con un
-                            instructor de apnea certificado</p>
+                        <h2 class="titulo mb-3">{{$evento -> titulo}}</h2>
+                        <p class="mb-4">{!! $evento -> descripcion !!}</p>
                         <a class="btn btn-gold" href="{{route('front.pagos')}}">¡Quiero ir!</a>
                     </div>
-                    <div class="col-12 col-md-6">
-                        <p class="date mb-0">27 Marzo 2022</p>
-                        <p class="date">Mérida | 09:00 am</p>
+                    <div class="col-12 {{($evento -> imagen_lateral_1 || $evento -> imagen_lateral_2 || $evento -> imagen_lateral_3) ? 'col-md-6' : 'col-md-10'}}">
+                        <p class="date mb-0">{{App\Helpers::dateSpanishComplete($horarios -> fecha)}}</p>
+                        <p class="date">{{$evento -> lugar}} | {{App\Helpers::dateTo12Hrs($horarios -> hora)}}</p>
                         <div class="information-extra">
-                            <p>En esta experiencia, un instructor certificado te enseñara los fundamentos básicos del buceo
-                                libre (apnea) en donde descubrirás habilidades naturales de respiración para sentirte cómodo
-                                bajo el agua y tener una mágica conexión con tu ser y el mundo subacuático de un majestuoso
-                                cenote cristalino</p>
-                            <p><strong>Duración Experiencia</strong>: 7 horas</p>
-                            <p><strong>Hora y Punto de salida:</strong> 09:00 am</p>
-                            <p><strong>Lugar de Salida</strong>: Hotel Cigno</p>
-                            <p><strong>Idiomas:</strong> Inglés, Español</p>
-                            <p><strong><br></strong></p>
-                            <p><strong>Número de personas:</strong> 4 Máximo<br></p>
-                            <p><strong>Costo: </strong>$400 MXN por persona</p>
-                            <p><span style="font-weight: 700;">Incluye:</span><br></p>
-                            <p>
-                            <ul>
-                                <li>Transporte</li>
-                                <li>Refrigerios, comida y bebida no alcoholica</li>
-                                <li>Equipo de apnea (wetsuit, máscara, snorkel, aletas, lanyard)</li>
-                                <li>Entrada al cenote</li>
-                                <li>Clase de introducción a la apnea por instructor certificado Molchanovs</li>
-                                <li>Ejercicios en seco de respiración y relajación</li>
-                            </ul>
-                            </p>
-                            <p><br></p>
-                            <p><strong>No incluye:</strong></p>
-                            <p>
-                            <ul>
-                                <li>Certificación de Apnea</li>
-                                <li>Propina</li>
-                            </ul>
-                            </p>
-                            <p><strong><br></strong></p>
-                            <p><strong>Que llevar:</strong><br>
-                            <ul>
-                                <li>Traje de baño cómodo para usar bajo el traje de neopreno</li>
-                                <li>Toalla</li>
-                                <li>Sandalias</li>
-                            </ul>
-                            </p>
-                            <p><strong><br></strong></p>
-                            <p><strong>Políticas:</strong></p>
-                            <p>
-                            <ul>
-                                <li>Toda reserva queda sujeta a disponibilidad</li>
-                                <li>En caso de que el cliente no se presente o realice la experiencia esta no será
-                                    reembolsable</li>
-                                <li>Se requiere el pago total para realizar una reserva</li>
-                                <li>Cancelaciones deben realizarse con 48 hrs. de anticipación&nbsp;</li>
-                                <li>Cancelaciones realizadas con menos de 48 hrs. no serán reembolsables.</li>
-                            </ul>
-                            </p>
-                            <p><br></p>
-                            <p><strong>Requísitos:</strong></p>
-                            <p>
-                            <ul>
-                                <li>Saber nadar</li>
-                                <li>Edad mínima 18 años</li>
-                            </ul>
-                            </p>
-
+                            {!! $evento -> descripcion_2 !!}
                         </div>
                     </div>
-                    <div class="col-12 col-md-6">
-                        <img class="mb-2 w-100" src="https://images.pexels.com/photos/3046637/pexels-photo-3046637.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="">
-                        <img class="mb-2 w-100" src="https://images.pexels.com/photos/37542/divers-scuba-reef-underwater-37542.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-                        <img class="mb-2 w-100" src="https://images.pexels.com/photos/3098971/pexels-photo-3098971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-                    </div>
+                    @if ($evento -> imagen_lateral_1 || $evento -> imagen_lateral_2 || $evento -> imagen_lateral_3)
+                        <div class="col-12 col-md-6">
+                            @if ($evento -> imagen_lateral_1) <img class="mb-2 w-100" src="{{asset($evento -> imagen_lateral_1)}}" alt="{{$evento -> titulo}}"> @endif
+                            @if ($evento -> imagen_lateral_2) <img class="mb-2 w-100" src="{{asset($evento -> imagen_lateral_2)}}" alt="{{$evento -> titulo}}"> @endif
+                            @if ($evento -> imagen_lateral_3) <img class="mb-2 w-100" src="{{asset($evento -> imagen_lateral_3)}}" alt="{{$evento -> titulo}}"> @endif
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

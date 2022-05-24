@@ -9,6 +9,7 @@ use App\EventoHorario;
 use App\EventoPrecio;
 use App\Exports\HorarioExport;
 use App\Galeria;
+use App\Helpers;
 use App\Imports\AsientoImport;
 use App\PrecioPerAsiento;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class EventoController extends Controller
 {
+    protected $directorio = "public/evento";
     /**
      * Display a listing of the resource.
      *
@@ -131,6 +133,21 @@ class EventoController extends Controller
                 $_exploded[0] = 'storage';
                 $path_cover = implode('/', $_exploded);
                 $evento -> portada = basename($path_cover);
+                $evento -> save();
+            }
+            if($request -> hasFile('imagen_1')) {
+                $img = Helpers::addFileStorage($request -> file('imagen_1'), $this -> directorio);
+                $evento -> imagen_lateral_1 = $img;
+                $evento -> save();
+            }
+            if($request -> hasFile('imagen_2')) {
+                $img = Helpers::addFileStorage($request -> file('imagen_2'), $this -> directorio);
+                $evento -> imagen_lateral_2 = $img;
+                $evento -> save();
+            }
+            if($request -> hasFile('imagen_2')) {
+                $img = Helpers::addFileStorage($request -> file('imagen_3'), $this -> directorio);
+                $evento -> imagen_lateral_3 = $img;
                 $evento -> save();
             }
             if($request->file('galeria')){
@@ -258,6 +275,23 @@ class EventoController extends Controller
             $path_cover = implode('/', $_exploded);
             $evento -> portada = basename($path_cover);
         }
+
+        if($request -> hasFile('imagen_1')) {
+            Helpers::deleteFileStorage('evento', 'imagen_lateral_1', $id);
+            $img1 = Helpers::addFileStorage($request -> file('imagen_1'), $this -> directorio);
+            $evento -> imagen_lateral_1 = $img1;
+        }
+        if($request -> hasFile('imagen_2')) {
+            Helpers::deleteFileStorage('evento', 'imagen_lateral_2', $id);
+            $img2 = Helpers::addFileStorage($request -> file('imagen_2'), $this -> directorio);
+            $evento -> imagen_lateral_2 = $img2;
+        }
+        if($request -> hasFile('imagen_2')) {
+            Helpers::deleteFileStorage('evento', 'imagen_lateral_3', $id);
+            $img3 = Helpers::addFileStorage($request -> file('imagen_3'), $this -> directorio);
+            $evento -> imagen_lateral_3 = $img3;
+        }
+
         $evento -> save();
 
         if($request->file('galeria')){

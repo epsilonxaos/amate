@@ -21,9 +21,9 @@ use App\OrdenPerAsiento;
 use App\Pieza;
 use App\PiezaContenido;
 use App\Taller;
-use Carbon\Carbon;
 use Carbon\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -264,7 +264,12 @@ class FrontController extends Controller
             -> where([
                 ['ev.status', '=', 1],
                 ['evc.status', '=', 1]
-            ]) -> paginate(12);
+            ])
+            -> whereDate('evh.fecha', '>=', Carbon::now() -> format('Y-m-d'))
+            // -> whereTime('evh.hora' , '>', Carbon::now() -> format('H:i:s'))
+            -> orderBy('evh.fecha', 'ASC') -> paginate(12);
+
+        // dd(Carbon::now() -> format('Y-m-d'), Carbon::now() -> format('H:i:s'), $eventos);
 
         foreach ($eventos as $pr){
             $pr -> id = $optimus -> encode($pr -> id);
@@ -316,8 +321,6 @@ class FrontController extends Controller
             [Date::parse('+6 day')->format('D'),Date::parse('+6 day')->format('d')],
         ];
 
-
-
         return view('pages.eventos', [
             'eventos' => $eventos,
             'calendario' => $calendario,
@@ -327,20 +330,25 @@ class FrontController extends Controller
             'categorias' => $eventoCategorias
         ]);
     }
-    public function eventos_detalleOld($id, Optimus $optimus){
-        $original_id = $id;
-        $id = $optimus -> decode($id);
-        $evento = Evento::find($id);
-        $galeria = Galeria::where('rel_id', $id) -> where('tipo',1)->get();
-        $horarios = Evento::find($id)->horarios()->groupBy('fecha')->orderBy('fecha', 'ASC')->get();
-        $url_amigable = Str::slug($evento -> titulo);
-        return view('pages.eventos_detalle', ['original_id' => $original_id, 'url_amigable' => $url_amigable, 'evento' => $evento, 'galeria' => $galeria, 'horarios' => $horarios]);
-        //return view('pages.eventos_detalle');
-    }
 
-    public function eventos_detalle()
-    {
-        return view('pages.eventos_detalle');
+    public function eventos_detalle($id, Optimus $optimus){
+        $original_id = $id;
+        $id          = $optimus -> decode($id);
+
+        $evento       = Evento::find($id);
+        $galeria      = Galeria::where('rel_id', $id) -> where('tipo',1)->get();
+        $horarios     = Evento::find($id) -> horarios() -> groupBy('fecha') -> orderBy('fecha', 'ASC') -> first();
+
+        // dd($galeria);
+        $url_amigable = Str::slug($evento -> titulo);
+
+        return view('pages.eventos_detalle', [
+            'original_id'  => $original_id,
+            'url_amigable' => $url_amigable,
+            'evento'       => $evento,
+            'galeria'      => $galeria,
+            'horarios'     => $horarios
+        ]);
     }
 
     public function eventos_butacas(Request $request, Optimus $optimus){

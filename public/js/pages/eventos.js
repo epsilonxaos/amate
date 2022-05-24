@@ -12300,9 +12300,9 @@ if (EVENTO_VIEW_DETAIL) {
   };
 
   var swiperSlide = new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__["default"]('#swiperSlide', {
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
     }
   });
 } else {

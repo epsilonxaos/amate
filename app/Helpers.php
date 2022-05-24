@@ -17,15 +17,15 @@ class Helpers {
      * @return $ruta
      */
     public static function addFileStorage($file, $directorio) {
-        $ruta = Storage::disk('public_uploads')->put($directorio, $file);
+        // $ruta = Storage::disk('public_uploads')->put($directorio, $file);
 
-        return 'uploads/'.$ruta;
-        // $ruta = $file -> store($directorio);
-        // $exploded = explode('/', $ruta);
-        // $exploded[0] = 'storage';
-        // $ruta = implode('/', $exploded);
+        // return 'uploads/'.$ruta;
+        $ruta = $file -> store($directorio);
+        $exploded = explode('/', $ruta);
+        $exploded[0] = 'storage';
+        $ruta = implode('/', $exploded);
 
-        // return $ruta;
+        return $ruta;
     }
 
     /**
@@ -88,7 +88,12 @@ class Helpers {
 
         // return $from;
 
-        return $to > $from ? 'true' : 'false';
+        return $to > $from ? 'off-time' : '';
+    }
+
+    public static function dateTo12Hrs($hora)
+    {
+        return date("g:i a", strtotime($hora));
     }
 
     public static function colorCategoriaEvento($categoria)

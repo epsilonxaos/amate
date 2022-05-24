@@ -33,9 +33,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-4-tab" data-toggle="tab" href="#tabs-icons-text-4" role="tab" aria-controls="tabs-icons-text-4" aria-selected="false"><i class="ni ni-bell-55 mr-2"></i>Precios</a>
                                     </li>
-                                   {{-- <li class="nav-item">
+                                   <li class="nav-item">
                                         <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false"><i class="ni ni-bell-55 mr-2"></i>Galería</a>
-                                    </li>--}}
+                                    </li>
                                 </ul>
                             </div>
                             <div class="card shadow">
@@ -82,7 +82,25 @@
                                                             <input type="text" name="lugar" id="lugar" class="form-control" autocomplete="off" value="{{ old('lugar') }}">
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-12">
+                                                    <div class="col-12 col-md-4 mb-3">
+                                                        <div class="custom-file">
+                                                            <label for="imagen_1" class="form-control-label">Imagen lateral</label>
+                                                            <input type="file" name="imagen_1" class="filestyle" data-text="Imagen" id="imagen_1" accept="image/x-png,image/gif,image/jpeg">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-4 mb-3">
+                                                        <div class="custom-file">
+                                                            <label for="imagen_2" class="form-control-label">Imagen lateral</label>
+                                                            <input type="file" name="imagen_2" class="filestyle" data-text="Imagen" id="imagen_2" accept="image/x-png,image/gif,image/jpeg">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-4 mb-3">
+                                                        <div class="custom-file">
+                                                            <label for="imagen_3" class="form-control-label">Imagen lateral</label>
+                                                            <input type="file" name="imagen_3" class="filestyle" data-text="Imagen" id="imagen_3" accept="image/x-png,image/gif,image/jpeg">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 mb-3">
                                                         <fieldset class="gllpLatlonPicker">
                                                             <legend style="margin: 0;padding-top: 20px;padding-bottom: 20px;text-align: center;"><small>Arrastre el pin a la ubicación del evento ó utilice el buscador</small></legend>
                                                             <div class="input-group mb-3">
@@ -106,13 +124,13 @@
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="form-group @error('descripcion') invalid @enderror">
-                                                            <label class="form-control-label" for="descripcion">Descripción</label>
-                                                            <textarea name="descripcion" rel="summer" id="descripcion" class="form-control">{{ old('descripcion') }}</textarea>
+                                                            <label class="form-control-label" for="descripcion">Descripción corta</label>
+                                                            <textarea name="descripcion" rel="summer" id="descripcion" class="form-control" required>{{ old('descripcion') }}</textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="form-group @error('descripcion_2') invalid @enderror">
-                                                            <label class="form-control-label" for="descripcion_2">Descripción 2</label>
+                                                            <label class="form-control-label" for="descripcion_2">Contenido</label>
                                                             <textarea name="descripcion_2" rel="summer" id="descripcion_2" class="form-control">{{ old('descripcion_2') }}</textarea>
                                                         </div>
                                                     </div>
