@@ -627,12 +627,13 @@ class FrontController extends Controller
             $orden -> save();
             //dd($request -> precio_boleto);
             if($request -> evento_tipo == 0){
-                $orden_controller = new OrdenController();
-                if($orden_controller -> validarDisponibilidadLugares($orden -> id, $request -> precio_id)){
-                    return response() ->json(['success' => true]);
-                }else{
-                    return response() ->json(['success' => false, 'msg' => 'La cantidad de boletos solicitada sobrepasa la disponibilidad actual']);
-                }
+                return response() ->json(['success' => true]);
+                // $orden_controller = new OrdenController();
+                // if($orden_controller -> validarDisponibilidadLugares($orden -> id, $request -> precio_id)){
+                //     return response() ->json(['success' => true]);
+                // }else{
+                //     return response() ->json(['success' => false, 'msg' => 'La cantidad de boletos solicitada sobrepasa la disponibilidad actual']);
+                // }
             }else{
                 $valid_asientos = $this -> validarDisponibilidadLugares();
                 if($valid_asientos['response']){
