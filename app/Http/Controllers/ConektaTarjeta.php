@@ -170,13 +170,13 @@ class ConektaTarjeta extends Controller
                     $orden -> status = 3;
                     $orden -> pago_error = $error;
                     $orden -> save();
-                    return redirect()->back()->with('message',$error);
+                    return redirect()->back()->with('message',' here2: '.$error);
                 }
             }else{
                 $orden -> status = 3;
                 $orden -> pago_error = $er;
                 $orden -> save();
-                return redirect()->back()->with('message',$er);
+                return redirect()->back()->with('message','here: '.$er);
             }
         }else{
             return redirect()->back()->with('message','La session ha expirado');
