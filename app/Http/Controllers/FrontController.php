@@ -612,6 +612,7 @@ class FrontController extends Controller
     public function pagoSave(Request $request){
         if(Session::exists('orden_id')){
             $orden = Orden::find(Session::get('orden_id'));
+            // dd($orden);
             $orden -> evento_titulo = $request -> evento_titulo;
             $orden -> nombre_completo = $request -> nombre;
             $orden -> correo = $request -> email;

@@ -36,7 +36,7 @@
                             <input type="hidden" name="cupon_valor" value="0">
                             <input type="hidden" name="descuento" value="0">
                             <input type="hidden" name="evento_tipo" value="{{$evento -> tipo}}">
-                            <input type="hidden" name="precio_boleto" value="">
+                            <input type="hidden" name="precio_boleto" value="{{$precios -> precio_final}}">
                             <input type="text" name="cupon" id="cupon" class="form-control in" placeholder="Escribir cupón de descuento" aria-label="Escribir cupón de descuento" aria-describedby="button-addon2">
                             <div class="input-group-append rounded-0">
                                 <button class="btn btn-gold apply-cupon" type="button" id="button-addon2">Aplicar</button>
