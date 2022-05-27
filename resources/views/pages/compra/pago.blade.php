@@ -10,168 +10,170 @@
             
             
             <h5 class="text-center">Tiempo restante para completar la compra:</h5>
-            <p class="text-center text-dark font-weight-bold mb-5" data-countdown="{{\App\Http\Controllers\FrontController::sumMinutes($orden -> created_at)}}" id="getting-started"></p|>
+            <p class="text-center text-dark font-weight-bold mb-5" data-countdown="{{\App\Http\Controllers\FrontController::sumMinutes($orden -> created_at)}}" id="getting-started"></p>
+
+            <form action="" method="POST" id="form_pago">
                 <h4 class="text-center mb-3">Selecciona la cantidad de boletos </h4>
-
-            <div class="row">
-                <div class="col-12">
-                    {{-- Cantidad de boletos --}}
-                    <div class="form-group">
-                        <input class="custom-radio radio-validate" type="radio" id="precio_id" name="precio_id" data-precio="{{$precios -> precio_final}}" checked value="personal">
-                        <label for="precio_id" class="dorado font-weight-bold">
-                            <span style="margin-top: -6px;"></span> Boleto Personal - ${{number_format($precios -> precio, 2)}} MXN
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="dorado font-weight-bold">Cantidad de boletos</label>
-                        <input type="number" class="form-control" name="boletos" id="boletos" required min="1" max="100" value="1" style="max-width: 80px">
-                    </div>
-
-                    {{-- Cupon --}}
-                    <div class="input-group cupon mb-4 rounded-0">
-                        <input type="hidden" name="evento_titulo" value="{{$evento -> titulo}}">
-                        <input type="hidden" name="subtotal" value="{{$precios -> precio}}">
-                        <input type="hidden" name="cupon_tipo" value="0">
-                        <input type="hidden" name="cupon_valor" value="0">
-                        <input type="hidden" name="descuento" value="0">
-                        <input type="hidden" name="evento_tipo" value="{{$evento -> tipo}}">
-                        <input type="hidden" name="precio_boleto" value="">
-                        <input type="text" name="cupon" id="cupon" class="form-control in" placeholder="Escribir cupón de descuento" aria-label="Escribir cupón de descuento" aria-describedby="button-addon2">
-                        <div class="input-group-append rounded-0">
-                            <button class="btn btn-gold apply-cupon" type="button" id="button-addon2">Aplicar</button>
+                <div class="row">
+                    <div class="col-12">
+                        {{-- Cantidad de boletos --}}
+                        <div class="form-group">
+                            <input class="custom-radio radio-validate" type="radio" id="precio_id" name="precio_id" data-precio="{{$precios -> precio_final}}" checked value="personal">
+                            <label for="precio_id" class="dorado font-weight-bold">
+                                <span style="margin-top: -6px;"></span> Boleto Personal - ${{number_format($precios -> precio, 2)}} MXN
+                            </label>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Informacion de compra --}}
-            <div class="card border-0 rounded-0 mb-5">
-                <div class="card-body border-0 rounded-0 pt-4 pb-4">
-                    <div class="row justify-content-center no-gutter">
-                        <div class="col-12 col-md-11 col-lg-10">
-                            <p class="mb-0"><span class="font-weight-bold">Día: {{\App\Helpers::dateSpanishShort($horario -> fecha)}}</p>
-                            <p class="mb-0"><span class="font-weight-bold">Hora: {{$horario -> hora}} hrs</p>
-                            <p class="mb-4"><span class="font-weight-bold">Ubicacion: {{$evento -> lugar}}</p>
-                            
-                            <p><span class="font-weight-bold">Número de boletos:</span> <span id="no_boletos">1</span></p>
+                        <div class="form-group">
+                            <label for="" class="dorado font-weight-bold">Cantidad de boletos</label>
+                            <input type="number" class="form-control" name="boletos" id="boletos" required min="1" max="100" value="1" style="max-width: 80px">
                         </div>
-                    </div>
-                </div>
-                <div class="card-footer border-0 rounded-0 pt-4 pb-4">
-                    <div class="row justify-content-center no-gutter">
-                        <div class="col-12 col-md-11 col-lg-10">
-                            <table class="w-100">
-                                <thead>
-                                    <tr>
-                                        <td class="font-weight-bold">Subtotal</td>
-                                        <td>$<span id="s_subtotal">{{number_format($precios -> precio, 2)}}</span> MXN</td>
-                                    </tr>
-                                    {{-- <tr>
-                                        <td class="font-weight-bold">Comision de venta en linea</td>
-                                        <td>$<span id="s_subtotal">{{number_format((($precios -> precio * $precios -> comision) / 100), 2)}} MXN</td>
-                                    </tr> --}}
-                                    <tr>
-                                        <td class="font-weight-bold">Descuento</td>
-                                        <td>-$ <span id="s_descuento">0.00</span> MXN</td>
-                                    </tr>
-                                    <tr class="pt-5">
-                                        <td class="font-weight-bold">Total</td>
-                                        <td>$<span id="s_total">{{number_format($precios -> precio_final, 2)}}</span> MXN</td>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Informacion del comprador --}}
-            <div class="row mb-4">
-                <div class="col-12">
-                    <label for="" class="dorado font-weight-bold">Información del comprador</label>
-                </div>
-                <div class="col-12 form-group">
-                    <input type="text" class="form-control in" placeholder="Nombre" name="nombre" id="nombre">
-                </div>
-                <div class="col-12 form-group">
-                    <input type="text" class="form-control in" placeholder="Correo" name="email" id="email">
-                </div>
-                <div class="col-12 form-group">
-                    <input type="text" class="form-control in" placeholder="Celular" name="pago_telefono" id="pago_telefono">
-                </div>
-                <div class="col-12 form-group">
-                    <textarea class="form-control tx" placeholder="Comentarios" name="comentarios" id="comentarios" cols="30" rows="5"></textarea>
-                </div>
-                <div class="col-12 form-group">
-                    <input type="text" class="form-control in" placeholder="En que hotel estas hospedado?" name="p_hospedado" id="p_hospedado">
-                </div>
-                <div class="col-12 form-group">
-                    <label for="" class="grey">Favor de escribir el número de talla de las aletas / accesorios de todos los participantes al evento</label>
-                    <textarea class="form-control tx" placeholder="Ejemplo: Talla Mediana o 32..." name="p_talla" id="p_talla" cols="30" rows="5"></textarea>
-                </div>
-                <div class="col-12 form-group">
-                    <label for="" class="grey">Favor de escribir el las alergías de los participantes a algun alimento</label>
-                    <textarea class="form-control tx" placeholder="Ejemplo:  Alergia a los mariscos..." name="p_alergia" id="p_alergia" cols="30" rows="5"></textarea>
-                </div>
-            </div>
-
-            {{-- Forma de pago --}}
-            <label for="" class="dorado font-weight-bold mb-3">Metodo de compra</label>
-            <div class="card border-0 rounded-0 mb-5">
-                <div class="card-footer border-0 rounded-0 pt-4 pb-4">
-                    <div class="row no-gutter">
-                        <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                            <div class="form-group">
-                                <input class="custom-radio radio-validate" type="radio" id="metodo1" name="metodo" checked value="paypal">
-                                <label for="metodo1">
-                                    <span></span> <img src="{{asset('img/paypal.png')}}" alt="Paypal">
-                                </label>
-                            </div>
-                        </div>
-                        {{-- <div class="col-12 col-sm-4 col-md-6 col-lg-4">
-                            <div class="form-group">
-                                <input class="custom-radio" type="radio" id="metodo2" name="metodo" value="oxxo">
-                                <label for="metodo2">
-                                    <span></span> <img src="{{asset('img/oxxo.png')}}" alt="Oxxo">
-                                </label>
-                            </div>
-                        </div> --}}
-                        <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                            <div class="form-group">
-                                <input class="custom-radio" type="radio" id="metodo3" name="metodo" value="tarjeta">
-                                <label for="metodo3">
-                                    <span></span> <img src="{{asset('img/tarjeta.png')}}" alt="Visa Mastercard">
-                                </label>
+    
+                        {{-- Cupon --}}
+                        <div class="input-group cupon mb-4 rounded-0">
+                            <input type="hidden" name="evento_titulo" value="{{$evento -> titulo}}">
+                            <input type="hidden" name="subtotal" value="{{$precios -> precio}}">
+                            <input type="hidden" name="cupon_tipo" value="0">
+                            <input type="hidden" name="cupon_valor" value="0">
+                            <input type="hidden" name="descuento" value="0">
+                            <input type="hidden" name="evento_tipo" value="{{$evento -> tipo}}">
+                            <input type="hidden" name="precio_boleto" value="">
+                            <input type="text" name="cupon" id="cupon" class="form-control in" placeholder="Escribir cupón de descuento" aria-label="Escribir cupón de descuento" aria-describedby="button-addon2">
+                            <div class="input-group-append rounded-0">
+                                <button class="btn btn-gold apply-cupon" type="button" id="button-addon2">Aplicar</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="row d-none mb-5" id="content_tarjeta">
-                <div class="col-12 m15">
-                    <input type="text" class="in form-control" name="nombre_tarjeta" placeholder="Nombre en la tarjeta">
+    
+                {{-- Informacion de compra --}}
+                <div class="card border-0 rounded-0 mb-5">
+                    <div class="card-body border-0 rounded-0 pt-4 pb-4">
+                        <div class="row justify-content-center no-gutter">
+                            <div class="col-12 col-md-11 col-lg-10">
+                                <p class="mb-0"><span class="font-weight-bold">Día: {{\App\Helpers::dateSpanishShort($horario -> fecha)}}</p>
+                                <p class="mb-0"><span class="font-weight-bold">Hora: {{$horario -> hora}} hrs</p>
+                                <p class="mb-4"><span class="font-weight-bold">Ubicacion: {{$evento -> lugar}}</p>
+                                
+                                <p><span class="font-weight-bold">Número de boletos:</span> <span id="no_boletos">1</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer border-0 rounded-0 pt-4 pb-4">
+                        <div class="row justify-content-center no-gutter">
+                            <div class="col-12 col-md-11 col-lg-10">
+                                <table class="w-100">
+                                    <thead>
+                                        <tr>
+                                            <td class="font-weight-bold">Subtotal</td>
+                                            <td>$<span id="s_subtotal">{{number_format($precios -> precio, 2)}}</span> MXN</td>
+                                        </tr>
+                                        {{-- <tr>
+                                            <td class="font-weight-bold">Comision de venta en linea</td>
+                                            <td>$<span id="s_subtotal">{{number_format((($precios -> precio * $precios -> comision) / 100), 2)}} MXN</td>
+                                        </tr> --}}
+                                        <tr>
+                                            <td class="font-weight-bold">Descuento</td>
+                                            <td>-$ <span id="s_descuento">0.00</span> MXN</td>
+                                        </tr>
+                                        <tr class="pt-5">
+                                            <td class="font-weight-bold">Total</td>
+                                            <td>$<span id="s_total">{{number_format($precios -> precio_final, 2)}}</span> MXN</td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-12 m15">
-                    <input type="text" class="in form-control" name="numero_tarjeta" id="tarjeta_show" placeholder="Número en la tarjeta">
+    
+                {{-- Informacion del comprador --}}
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <label for="" class="dorado font-weight-bold">Información del comprador</label>
+                    </div>
+                    <div class="col-12 form-group">
+                        <input type="text" class="form-control in" placeholder="Nombre" name="nombre" id="nombre">
+                    </div>
+                    <div class="col-12 form-group">
+                        <input type="text" class="form-control in" placeholder="Correo" name="email" id="email">
+                    </div>
+                    <div class="col-12 form-group">
+                        <input type="text" class="form-control in" placeholder="Celular" name="pago_telefono" id="pago_telefono">
+                    </div>
+                    <div class="col-12 form-group">
+                        <textarea class="form-control tx" placeholder="Comentarios" name="comentarios" id="comentarios" cols="30" rows="5"></textarea>
+                    </div>
+                    <div class="col-12 form-group">
+                        <input type="text" class="form-control in" placeholder="En que hotel estas hospedado?" name="p_hospedado" id="p_hospedado">
+                    </div>
+                    <div class="col-12 form-group">
+                        <label for="" class="grey">Favor de escribir el número de talla de las aletas / accesorios de todos los participantes al evento</label>
+                        <textarea class="form-control tx" placeholder="Ejemplo: Talla Mediana o 32..." name="p_talla" id="p_talla" cols="30" rows="5"></textarea>
+                    </div>
+                    <div class="col-12 form-group">
+                        <label for="" class="grey">Favor de escribir el las alergías de los participantes a algun alimento</label>
+                        <textarea class="form-control tx" placeholder="Ejemplo:  Alergia a los mariscos..." name="p_alergia" id="p_alergia" cols="30" rows="5"></textarea>
+                    </div>
                 </div>
-                <div class="col-6 m15">
-                    <input type="text" class="in form-control" name="mes_exp" id="mes_show" placeholder="Mes de expiración (MM)">
+    
+                {{-- Forma de pago --}}
+                <label for="" class="dorado font-weight-bold mb-3">Metodo de compra</label>
+                <div class="card border-0 rounded-0 mb-5">
+                    <div class="card-footer border-0 rounded-0 pt-4 pb-4">
+                        <div class="row no-gutter">
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <input class="custom-radio radio-validate" type="radio" id="metodo1" name="metodo" checked value="paypal">
+                                    <label for="metodo1">
+                                        <span></span> <img src="{{asset('img/paypal.png')}}" alt="Paypal">
+                                    </label>
+                                </div>
+                            </div>
+                            {{-- <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <input class="custom-radio" type="radio" id="metodo2" name="metodo" value="oxxo">
+                                    <label for="metodo2">
+                                        <span></span> <img src="{{asset('img/oxxo.png')}}" alt="Oxxo">
+                                    </label>
+                                </div>
+                            </div> --}}
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <input class="custom-radio" type="radio" id="metodo3" name="metodo" value="tarjeta">
+                                    <label for="metodo3">
+                                        <span></span> <img src="{{asset('img/tarjeta.png')}}" alt="Visa Mastercard">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-6 m15">
-                    <input type="text" class="in form-control" name="anio_exp" id="anio_show" placeholder="Año de expiración (YYYY)">
+    
+                <div class="row d-none mb-5" id="content_tarjeta">
+                    <div class="col-12 m15">
+                        <input type="text" class="in form-control" name="nombre_tarjeta" placeholder="Nombre en la tarjeta">
+                    </div>
+                    <div class="col-12 m15">
+                        <input type="text" class="in form-control" name="numero_tarjeta" id="tarjeta_show" placeholder="Número en la tarjeta">
+                    </div>
+                    <div class="col-6 m15">
+                        <input type="text" class="in form-control" name="mes_exp" id="mes_show" placeholder="Mes de expiración (MM)">
+                    </div>
+                    <div class="col-6 m15">
+                        <input type="text" class="in form-control" name="anio_exp" id="anio_show" placeholder="Año de expiración (YYYY)">
+                    </div>
+                    <div class="col-12 m15">
+                        <input type="text" class="in form-control" name="cvc" id="cvv_show_" placeholder="CVC">
+                    </div>
+                    <div class="col-12 m15 d-none" id="content-error-tarjeta">
+                        <p class="text-red" style="color: red !important;" id="error-tarjeta">Error Tarjeta: alksdjkasjdlaksj</p>
+                    </div>
                 </div>
-                <div class="col-12 m15">
-                    <input type="text" class="in form-control" name="cvc" id="cvv_show_" placeholder="CVC">
+    
+                <div class="text-center">
+                    <button class="btn btn-gold" style="box-shadow: 0px 4px 30px rgba(252, 69, 0, 0.5);">PAGAR</button>
                 </div>
-                <div class="col-12 m15 d-none" id="content-error-tarjeta">
-                    <p class="text-red" style="color: red !important;" id="error-tarjeta">Error Tarjeta: alksdjkasjdlaksj</p>
-                </div>
-            </div>
-
-            <div class="text-center">
-                <button class="btn btn-gold" style="box-shadow: 0px 4px 30px rgba(252, 69, 0, 0.5);">PAGAR</button>
-            </div>
+            </form>
         </div>
     </section>
 
