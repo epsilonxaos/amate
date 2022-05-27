@@ -33,9 +33,20 @@
                     <div class="col-12 text-center mb-5">
                         <h2 class="titulo mb-3">{{$evento -> titulo}}</h2>
                         <p class="mb-4">{!! $evento -> descripcion !!}</p>
-                        <a class="btn btn-gold" href="{{route('front.pagos')}}">¡Quiero ir!</a>
+
+
+                        <form action="{{$evento -> tipo == 0 ? route('front.eventos.boletos') : route('front.eventos.butacas')}}" method="post">
+                            {{csrf_field()}}
+                            <input type="hidden" name="evento_id" value="{{$evento -> id}}">
+                            <input type="hidden" name="dia" value="{{$horarios -> fecha}}">
+                            <input type="hidden" name="horario" value="{{$horarios -> hora}}">
+                            <input type="hidden" name="horario_id" value="{{$horarios -> id}}">
+                            
+                            <button type="submit" class="btn btn-gold">¡Quiero ir!</button>
+                        </form>
+
                     </div>
-                    <div class="col-12 {{($evento -> imagen_lateral_1 || $evento -> imagen_lateral_2 || $evento -> imagen_lateral_3) ? 'col-md-6' : 'col-md-10'}}">
+                    <div class="col-12 {{($evento -> imagen_lateral_1 || $evento -> imagen_lateral_2 || $evento -> imagen_lateral_3) ? 'col-md-6' : 'col-md-11'}}">
                         <p class="date mb-0">{{App\Helpers::dateSpanishComplete($horarios -> fecha)}}</p>
                         <p class="date">{{$evento -> lugar}} | {{App\Helpers::dateTo12Hrs($horarios -> hora)}}</p>
                         <div class="information-extra">

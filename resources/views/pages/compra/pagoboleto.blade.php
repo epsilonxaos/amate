@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="{{mix('css/pages/pago.css')}}">
 @endpush
 @section('contenido')
-    <section class="section pago">
+    <section class="section pago text-dark">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-5 text-center">
@@ -11,7 +11,7 @@
                         <a class="nav-link" href="#">PASO 1</a>
                         <a class="nav-link active" href="#">PASO 2 </a>
                     </nav>
-                    <div class="countdown mb-5">
+                    <div class="countdown mb-5 text-dark">
                         <h5 class="text-center">Tiempo restante para completar la compra:</h5>
                         <div class="text-center" data-countdown="{{\App\Http\Controllers\FrontController::sumMinutes($orden -> created_at)}}" id="getting-started"></div>
                     </div>
@@ -28,7 +28,7 @@
                     @endif
                    {{-- <input type="hidden" name="boletos" id="boletos" value="{{count($asientos)}}">--}}
                     <div class="col-lg-7 col-md-8 col-sm-12">
-                        <h3 class=" mb-4">SELECCIONA TU ZONA Y LA CANTIDAD DE BOLETOS</h3>
+                        <h3 class=" mb-4 text-dark">SELECCIONA TU ZONA Y LA CANTIDAD DE BOLETOS</h3>
                         <div class="row">
                             @foreach($precios as $i => $precio)
                                 <div class="col-12 col-sm-4 col-md-6 col-lg-4">

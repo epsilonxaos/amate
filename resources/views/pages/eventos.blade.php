@@ -43,8 +43,8 @@
                     <button class="btn btn-gold toggleEventos">Ver Calendario</button>
                 </div>
                 <div class="row mb-3">
-                    @if (count($eventos) > 0)
-                        @foreach ($eventos as $evento)
+                    @if (count($params) > 0)
+                        @foreach ($params as $evento)
                             <div class="col-12 col-md-4 col-lg-3 mb-3">
                                 <a href="{{route('front.eventos.detalle', [$evento -> id, $evento -> url_amigable])}}">
                                     <div class="eventos-content">

@@ -256,6 +256,9 @@ class FrontController extends Controller
         return view('pages.concursos.consurso_detalle', ['concurso' => $concurso, 'galerias' => $galerias]);
     }
     public function eventos(Optimus $optimus){
+        $now    = Date::parse('today') -> format('Y-m-d');
+        $future = Date::parse("+7 days") -> format('Y-m-d');
+
         $eventos = Evento::from('evento as ev')
             -> select('ev.*', 'evh.fecha as fechaEvento', 'evh.hora as horaEvento', 'evp.precio as precioEvento', 'evc.titulo as categoriaEvento')
             -> leftJoin('evento_horarios as evh', 'ev.id', '=', 'evh.evento_id')
@@ -265,11 +268,9 @@ class FrontController extends Controller
                 ['ev.status', '=', 1],
                 ['evc.status', '=', 1]
             ])
-            -> whereDate('evh.fecha', '>=', Carbon::now() -> format('Y-m-d'))
-            // -> whereTime('evh.hora' , '>', Carbon::now() -> format('H:i:s'))
+            -> whereRaw("evh.fecha >= CAST('".$now."' AS DATE) AND evh.fecha <= CAST('".$future."' AS DATE) ")
             -> orderBy('evh.fecha', 'ASC') -> paginate(12);
 
-        // dd(Carbon::now() -> format('Y-m-d'), Carbon::now() -> format('H:i:s'), $eventos);
 
         foreach ($eventos as $pr){
             $pr -> id = $optimus -> encode($pr -> id);
@@ -286,9 +287,6 @@ class FrontController extends Controller
             -> groupBy('evc.id')
             -> orderBy('evc.orden', 'ASC') -> get();
 
-
-        $now    = Date::parse('today') -> format('Y-m-d');
-        $future = Date::parse("+7 days") -> format('Y-m-d');
         $params = Evento::from('evento as ev')
             -> select('ev.*', 'evh.fecha as fechaEvento', 'evh.hora as horaEvento', 'evp.precio as precioEvento', 'evc.id as idCategoriaEvento', 'evc.titulo as categoriaEvento')
             -> leftJoin('evento_horarios as evh', 'ev.id', '=', 'evh.evento_id')
@@ -412,10 +410,14 @@ class FrontController extends Controller
                 $orden_id = Session::get('orden_id');
                 $orden = Orden::find($orden_id);
 
-                $precios = EventoPrecio::where('evento_id', $orden -> evento_id)->where('tipo', 1)->get();
-                foreach ($precios  as $precio){
-                    $precio -> precio_final = (($precio -> precio * $precio -> comision) / 100) + $precio -> precio;
-                }
+                // dd($orden -> evento_id);
+
+                // $precios = EventoPrecio::where('evento_id', $orden -> evento_id)->where('tipo', 1)->get();
+                $precios = EventoPrecio::where('evento_id', $orden -> evento_id)-> first();
+                // dd($precios);
+                $precios -> precio_final = (($precios -> precio * $precios -> comision) / 100) + $precios -> precio;
+                // foreach ($precios  as $precio){
+                // }
 
                 $data['orden'] = $orden;
                 $data['asientos'] = OrdenPerAsiento::select(['asiento.num', 'asiento.letra'])->join('asiento', 'asiento.id', '=', 'orden_per_asiento.asiento_id')->where('orden_per_asiento.orden_id', $orden_id)->get()->toArray();
@@ -423,7 +425,8 @@ class FrontController extends Controller
                 $data['horario'] = EventoHorario::find($orden->horario_id);
                 $data['subtotal'] = OrdenPerAsiento::where('orden_id', $orden_id)->sum('precio');
                 $data['precios'] = $precios;
-                return view('pages.compra.pagoboleto', $data);
+                return view('pages.compra.pago', $data);
+                // return view('pages.compra.pagoboleto', $data);
             }else{
                 Session::forget('orden_id');
                 return redirect()->route('front.eventos')->with('message', 'Tu tiempo se agoto porfavor intenta de nuevo');
