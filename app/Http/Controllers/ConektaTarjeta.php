@@ -26,9 +26,10 @@ class ConektaTarjeta extends Controller
     function payment(Request $request, Optimus $optimus){
 
         if(Session::exists('orden_id')){
-            Conekta::setApiKey(env('CONEKTA_SK', 'key_N7zhCySArzNxRPNMqsQVJxQ'));
+            Conekta::setApiKey(env('CONEKTA_SK', 'key_DiRAqecfbC4rHk3xa4cGTQ'));
             Conekta::setApiVersion('2.0.0');
             Conekta::setLocale('es');
+            $er = '';
 
             $success_customer = false;
             $orden = Orden::find(Session::get('orden_id'));
@@ -50,7 +51,7 @@ class ConektaTarjeta extends Controller
                 );
                 $success_customer = true;
             } catch (ProcessingError $error) {
-                // $er = $error->getMesage();
+                $er = $error->getMesage();
             } catch (ParameterValidationError $error) {
                 $er = $error->getMessage();
             } catch (Handler $error) {
@@ -155,8 +156,8 @@ class ConektaTarjeta extends Controller
                                 'descuento' => $orden -> descuento,
                                 'total' => $subtotal - $orden ->descuento
                             ];
-                            Mail::to($orden->correo)->send(new PagoCompletado($data));
-                            Mail::to('aguila-josue@hotmail.com')->send(new PagoCompletadoStaff($data, true));
+                            //Mail::to($orden->correo)->send(new PagoCompletado($data));
+                           // Mail::to('aguila-josue@hotmail.com')->send(new PagoCompletadoStaff($data, true));
                             $info['id'] = $optimus ->encode(Session::get('orden_id'));
                             return redirect()->route('front.eventos.pago.completado', $info);
                         break;
