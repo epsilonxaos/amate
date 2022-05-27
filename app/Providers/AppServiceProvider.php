@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
         if(env('APP_ENV') == 'desarrollo' || env('APP_ENV') == 'production') {
             Schema::defaultStringLength(191);
         }
-        if(env('APP_ENV') == 'production') {
+        if(env('APP_ENV') == 'desarrollo' || env('APP_ENV') == 'production') {
             URL::forceScheme('https');
         }
        /* $this->app->bind('path.public', function() {
