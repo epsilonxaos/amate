@@ -24,6 +24,7 @@ use Jenssegers\Optimus\Optimus;
 class ConektaTarjeta extends Controller
 {
     function payment(Request $request, Optimus $optimus){
+
         if(Session::exists('orden_id')){
             Conekta::setApiKey(env('CONEKTA_SK'));
             Conekta::setApiVersion('2.0.0');

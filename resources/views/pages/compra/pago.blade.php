@@ -8,6 +8,13 @@
 
             <h3 class="text-center titulo mb-3"> {{$evento -> titulo}} </h3>
             
+            @if(session()->has('message'))
+                <div class="col-12 col-md-12">
+                    <div class="alert alert-secondary" role="alert">
+                        {{ session()->get('message') }}
+                    </div>
+                </div>
+            @endif
             
             <h5 class="text-center">Tiempo restante para completar la compra:</h5>
             <p class="text-center text-dark font-weight-bold mb-5" data-countdown="{{\App\Http\Controllers\FrontController::sumMinutes($orden -> created_at)}}" id="getting-started"></p>
