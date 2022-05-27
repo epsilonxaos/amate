@@ -28,6 +28,8 @@ class ConektaTarjeta extends Controller
         if(Session::exists('orden_id')){
             Conekta::setApiKey(env('CONEKTA_SK', 'key_N7zhCySArzNxRPNMqsQVJxQ'));
             Conekta::setApiVersion('2.0.0');
+            Conekta::setLocale('es');
+
             $success_customer = false;
             $orden = Orden::find(Session::get('orden_id'));
             $orden -> pago_metodo = 'tarjeta';
@@ -48,7 +50,7 @@ class ConektaTarjeta extends Controller
                 );
                 $success_customer = true;
             } catch (ProcessingError $error) {
-                $er = $error->getMesage();
+                // $er = $error->getMesage();
             } catch (ParameterValidationError $error) {
                 $er = $error->getMessage();
             } catch (Handler $error) {
