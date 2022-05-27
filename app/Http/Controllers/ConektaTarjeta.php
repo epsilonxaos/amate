@@ -26,7 +26,7 @@ class ConektaTarjeta extends Controller
     function payment(Request $request, Optimus $optimus){
 
         if(Session::exists('orden_id')){
-            Conekta::setApiKey(env('CONEKTA_SK'));
+            Conekta::setApiKey(env('CONEKTA_SK', 'key_N7zhCySArzNxRPNMqsQVJxQ'));
             Conekta::setApiVersion('2.0.0');
             $success_customer = false;
             $orden = Orden::find(Session::get('orden_id'));
@@ -185,7 +185,7 @@ class ConektaTarjeta extends Controller
     }
 
     static public function findOrder($order_id){
-        Conekta::setApiKey(env('CONEKTA_SK'));
+        Conekta::setApiKey(env('CONEKTA_SK', 'key_DiRAqecfbC4rHk3xa4cGTQ'));
         Conekta::setApiVersion('2.0.0');
         $order = Order::find($order_id);
         return $order;

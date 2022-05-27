@@ -28,7 +28,7 @@ class ConektaOxxo extends Controller
 {
     function payment(Request $request, Optimus $optimus){
         if(Session::exists('orden_id')){
-            Conekta::setApiKey(env('CONEKTA_SK'));
+            Conekta::setApiKey(env('CONEKTA_SK', 'key_DiRAqecfbC4rHk3xa4cGTQ'));
             Conekta::setApiVersion('2.0.0');
             $thirty_days_from_now = (new DateTime())->add(new DateInterval('P1D'))->getTimestamp();
             $success_customer = false;
@@ -187,7 +187,7 @@ class ConektaOxxo extends Controller
     }
 
     public function getOrderOxxo($id){
-        Conekta::setApiKey(env('CONEKTA_SK'));
+        Conekta::setApiKey(env('CONEKTA_SK', 'key_DiRAqecfbC4rHk3xa4cGTQ'));
         Conekta::setApiVersion('2.0.0');
         $order = Order::find($id);
         //dd($order);
@@ -195,7 +195,7 @@ class ConektaOxxo extends Controller
     }
 
     public function getOrderOxxoObj($id){
-        Conekta::setApiKey(env('CONEKTA_SK'));
+        Conekta::setApiKey(env('CONEKTA_SK', 'key_DiRAqecfbC4rHk3xa4cGTQ'));
         Conekta::setApiVersion('2.0.0');
         return Order::find($id);
     }

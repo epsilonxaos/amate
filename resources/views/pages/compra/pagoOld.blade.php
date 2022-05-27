@@ -177,7 +177,7 @@
     <script type="text/javascript" src="https://conektaapi.s3.amazonaws.com/v0.3.0/js/conekta.js"></script>
     <script type="text/javascript">
         // Conekta Public Key
-        Conekta.setPublishableKey('{{env('CONEKTA_PK')}}');
+        Conekta.setPublishableKey('{{env("CONEKTA_PK", "key_N7zhCySArzNxRPNMqsQVJxQ")}}');
         // ...
 
         $(function(){
