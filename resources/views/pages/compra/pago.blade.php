@@ -171,7 +171,7 @@
                 </div>
     
                 <div class="text-center">
-                    <button class="btn btn-gold" style="box-shadow: 0px 4px 30px rgba(252, 69, 0, 0.5);">PAGAR</button>
+                    <button type="button" class="btn btn-gold do-pay" data-route="{{route('front.pago.save')}}" style="box-shadow: 0px 4px 30px rgba(252, 69, 0, 0.5);">PAGAR</button>
                 </div>
             </form>
         </div>
