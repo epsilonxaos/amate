@@ -550,14 +550,20 @@ class FrontController extends Controller
         $id = $optimus->decode($id);
         $orden_id = $id;
         $orden = Orden::find($orden_id);
+        
+        //dd($orden);
         $data['orden'] = $orden;
         $data['asientos'] = OrdenPerAsiento::select(['asiento.folio', 'asiento.num', 'asiento.letra'])->join('asiento', 'asiento.id', '=', 'orden_per_asiento.asiento_id')->where('orden_per_asiento.orden_id', $orden_id)->get();
         $data['evento'] = Evento::find($orden->evento_id);
+        $precios = EventoPrecio::where('evento_id', $orden -> evento_id)-> first();
+        $precios -> precio_final = (($precios -> precio * $precios -> comision) / 100) + $precios -> precio;
         $data['fecha'] = self::ParseDate($orden -> dia);
-        $subtotal =  OrdenPerAsiento::where('orden_id', $orden_id)->sum('precio');
+        $subtotal =  $precios -> precio_final * $orden -> no_boletos;
+        //$data['subtotal'] = $subtotal;
         $data['subtotal'] = $subtotal;
         $data['descuento'] = $orden -> descuento;
         $data['total'] = $subtotal - $orden ->descuento;
+        //dd($data);
         return view('pages.compra.thx', $data);
     }
 

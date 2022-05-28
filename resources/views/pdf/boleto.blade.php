@@ -334,7 +334,7 @@
                                     <div
                                             style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#ffffff;"
                                     ><p>NO BOLETOS:</p>
-                                        <p style="font-size: 24px;"><b>{{count($orden->asientos)}}</b></p>
+                                        <p style="font-size: 24px;"><b>{{$orden->no_boletos}}</b></p>
                                         <p>SUBTOTAL:</p>
                                         <p style="font-size: 24px;"><b>${{$orden -> subtotal}} MXN</b></p>
                                         <p>DESCUENTO:</p>

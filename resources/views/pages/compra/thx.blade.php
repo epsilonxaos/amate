@@ -7,7 +7,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-8 text-center">
-                    <h1>
+                    <h1 class="text-dark">
                         <b>FOLIO</b> <br>
                         <span>{{$orden -> folio}}</span>
                     </h1>
@@ -19,16 +19,14 @@
                         <div class="card-body">
                             <h5 class="card-title mb-5"><b>{{$evento -> titulo}}</b></h5>
                             <p class="card-text">
-                                Día: {{$fecha}} <br>
+                                Día: {{App\Helpers::dateSpanishComplete($evento -> dia)}} <br>
                                 Hora: {{$orden -> hora}} hrs <br>
                                 Ubicacion: {{$evento -> lugar}} <br>
-                                Número de boletos: {{count($asientos)}} <br>
-                                Asientos: {{\App\Http\Controllers\FrontController::asientosToString($asientos)}}
-                            </p>
+                                Número de boletos: {{$orden -> no_boletos}}
                         </div>
-                        <div class="card-footer">
+                        <div class="card-footer" style="background-color: #153D3C">
                             <p>Subtotal <span class="float-right">${{number_format($subtotal, 2)}} MXN</span></p>
-                <p>Descuento <span class="float-right">${{number_format($descuento, 2)}}</span></p>
+                            <p>Descuento <span class="float-right">${{number_format($descuento, 2)}}</span></p>
                             <p>Total <span class="float-right">${{number_format($total, 2)}} MXN</span></p>
                         </div>
                         <div class="row justify-content-center">
@@ -42,9 +40,9 @@
                             @endforeach
                         </div>
                     </div>
-                    <p class="mt-5 text-center">
+                    <p class="mt-5 text-center text-dark">
                         Se ha enviado a tu correo este comprobante <br> <br>
-                        <a class="btn btn-success rounded-pill" href="{{route('front.boleto.download', ['orden_id'=>$orden -> id])}}">DESCARGAR BOLETOS</a>
+                        <a class="btn btn-success rounded-pill" target="_blank" href="{{route('front.boleto.download', ['orden_id'=>$orden -> id])}}">DESCARGAR BOLETOS</a>
                         <a class="btn btn-primary rounded-pill" href="{{route('front.eventos')}}">REGRESAR</a>
                     </p>
                 </div>
