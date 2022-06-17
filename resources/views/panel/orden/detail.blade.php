@@ -34,9 +34,23 @@
                                                             DATOS DEL CLIENTE
                                                         </div>
                                                         <div class="card-body">
-                                                            <p><b>Nombre:</b> {{$orden -> nombre_completo}} </p>
-                                                            <p><b>Correo:</b> {{$orden -> correo}}</p>
-                                                            <p><b>Teléfono:</b> {{$orden -> telefono}}</p>
+                                                            @if (isset($orden -> json_informacion -> nombre))
+                                                                <p><b>Nombre:</b> {{$orden -> json_informacion -> nombre}} </p>
+                                                                <p><b>Correo:</b> {{$orden -> json_informacion -> correo}}</p>
+                                                                <p><b>Teléfono:</b> {{$orden -> json_informacion -> telefono}}</p>
+                                                                <p><b>Comentarios:</b> <br> {{$orden -> json_informacion -> comentarios}}</p>
+                                                                <p><b>Hotel hospedado:</b> <br> {{$orden -> json_informacion -> p_hospedado}}</p>
+                                                                <p><b>Talla / Accesorios:</b> <br> {{$orden -> json_informacion -> p_talla}}</p>
+                                                                <p><b>Alergias:</b> <br> {{$orden -> json_informacion -> p_alergia}}</p>
+                                                            @else
+                                                                <p><b>Nombre:</b> {{$orden -> nombre_completo}} </p>
+                                                                <p><b>Correo:</b> {{$orden -> correo}}</p>
+                                                                <p><b>Teléfono:</b> {{$orden -> telefono}}</p>
+                                                                <p><b>Comentarios:</b> <br> Sin información</p>
+                                                                <p><b>Hotel hospedado:</b> <br> Sin información</p>
+                                                                <p><b>Talla / Accesorios:</b> <br> Sin información</p>
+                                                                <p><b>Alergias:</b> <br> Sin información</p>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>

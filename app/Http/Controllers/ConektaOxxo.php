@@ -203,11 +203,12 @@ class ConektaOxxo extends Controller
     public function webhook(){
         $body = @file_get_contents('php://input');
         $data = json_decode($body);
-        Mail::to('luisjcaamal@gmail.com') -> send(new test_webhook($data));
+        //Mail::to('luisjcaamal@gmail.com') -> send(new test_webhook($data));
 
         if ($data -> type == 'order.paid'){
             $item_number = $data -> data -> object -> metadata -> id_orden;
             $orden = Orden::find($item_number);
+            $orden -> json_informacion = json_decode($orden ->informacion);
             $orden -> status = 2;
             $orden -> pago_hora = date('Y-m-d H:i:s');
             $orden -> save();

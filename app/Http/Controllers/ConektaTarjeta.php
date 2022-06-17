@@ -33,6 +33,7 @@ class ConektaTarjeta extends Controller
 
             $success_customer = false;
             $orden = Orden::find(Session::get('orden_id'));
+            $orden -> json_informacion = json_decode($orden ->informacion);
             $orden -> pago_metodo = 'tarjeta';
             $orden -> save();
             try {

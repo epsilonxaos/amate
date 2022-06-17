@@ -93,6 +93,7 @@ class OrdenController extends Controller
         $orden -> fecha_string = self::formatedDate($orden -> dia);
         $orden -> status_string = self::getStatus($orden -> status);
         $orden -> pago_hora_string = self::formatedDateHora($orden -> pago_hora);
+        $orden -> json_informacion = json_decode($orden ->informacion);
 
         $orden -> asientos = OrdenPerAsiento::select(['asiento.folio', 'asiento.num', 'asiento.letra'])->join('asiento', 'asiento.id', '=', 'orden_per_asiento.asiento_id')->where('orden_per_asiento.orden_id', $id)->get();
         //$orden -> asientos_string = FrontController::asientosToString($orden->asientos);

@@ -706,6 +706,7 @@ class FrontController extends Controller
     public function freePayment(Optimus $optimus){
         if(Session::exists('orden_id')){
             $orden = Orden::find(Session::get('orden_id'));
+            $orden -> json_informacion = json_decode($orden ->informacion);
             $orden -> pago_metodo = 'free';
             $orden -> status = 2;
             $orden -> pago_hora = date('Y-m-d H:i:s');

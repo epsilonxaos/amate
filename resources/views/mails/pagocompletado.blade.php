@@ -259,6 +259,12 @@
                                         <p><b>NOMBRE:</b> {{$data['orden']->nombre_completo}}</p>
                                         <p><b>CORREO:</b> {{$data['orden']->correo}}</p>
                                         <p><b>TELÉFONO:</b> {{$data['orden']->telefono}}</p>
+                                        @if (isset($data['orden'] -> json_informacion -> comentarios))
+                                            <p><b>COMENTARIOS:</b> {{$data['orden'] -> json_informacion -> comentarios}}</p>
+                                            <p><b>HOTEL HOSPEDADO:</b> {{$data['orden'] -> json_informacion -> p_hospedado}}</p>
+                                            <p><b>MEDIDAS / ACCESORIOS:</b> {{$data['orden'] -> json_informacion -> p_talla}}</p>
+                                            <p><b>ALERGIAS:</b> {{$data['orden'] -> json_informacion -> p_alergia}}</p>
+                                        @endif
                                     </div>
 
                                 </td>
