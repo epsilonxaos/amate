@@ -25,6 +25,7 @@ use Carbon\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -260,16 +261,27 @@ class FrontController extends Controller
         $future = Date::parse("+7 days") -> format('Y-m-d');
 
         $eventos = Evento::from('evento as ev')
-            -> select('ev.*', 'evh.fecha as fechaEvento', 'evh.hora as horaEvento', 'evp.precio as precioEvento', 'evc.titulo as categoriaEvento')
+            -> select(
+                'ev.*', 
+                'evh.fecha as fechaEvento',
+                'evh.hora as horaEvento',
+                'evc.titulo as categoriaEvento'
+            )
+            -> selectRaw("(SELECT ((p.precio * p.comision) / 100) + p.precio
+                FROM evento_precios p
+                WHERE p.evento_id = ev.id
+                ORDER BY p.precio ASC
+                LIMIT 1) as precioEvento")
             -> leftJoin('evento_horarios as evh', 'ev.id', '=', 'evh.evento_id')
-            -> leftJoin('evento_precios as evp', 'ev.id', '=', 'evp.evento_id')
             -> leftJoin('evento_categorias as evc', 'ev.categoria_id', '=', 'evc.id')
             -> where([
                 ['ev.status', '=', 1],
                 ['evc.status', '=', 1]
             ])
             -> whereRaw("evh.fecha >= CAST('".$now."' AS DATE) AND evh.fecha <= CAST('".$future."' AS DATE) ")
-            -> orderBy('evh.fecha', 'ASC') -> paginate(12);
+            -> orderBy('evh.fecha', 'ASC')
+            -> groupBy('ev.id')
+            -> paginate(12);
 
 
         foreach ($eventos as $pr){
@@ -288,7 +300,14 @@ class FrontController extends Controller
             -> orderBy('evc.orden', 'ASC') -> get();
 
         $params = Evento::from('evento as ev')
-            -> select('ev.*', 'evh.fecha as fechaEvento', 'evh.hora as horaEvento', 'evp.precio as precioEvento', 'evc.id as idCategoriaEvento', 'evc.titulo as categoriaEvento')
+            -> select(
+                'ev.*',
+                'evh.fecha as fechaEvento',
+                'evh.hora as horaEvento',
+                'evp.precio as precioEvento',
+                'evc.id as idCategoriaEvento',
+                'evc.titulo as categoriaEvento'
+            )
             -> leftJoin('evento_horarios as evh', 'ev.id', '=', 'evh.evento_id')
             -> leftJoin('evento_precios as evp', 'ev.id', '=', 'evp.evento_id')
             -> leftJoin('evento_categorias as evc', 'ev.categoria_id', '=', 'evc.id')
@@ -623,6 +642,15 @@ class FrontController extends Controller
             $orden -> nombre_completo = $request -> nombre;
             $orden -> correo = $request -> email;
             $orden -> telefono = $request -> pago_telefono;
+            $orden -> informacion = json_encode(array(
+                "nombre" => $request -> nombre,
+                "correo" => $request -> email,
+                "telefono" => $request -> pago_telefono,
+                "comentarios" => $request -> comentarios,
+                "p_hospedado" => $request -> p_hospedado,
+                "p_talla" => $request -> p_talla,
+                "p_alergia" => $request -> p_alergia,
+            ));
             $orden -> no_boletos = $request -> evento_tipo == 0 ? $request -> boletos : 1;
             $orden -> precio_boleto = $request -> evento_tipo == 0 ? $request -> precio_boleto : $request -> subtotal;
             $orden -> cupon = $request -> cupon;

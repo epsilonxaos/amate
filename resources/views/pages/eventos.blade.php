@@ -43,15 +43,15 @@
                     <button class="btn btn-gold toggleEventos">Ver Calendario</button>
                 </div>
                 <div class="row mb-3">
-                    @if (count($params) > 0)
-                        @foreach ($params as $evento)
+                    @if (count($eventos) > 0)
+                        @foreach ($eventos as $evento)
                             <div class="col-12 col-md-4 col-lg-3 mb-3">
                                 <a href="{{route('front.eventos.detalle', [$evento -> id, $evento -> url_amigable])}}">
                                     <div class="eventos-content">
                                         <img src="{{asset('storage/evento/'.$evento -> portada)}}" alt="{{$evento -> titulo}}" class="cover">
                                         <div class="footer text-left p-3">
                                             <h5>{{$evento -> titulo}}</h5>
-                                            <h6 class="mb-1">Fecha: {{\App\Helpers::dateSpanishComplete($evento -> fechaEvento)}}</h6>
+                                            {{-- <h6 class="mb-1">Fecha: {{\App\Helpers::dateSpanishComplete($evento -> fechaEvento)}}</h6> --}}
                                             <small>Precio</small>
                                             <p class="font-weight-bold text-black mb-0">${{number_format($evento -> precioEvento)}} MXN por persona</p>
                                         </div>
@@ -234,7 +234,7 @@
 
         </div>
 
-        <div class="eventos-comentarios pt-5 pb-5">
+        <div class="eventos-comentarios pt-5 pb-5 d-none">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-11 col-md-10 col-lg-9">

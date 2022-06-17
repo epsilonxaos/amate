@@ -1,5 +1,5 @@
 <footer>
-    <div class="ft-telefonos pt-5 pb-5">
+    <div class="ft-telefonos pt-5 pb-5 d-none">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-sm-6 text-center text-white mb-4 mb-sm-0">
