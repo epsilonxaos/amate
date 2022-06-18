@@ -17,8 +17,9 @@
                             <thead class="thead-light">
                             <tr>
                                 <th scope="col" class="sort" data-sort="status">Portada</th>
-                                <th width="200px">Publicación</th>
-                                <th scope="col" width="250px">Acciones</th>
+                                <th width="150px">Publicación</th>
+                                <th width="100px">Destacar</th>
+                                <th scope="col" width="150px">Acciones</th>
                             </tr>
                             </thead>
                             <tbody class="list">
@@ -38,7 +39,13 @@
                                         </td>
                                         <td>
                                             <label class="custom-toggle">
-                                                <input class="update-status" data-axios-method="put" data-route="{{ route('panel.evento.status', ['id' => $row->id]) }}" type="checkbox" value="1" {{ ($row->status == 1) ? 'checked' : '' }}>
+                                                <input class="update-status" data-axios-method="put" data-route="{{ route('panel.evento.status', ['id' => $row->id]) }}" type="checkbox" value="{{$row->status}}" {{ ($row->status == 1) ? 'checked' : '' }}>
+                                                <span class="custom-toggle-slider rounded-circle"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="custom-toggle">
+                                                <input class="update-status" data-axios-method="put" data-route="{{ route('panel.evento.destacar', ['id' => $row->id]) }}" type="checkbox" value="{{$row->destacado == 1 ? 0 : 1}}" {{ ($row->destacado == 1) ? 'checked' : '' }}>
                                                 <span class="custom-toggle-slider rounded-circle"></span>
                                             </label>
                                         </td>

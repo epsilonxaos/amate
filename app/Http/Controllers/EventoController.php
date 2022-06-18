@@ -439,6 +439,13 @@ class EventoController extends Controller
         return response(['success' => true], 200);
     }
 
+    public function changeDestacar($id, Request $request){
+        $evento = Evento::find($id);
+        $evento -> destacado = $request -> status == 'hidden' ? 0 : 1;
+        $evento -> save();
+        return response(['success' => true], 200);
+    }
+
     public function changeStatusHorario($id, Request $request){
         $evento = EventoHorario::find($id);
         $evento -> status = $request -> status == 'hidden' ? 0 : 1;

@@ -260,6 +260,25 @@ class FrontController extends Controller
         $now    = Date::parse('today') -> format('Y-m-d');
         $future = Date::parse("+7 days") -> format('Y-m-d');
 
+        $existDestacados = Evento::select('id') -> where([
+            ['status', '=', 1],
+            ['destacado', '=', 1]
+        ]) -> count();
+        
+        if($existDestacados > 0) {
+            $destacados = Evento::select('titulo', 'portada', 'id') -> where([
+                ['status', '=', 1],
+                ['destacado', '=', 1]
+            ]) -> get();
+        } else {
+            $destacados = Evento::select('titulo', 'portada', 'id') -> where('status', 1) -> inRandomOrder() -> limit(4) -> get();
+        }
+
+        foreach ($destacados as $pr){
+            $pr -> id = $optimus -> encode($pr -> id);
+            $pr -> url_amigable = Str::slug($pr -> titulo);
+        }
+
         // Listado normal
         $eventos = Evento::from('evento as ev')
         -> select(
@@ -338,6 +357,7 @@ class FrontController extends Controller
         ];
 
         return view('pages.eventos', [
+            'destacados' => $destacados,
             'eventos' => $eventos,
             'calendario' => $calendario,
             'fechas' => $fechas,

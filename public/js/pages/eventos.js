@@ -12333,7 +12333,12 @@ if (EVENTO_VIEW_DETAIL) {
     pagination: {
       el: '.swiper-pagination',
       clickable: true
-    }
+    },
+    autoplay: {
+      delay: 6000,
+      disableOnInteraction: false
+    },
+    speed: 1500
   });
 
   var swiperComentarios = new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__["default"]('#swipercomentarios', {

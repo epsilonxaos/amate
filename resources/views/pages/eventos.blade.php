@@ -12,23 +12,25 @@
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
                   <!-- Slides -->
-                  <div class="swiper-slide">
+                    @foreach ($destacados as $item)
+                        <div class="swiper-slide position-relative">
+                            <img src="{{asset('storage/evento/'.$item -> portada)}}" alt="Galeria">
+
+                            <div class="info text-center pl-3 pr-3 pl-md-5 pr-md-5">
+                                <h2 class="mb-4">{{$item -> titulo}}</h2>
+                                <a href="{{route('front.eventos.detalle', [$item -> id, $item -> url_amigable])}}" class="btn btn-white fw-500">¡Quiero ir!</a>
+                            </div>
+                        </div>
+                    @endforeach
+                  {{-- <div class="swiper-slide">
                       <img src="{{asset('img/slide01.jpg')}}" alt="Galeria">
                   </div>
                   <div class="swiper-slide">
                       <img src="{{asset('img/slide01.jpg')}}" alt="Galeria">
-                  </div>
-                  <div class="swiper-slide">
-                      <img src="{{asset('img/slide01.jpg')}}" alt="Galeria">
-                  </div>
+                  </div> --}}
                 </div>
                 <!-- If we need pagination -->
                 <div class="swiper-pagination"></div>
-            </div>
-
-            <div class="info text-center pl-3 pr-3 pl-md-5 pr-md-5">
-                <h2 class="mb-4">Introducción a la Apnea</h2>
-                <a href="#" class="btn btn-white fw-500">¡Quiero ir!</a>
             </div>
         </div>
 

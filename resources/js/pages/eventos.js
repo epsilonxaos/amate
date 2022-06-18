@@ -76,6 +76,11 @@ if(EVENTO_VIEW_DETAIL) {
             el: '.swiper-pagination',
             clickable: true
         },
+        autoplay: {
+            delay: 6000,
+            disableOnInteraction: false
+        },
+        speed: 1500
     });
 
     const swiperComentarios = new Swiper('#swipercomentarios', {

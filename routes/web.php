@@ -96,6 +96,7 @@ Route::prefix('/admin')->group(function(){
         Route::get('/', 'EventoController@index')->name('panel.evento.list');
         Route::get('/nuevo', 'EventoController@create')->name('panel.evento.add');
         Route::put('/status/{id}', 'EventoController@changeStatus')->name('panel.evento.status');
+        Route::put('/destacar/{id}', 'EventoController@changeDestacar')->name('panel.evento.destacar');
         Route::put('/status/horario/{id}', 'EventoController@changeStatusHorario')->name('panel.evento.status.horario');
         Route::post('/store', 'EventoController@store')->name('panel.evento.store');
         Route::post('/asignar-precios', 'EventoController@addPrecioPerAsiento')->name('panel.evento.asignar.precio');

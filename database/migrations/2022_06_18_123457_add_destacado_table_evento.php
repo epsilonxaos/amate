@@ -14,7 +14,7 @@ class AddDestacadoTableEvento extends Migration
     public function up()
     {
         Schema::table('evento', function (Blueprint $table) {
-            //
+            $table -> tinyInteger('destacado') -> default(0);
         });
     }
 
@@ -26,7 +26,7 @@ class AddDestacadoTableEvento extends Migration
     public function down()
     {
         Schema::table('evento', function (Blueprint $table) {
-            //
+            $table -> dropColumn('destacado');
         });
     }
 }
