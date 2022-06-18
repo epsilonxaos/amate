@@ -38,17 +38,41 @@
                         <form action="{{$evento -> tipo == 0 ? route('front.eventos.boletos') : route('front.eventos.butacas')}}" method="post">
                             {{csrf_field()}}
                             <input type="hidden" name="evento_id" value="{{$evento -> id}}">
-                            <input type="hidden" name="dia" value="{{$horarios -> fecha}}">
-                            <input type="hidden" name="horario" value="{{$horarios -> hora}}">
-                            <input type="hidden" name="horario_id" value="{{$horarios -> id}}">
+
+                            <p class="date text-center">{{$evento -> lugar}}</p>
+
+                            @if (count($horarios) > 1)
+                                <input type="hidden" name="horario_id" id="horario_id" value="{{$horarios[0] -> id}}">
+                                <div class="row mb-3">
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <select name="dia" id="dia" class="form-control">
+                                            @foreach ($horarios as $num => $item)
+                                                <option value="{{$item -> id}}" {{$num === 0 ? 'selected' : ''}}>{{App\Helpers::dateSpanishComplete($item -> fecha)}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <select name="horario" id="horario" class="form-control">
+                                            @foreach ($horarios[0] -> horas_list as $num => $item)
+                                                <option value="{{$item -> id}}" {{$num === 0 ? 'selected' : ''}}>{{$item -> hora}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            @else
+                                <input type="hidden" name="dia" value="{{$horarios[0] -> fecha}}">
+                                <input type="hidden" name="horario" value="{{$horarios[0] -> hora}}">
+                                <input type="hidden" name="horario_id" id="horario_id" value="{{$horarios[0] -> id}}">
+
+                                <p class="date mb-0">{{App\Helpers::dateSpanishComplete($horarios[0] -> fecha)}}</p>
+                                <p class="date">{{App\Helpers::dateTo12Hrs($horarios[0] -> hora)}}</p>
+                            @endif
                             
                             <button type="submit" class="btn btn-gold">¡Quiero ir!</button>
                         </form>
 
                     </div>
                     <div class="col-12 {{($evento -> imagen_lateral_1 || $evento -> imagen_lateral_2 || $evento -> imagen_lateral_3) ? 'col-md-6' : 'col-md-11'}}">
-                        <p class="date mb-0">{{App\Helpers::dateSpanishComplete($horarios -> fecha)}}</p>
-                        <p class="date">{{$evento -> lugar}} | {{App\Helpers::dateTo12Hrs($horarios -> hora)}}</p>
                         <div class="information-extra">
                             {!! $evento -> descripcion_2 !!}
                         </div>
@@ -137,6 +161,7 @@
 @push('js')
     <script type="text/javascript">
         const EVENTO_VIEW_DETAIL = true;
+        const EHORARIOS = @json($horarios);
     </script>
     <script src="{{ mix('js/pages/eventos.js') }}"></script>
 @endpush

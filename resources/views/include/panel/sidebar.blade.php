@@ -2,9 +2,9 @@
 <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
 	<div class="scrollbar-inner">
 	<!-- Brand -->
-	<div class="sidenav-header  align-items-center">
+	<div class="sidenav-header bg-default align-items-center">
 		<a class="navbar-brand" href="javascript:void(0)">
-			<img src="{{asset('panel/img/brand/logo.png')}}" class="navbar-brand-img" alt="...">
+			<img src="{{asset('img/logo-header.svg')}}" class="navbar-brand-img" alt="...">
 		</a>
 	</div>
 	<div class="navbar-inner">

@@ -19,7 +19,7 @@
                         <div class="card-body">
                             <h5 class="card-title mb-5"><b>{{$evento -> titulo}}</b></h5>
                             <p class="card-text">
-                                Día: {{App\Helpers::dateSpanishComplete($evento -> dia)}} <br>
+                                Día: {{App\Helpers::dateSpanishComplete($orden -> dia)}} <br>
                                 Hora: {{$orden -> hora}} hrs <br>
                                 Ubicacion: {{$evento -> lugar}} <br>
                                 Número de boletos: {{$orden -> no_boletos}}

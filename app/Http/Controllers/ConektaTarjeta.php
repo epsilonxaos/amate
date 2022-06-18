@@ -33,9 +33,9 @@ class ConektaTarjeta extends Controller
 
             $success_customer = false;
             $orden = Orden::find(Session::get('orden_id'));
-            $orden -> json_informacion = json_decode($orden ->informacion);
             $orden -> pago_metodo = 'tarjeta';
             $orden -> save();
+
             try {
                 $customer = Customer::create(
                     array(
@@ -157,6 +157,8 @@ class ConektaTarjeta extends Controller
                                 'descuento' => $orden -> descuento,
                                 'total' => $subtotal - $orden ->descuento
                             ];
+
+                            $orden -> json_informacion = json_decode($orden ->informacion);
                             //Mail::to($orden->correo)->send(new PagoCompletado($data));
                            // Mail::to('aguila-josue@hotmail.com')->send(new PagoCompletadoStaff($data, true));
                             $info['id'] = $optimus ->encode(Session::get('orden_id'));

@@ -12251,21 +12251,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 if (EVENTO_VIEW_DETAIL) {
-  // $(function(){
-  //     $.ajaxSetup({
-  //         headers: {
-  //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  //         }
-  //     });
-  //     $('select[name=dia]').trigger('change');
-  //     $('select[name=dia]').on('change', function(){
-  //         getHours();
-  //         showData();
-  //     });
-  //     $('select[name=horario]').on('change', function(){
-  //         showData();
-  //     });
-  // })
   var getHours = function getHours() {
     var _evento_id = $('input[name=evento_id]').val(),
         _select_day = $('select[name=dia]').find('option:selected').val(),
@@ -12303,7 +12288,45 @@ if (EVENTO_VIEW_DETAIL) {
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev'
+    },
+    autoplay: true,
+    speed: 1500
+  });
+  $(function () {
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $('select[name=dia]').trigger('change');
+
+    function updateInfoHorario() {
+      var fechaID = $("#dia").val();
+      var horarioID = $("#horario").val();
+      var info = EHORARIOS.find(function (x) {
+        return x.id == fechaID;
+      });
+      var hora = info['horas_list'].find(function (x) {
+        return x.id == horarioID;
+      });
+      $('#horario_id').val(hora.id);
     }
+
+    $('select[name=dia]').on('change', function () {
+      var fechaID = $(this).val();
+      var hr = $("#horario");
+      var info = EHORARIOS.find(function (x) {
+        return x.id == fechaID;
+      });
+      hr.empty();
+      info['horas_list'].forEach(function (item, idx) {
+        hr.append("<option value=\"".concat(item.id, "\" ").concat(idx == 0 ? 'selected' : '', ">").concat(item.hora, "</option>"));
+      });
+      updateInfoHorario();
+    });
+    $('select[name=horario]').on('change', function () {
+      updateInfoHorario();
+    });
   });
 } else {
   var _swiperSlide = new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__["default"]('#swiperSlide', {

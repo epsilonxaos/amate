@@ -20,30 +20,40 @@
             <p class="text-center text-dark font-weight-bold mb-5" data-countdown="{{\App\Http\Controllers\FrontController::sumMinutes($orden -> created_at)}}" id="getting-started"></p>
 
             <form action="" method="POST" id="form_pago">
-                <h4 class="text-center mb-3">Selecciona la cantidad de boletos </h4>
+                {{-- <h4 class="text-center mb-3">Selecciona la cantidad de boletos </h4> --}}
                 <div class="row">
                     <div class="col-12">
+
                         {{-- Cantidad de boletos --}}
-                        <div class="form-group">
-                            <input class="custom-radio radio-validate" type="radio" id="precio_id" name="precio_id" data-precio="{{$precios -> precio_final}}" checked value="personal">
-                            <label for="precio_id" class="dorado font-weight-bold">
-                                <span style="margin-top: -6px;"></span> Boleto Personal - ${{number_format($precios -> precio, 2)}} MXN
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="dorado font-weight-bold">Cantidad de boletos</label>
-                            <input type="number" class="form-control" name="boletos" id="boletos" required min="1" max="100" value="1" style="max-width: 80px">
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                {{-- <label for="" class="dorado font-weight-bold mb-3">Selecciona el precio</label> --}}
+                                @foreach ($precios as $idx => $item)
+                                    <div class="form-group">
+                                        <input class="custom-radio radio-validate" type="radio" id="precio_id-{{$idx}}" name="precio_id" data-precio="{{$item -> precio_final}}" {{$idx == 0 ? 'checked' : ''}} value="{{$item -> concepto}}">
+                                        <label for="precio_id-{{$idx}}" class="dorado font-weight-bold">
+                                            <span style="margin-top: -6px;"></span> {{$item -> concepto}} - ${{number_format($item -> precio_final, 2)}} MXN
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="" class="dorado font-weight-bold mb-3">Cantidad de boletos</label>
+                                    <input type="number" class="form-control" name="boletos" id="boletos" required min="1" max="100" value="1" style="max-width: 80px">
+                                </div>
+                            </div>
                         </div>
     
                         {{-- Cupon --}}
                         <div class="input-group cupon mb-4 rounded-0">
                             <input type="hidden" name="evento_titulo" value="{{$evento -> titulo}}">
-                            <input type="hidden" name="subtotal" value="{{$precios -> precio}}">
+                            <input type="hidden" name="subtotal" value="{{$precios[0] -> precio}}">
                             <input type="hidden" name="cupon_tipo" value="0">
                             <input type="hidden" name="cupon_valor" value="0">
                             <input type="hidden" name="descuento" value="0">
                             <input type="hidden" name="evento_tipo" value="{{$evento -> tipo}}">
-                            <input type="hidden" name="precio_boleto" value="{{$precios -> precio_final}}">
+                            <input type="hidden" name="precio_boleto" value="{{$precios[0] -> precio_final}}">
                             <input type="text" name="cupon" id="cupon" class="form-control in" placeholder="Escribir cupón de descuento" aria-label="Escribir cupón de descuento" aria-describedby="button-addon2">
                             <div class="input-group-append rounded-0">
                                 <button class="btn btn-gold apply-cupon" type="button" id="button-addon2">Aplicar</button>
@@ -72,7 +82,7 @@
                                     <thead>
                                         <tr>
                                             <td class="font-weight-bold">Subtotal</td>
-                                            <td>$<span id="s_subtotal">{{number_format($precios -> precio, 2)}}</span> MXN</td>
+                                            <td>$<span id="s_subtotal">{{number_format($precios[0] -> precio_final, 2)}}</span> MXN</td>
                                         </tr>
                                         {{-- <tr>
                                             <td class="font-weight-bold">Comision de venta en linea</td>
@@ -84,7 +94,7 @@
                                         </tr>
                                         <tr class="pt-5">
                                             <td class="font-weight-bold">Total</td>
-                                            <td>$<span id="s_total">{{number_format($precios -> precio_final, 2)}}</span> MXN</td>
+                                            <td>$<span id="s_total">{{number_format($precios[0] -> precio_final, 2)}}</span> MXN</td>
                                         </tr>
                                     </thead>
                                 </table>
@@ -192,7 +202,7 @@
         <input type="hidden" name="return" value="{{asset('')}}pago/completado/{{$orden -> folio}}" />
         <input type="hidden" name="item_name" value="Orden de Compra" />
         <input type="hidden" name="item_number" value="{{\Illuminate\Support\Facades\Session::get('orden_id')}}" id="item_number" />
-        <input type="hidden" name="amount" value="{{$precios -> precio}}" id="precioFinal" />
+        <input type="hidden" name="amount" value="{{$precios[0] -> precio_final}}" id="precioFinal" />
         <input type="hidden" name="currency_code" value="MXN" />
         <input type="hidden" name="no_note" value="1" />
         <input type="hidden" name="no_shipping" value="1" />
@@ -202,7 +212,7 @@
     </form>
     <form action="{{route('front.conekta.payment')}}" method="POST" id="card-form" role="form" style="display:none">
         {{ csrf_field() }}
-        <input type="hidden" name="amount" value="{{$precios -> precio}}" />
+        <input type="hidden" name="amount" value="{{$precios[0] -> precio_final}}" />
         <span class="card-errors"></span>
         <div class="form-group">
             <label for="nombretarjetahabiente">Nombre del tarjetahabiente</label>

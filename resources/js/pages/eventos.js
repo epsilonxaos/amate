@@ -6,25 +6,45 @@ if(EVENTO_VIEW_DETAIL) {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
+        autoplay: true,
+        speed: 1500
     });
 
-    // $(function(){
-    //     $.ajaxSetup({
-    //         headers: {
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         }
-    //     });
-    //     $('select[name=dia]').trigger('change');
+    $(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('select[name=dia]').trigger('change');
+
+        function updateInfoHorario() {
+            let fechaID = $("#dia").val();
+            let horarioID = $("#horario").val();
+
+            let info = EHORARIOS.find(x => x.id == fechaID);
+            let hora = info['horas_list'].find(x => x.id == horarioID);
+
+            $('#horario_id').val(hora.id);
+        }
     
-    //     $('select[name=dia]').on('change', function(){
-    //         getHours();
-    //         showData();
-    //     });
+        $('select[name=dia]').on('change', function(){
+            let fechaID = $(this).val();
+            let hr = $("#horario")
+
+            let info = EHORARIOS.find(x => x.id == fechaID);
+            hr.empty();
+            info['horas_list'].forEach((item, idx) => {
+                hr.append(`<option value="${item.id}" ${idx == 0 ? 'selected' : ''}>${item.hora}</option>`);
+            });
+
+            updateInfoHorario();
+        });
     
-    //     $('select[name=horario]').on('change', function(){
-    //         showData();
-    //     });
-    // })
+        $('select[name=horario]').on('change', function(){
+            updateInfoHorario();
+        });
+    })
     
     function getHours(){
         let _evento_id = $('input[name=evento_id]').val(),

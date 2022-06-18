@@ -260,28 +260,29 @@ class FrontController extends Controller
         $now    = Date::parse('today') -> format('Y-m-d');
         $future = Date::parse("+7 days") -> format('Y-m-d');
 
+        // Listado normal
         $eventos = Evento::from('evento as ev')
-            -> select(
-                'ev.*', 
-                'evh.fecha as fechaEvento',
-                'evh.hora as horaEvento',
-                'evc.titulo as categoriaEvento'
-            )
-            -> selectRaw("(SELECT ((p.precio * p.comision) / 100) + p.precio
-                FROM evento_precios p
-                WHERE p.evento_id = ev.id
-                ORDER BY p.precio ASC
-                LIMIT 1) as precioEvento")
-            -> leftJoin('evento_horarios as evh', 'ev.id', '=', 'evh.evento_id')
-            -> leftJoin('evento_categorias as evc', 'ev.categoria_id', '=', 'evc.id')
-            -> where([
-                ['ev.status', '=', 1],
-                ['evc.status', '=', 1]
-            ])
-            -> whereRaw("evh.fecha >= CAST('".$now."' AS DATE) AND evh.fecha <= CAST('".$future."' AS DATE) ")
-            -> orderBy('evh.fecha', 'ASC')
-            -> groupBy('ev.id')
-            -> paginate(12);
+        -> select(
+            'ev.*', 
+            'evh.fecha as fechaEvento',
+            'evh.hora as horaEvento',
+            'evc.titulo as categoriaEvento'
+        )
+        -> selectRaw("(SELECT ((p.precio * p.comision) / 100) + p.precio
+            FROM evento_precios p
+            WHERE p.evento_id = ev.id
+            ORDER BY p.precio ASC
+            LIMIT 1) as precioEvento")
+        -> leftJoin('evento_horarios as evh', 'ev.id', '=', 'evh.evento_id')
+        -> leftJoin('evento_categorias as evc', 'ev.categoria_id', '=', 'evc.id')
+        -> where([
+            ['ev.status', '=', 1],
+            ['evc.status', '=', 1]
+        ])
+        -> whereRaw("evh.fecha >= CAST('".$now."' AS DATE)")
+        -> orderBy('evh.fecha', 'ASC')
+        -> groupBy('ev.id')
+        -> paginate(12);
 
 
         foreach ($eventos as $pr){
@@ -290,34 +291,32 @@ class FrontController extends Controller
         }
 
         $eventoCategorias = EventoCategoria::from('evento_categorias as evc')
-            -> select('evc.*')
-            -> join('evento as ev', 'evc.id', '=', 'ev.categoria_id')
-            -> where([
-                ['ev.status', '=', 1],
-                ['evc.status', '=', 1]
-            ])
-            -> groupBy('evc.id')
-            -> orderBy('evc.orden', 'ASC') -> get();
+        -> select('evc.*')
+        -> join('evento as ev', 'evc.id', '=', 'ev.categoria_id')
+        -> where([
+            ['ev.status', '=', 1],
+            ['evc.status', '=', 1]
+        ])
+        -> groupBy('evc.id')
+        -> orderBy('evc.orden', 'ASC') -> get();
 
         $params = Evento::from('evento as ev')
-            -> select(
-                'ev.*',
-                'evh.fecha as fechaEvento',
-                'evh.hora as horaEvento',
-                'evp.precio as precioEvento',
-                'evc.id as idCategoriaEvento',
-                'evc.titulo as categoriaEvento'
-            )
-            -> leftJoin('evento_horarios as evh', 'ev.id', '=', 'evh.evento_id')
-            -> leftJoin('evento_precios as evp', 'ev.id', '=', 'evp.evento_id')
-            -> leftJoin('evento_categorias as evc', 'ev.categoria_id', '=', 'evc.id')
-            -> whereRaw("evh.fecha >= CAST('".$now."' AS DATE) AND evh.fecha <= CAST('".$future."' AS DATE) ")
-            -> where([
-                ['ev.status', '=', 1],
-                ['evc.status', '=', 1]
-            ])
-            -> orderBy('evh.fecha', 'ASC')
-            -> get();
+        -> select(
+            'ev.*',
+            'evh.fecha as fechaEvento',
+            'evh.hora as horaEvento',
+            'evc.id as idCategoriaEvento',
+            'evc.titulo as categoriaEvento'
+        )
+        -> leftJoin('evento_horarios as evh', 'ev.id', '=', 'evh.evento_id')
+        -> leftJoin('evento_categorias as evc', 'ev.categoria_id', '=', 'evc.id')
+        -> whereRaw("evh.fecha >= CAST('".$now."' AS DATE) AND evh.fecha <= CAST('".$future."' AS DATE) ")
+        -> where([
+            ['ev.status', '=', 1],
+            ['evc.status', '=', 1]
+        ])
+        -> orderBy('evh.hora', 'ASC')
+        -> get();
 
         foreach ($params as $pr){
             $pr -> id = $optimus -> encode($pr -> id);
@@ -351,12 +350,31 @@ class FrontController extends Controller
     public function eventos_detalle($id, Optimus $optimus){
         $original_id = $id;
         $id          = $optimus -> decode($id);
+        $now         = Date::parse('today') -> format('Y-m-d');
 
         $evento       = Evento::find($id);
         $galeria      = Galeria::where('rel_id', $id) -> where('tipo',1)->get();
-        $horarios     = Evento::find($id) -> horarios() -> groupBy('fecha') -> orderBy('fecha', 'ASC') -> first();
+        $horarios     = Evento::find($id)
+        -> horarios()
+        -> whereRaw("fecha >= CAST('".$now."' AS DATE) AND status = 1")
+        -> groupBy('fecha')
+        -> orderBy('fecha', 'ASC')
+        -> get();
 
-        // dd($galeria);
+        foreach ($horarios as $key => $value) {
+            $horas = EventoHorario::select('hora', 'id')
+            -> where([
+                ['status', '=', '1'],
+                ['evento_id', '=', $id],
+                ['fecha', '=', $value -> fecha],
+            ])
+            -> orderBy('hora', 'ASC')
+            -> get();
+            
+            $value -> horas_list = $horas;
+        }
+
+        // dd($horarios[1] -> horas_list -> toArray());
         $url_amigable = Str::slug($evento -> titulo);
 
         return view('pages.eventos_detalle', [
@@ -431,11 +449,15 @@ class FrontController extends Controller
 
                 // dd($orden -> evento_id);
 
-                // $precios = EventoPrecio::where('evento_id', $orden -> evento_id)->where('tipo', 1)->get();
-                $precios = EventoPrecio::where('evento_id', $orden -> evento_id)-> first();
-                // dd($precios);
-                $precios -> precio_final = (($precios -> precio * $precios -> comision) / 100) + $precios -> precio;
+                $precios = EventoPrecio::select('*')
+                -> selectRaw('((precio * comision) / 100) + precio AS precio_final')
+                -> where([
+                    ['evento_id', '=' , $orden -> evento_id],
+                    ['tipo', '=' , 1]
+                ])
+                -> get();
                 // foreach ($precios  as $precio){
+                //     $precios -> precio_final = (($precios -> precio * $precios -> comision) / 100) + $precios -> precio;
                 // }
 
                 $data['orden'] = $orden;
@@ -574,14 +596,14 @@ class FrontController extends Controller
         $data['orden'] = $orden;
         $data['asientos'] = OrdenPerAsiento::select(['asiento.folio', 'asiento.num', 'asiento.letra'])->join('asiento', 'asiento.id', '=', 'orden_per_asiento.asiento_id')->where('orden_per_asiento.orden_id', $orden_id)->get();
         $data['evento'] = Evento::find($orden->evento_id);
-        $precios = EventoPrecio::where('evento_id', $orden -> evento_id)-> first();
-        $precios -> precio_final = (($precios -> precio * $precios -> comision) / 100) + $precios -> precio;
+        // $precios = EventoPrecio::where([['evento_id', '=', $orden -> evento_id], ['id', '=', $orden -> horario_id]])-> first();
+        // $precios -> precio_final = (($precios -> precio * $precios -> comision) / 100) + $precios -> precio;
         $data['fecha'] = self::ParseDate($orden -> dia);
-        $subtotal =  $precios -> precio_final * $orden -> no_boletos;
+        $subtotal =  $orden -> precio_boleto * $orden -> no_boletos;
         //$data['subtotal'] = $subtotal;
         $data['subtotal'] = $subtotal;
         $data['descuento'] = $orden -> descuento;
-        $data['total'] = $subtotal - $orden ->descuento;
+        $data['total'] = $subtotal - $orden -> descuento;
         //dd($data);
         return view('pages.compra.thx', $data);
     }
