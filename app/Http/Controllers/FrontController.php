@@ -593,12 +593,15 @@ class FrontController extends Controller
             $data['asientos'] = OrdenPerAsiento::select(['asiento.folio', 'asiento.num', 'asiento.letra'])->join('asiento', 'asiento.id', '=', 'orden_per_asiento.asiento_id')->where('orden_per_asiento.orden_id', $orden_id)->get();
             $data['evento'] = Evento::find($orden->evento_id);
             $data['fecha'] = self::ParseDate($orden -> dia);
-            $subtotal =  OrdenPerAsiento::where('orden_id', $orden_id)->sum('precio');
+            // $subtotal =  OrdenPerAsiento::where('orden_id', $orden_id)->sum('precio');
+            $subtotal = $orden -> precio_boleto * $orden -> no_boletos;
             $data['subtotal'] = $subtotal;
             $data['descuento'] = $orden -> descuento;
-            $data['total'] = $subtotal - $orden ->descuento;
+            $data['total'] = $subtotal - $orden -> descuento;
             $data['exists'] = true;
             $data['busqueda'] = $original_id;
+
+            // dd($data);
         }else{
             $data['busqueda'] = $original_id;
             $data['exists'] = false;

@@ -23,7 +23,10 @@
             <li class="text-center"><a href="">Ubicación</a></li>
             <li class="text-center"><a href="">Idioma</a></li>
             <li class="text-center">
-                <a href="#" class="btn btn-gold">Reservar</a>
+                <a href="#" class="btn btn-gold" style="min-width: 197px">Reservar</a>
+            </li>
+            <li class="text-center">
+                <a class="btn btn-white" href="#mdSuscripcion" data-toggle="modal">Consultar reservación</a>
             </li>
             {{-- <li class="text-uppercase text-center"><a href="">Inicio</a></li>
             <li class="text-uppercase text-center"><a href="">Torneos</a></li>
@@ -65,6 +68,7 @@
                     <li class="{{(request() -> is('eventos*')) ? 'active' : ''}} text-center"><a href="{{route('front.eventos')}}">Experiencias</a></li>
                     <li class="text-center"><a href="">Ubicación</a></li>
                     <li class="text-center"><a href="">Idioma</a></li>
+                    
                     {{-- <li class=""><a href="#mdSuscripcion" data-toggle="modal">Consultar reservación</a></li> --}}
                     {{--<li class="text-uppercase text-center {{(request() -> is('/')) ? 'active' : ''}}"><a href="{{route('front.inicio')}}">Inicio</a></li>
                     <li class="text-uppercase text-center {{(request() -> is('nosotros*')) ? 'active' : ''}}">
@@ -120,7 +124,10 @@
                 </ul>
             </div>
             <div class="col-md-2 text-right">
-                <a href="#" class="btn btn-gold">Reservar</a>
+                <div style="max-width: min-content" class="ml-auto mr-0">
+                    <a href="#" class="btn btn-gold w-100 btn-sm mb-2">Reservar</a>
+                    <a style="width: max-content" class="btn btn-white btn-sm" href="#mdSuscripcion" data-toggle="modal">Consultar reservación</a>
+                </div>
             </div>
         </div>
     </div>

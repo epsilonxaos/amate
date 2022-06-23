@@ -504,19 +504,9 @@ body .bg.bg-size-cover {
 
 body .btn.btn-gold,
 body .btn.btn-white {
-  padding: 11px 15px;
   border-radius: 6px;
-  min-width: 130px;
-  font-size: 14px;
   font-weight: normal;
   letter-spacing: 1px;
-}
-
-@media screen and (min-width: 1200px) {
-  body .btn.btn-gold,
-  body .btn.btn-white {
-    font-size: 16px;
-  }
 }
 
 body .btn.btn-gold.fw-500,

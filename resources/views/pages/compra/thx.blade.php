@@ -42,8 +42,8 @@
                     </div>
                     <p class="mt-5 text-center text-dark">
                         Se ha enviado a tu correo este comprobante <br> <br>
-                        <a class="btn btn-success rounded-pill" target="_blank" href="{{route('front.boleto.download', ['orden_id'=>$orden -> id])}}">DESCARGAR BOLETOS</a>
-                        <a class="btn btn-primary rounded-pill" href="{{route('front.eventos')}}">REGRESAR</a>
+                        <a class="btn btn-gold rounded-pill px-4" target="_blank" href="{{route('front.boleto.download', ['orden_id'=>$orden -> id])}}">DESCARGAR BOLETOS</a>
+                        <a class="btn btn-info rounded-pill px-4 ml-3" href="{{route('front.eventos')}}">REGRESAR</a>
                     </p>
                 </div>
             </div>

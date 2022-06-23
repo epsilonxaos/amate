@@ -14,7 +14,7 @@ class AddInfoExtraOrden extends Migration
     public function up()
     {
         Schema::table('orden', function (Blueprint $table) {
-            $table->json('informacion');
+            $table->json('informacion') -> nullable();
         });
     }
 
