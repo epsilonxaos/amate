@@ -52,8 +52,8 @@
                                         <td class="text-right">
                                             <a href="{{ route('panel.evento.edit', ['id' => $row->id]) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
                                             <button class="btn btn-danger btn-sm btn-delete" data-axios-method="delete" data-route="{{ route('panel.evento.destroy', ['id' => $row->id]) }}" data-action="location.reload()"><i class="fa fa-trash"></i></button>
-                                            <a href="{{route('panel.evento.lugares', ['id' => $row ->id])}}" class="btn btn-success btn-sm"><i class="fa fa-ticket-alt"></i></a>
-                                            <a href="{{route('panel.evento.export', ['id' => $row ->id])}}"><i class="fa fa-download"></i></a>
+                                            {{-- <a href="{{route('panel.evento.lugares', ['id' => $row ->id])}}" class="btn btn-success btn-sm"><i class="fa fa-ticket-alt"></i></a> --}}
+                                            {{-- <a href="{{route('panel.evento.export', ['id' => $row ->id])}}"><i class="fa fa-download"></i></a> --}}
                                            {{-- @if (Auth::guard('web')->user()->role == 'admin')--}}
                                                 {{--<div class="dropdown">
                                                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

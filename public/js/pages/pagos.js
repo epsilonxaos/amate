@@ -14479,6 +14479,7 @@ function pay(btn) {
       if (data.success) {
         payMethod();
       } else {
+        swal('', data.msg, "info");
         _validate__WEBPACK_IMPORTED_MODULE_0__["serverNotification"](false, data.msg);
       }
     });

@@ -184,6 +184,9 @@ nav {
                 color: $blanco;
                 font-weight: normal;
                 
+                @media screen and (min-width: 992px) {
+                    font-size: 12px;
+                }
                 @media screen and (min-width: 1200px) {
                     font-size: 14px;
                 }
@@ -195,11 +198,11 @@ nav {
                     margin-left: 25px;
 
                     @media screen and (min-width: 1200px) {
-                        margin-left: 40px;
+                        margin-left: 35px;
                     }
-                    @media screen and (min-width: 1366px) {
-                        margin-left: 50px;
-                    }
+                    // @media screen and (min-width: 1366px) {
+                    //     margin-left: 50px;
+                    // }
                 }
 
                 &.active {

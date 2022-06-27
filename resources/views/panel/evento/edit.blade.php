@@ -179,6 +179,10 @@
                                                                                     <label class="form-control-label" for="fecha-hora-upd-{{$horario -> id}}">Hora</label>
                                                                                     <input type="hour" name="fecha-hora-upd[{{$horario -> id}}]" id="fecha-hora-upd-{{$horario -> id}}" class="form-control" autocomplete="off" value="{{$horario -> hora}}">
                                                                                 </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="form-control-label" for="fecha-cupo-upd-{{$horario -> id}}">Cupo</label>
+                                                                                    <input type="number" name="fecha-cupo-upd[{{$horario -> id}}]" id="fecha-cupo-upd-{{$horario -> cupo}}" class="form-control" autocomplete="off" value="{{$horario -> cupo}}">
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -265,10 +269,12 @@
                                                                     <button type="button" class="btn btn-danger btn-sm float-right btn-delete" data-axios-method="delete" data-route="{{ route('panel.evento.galeria.destroy', ['id' => $gal->id]) }}" data-action="location.reload()"><i class="fa fa-trash"></i></button>
                                                                 </div>
                                                                 <input type="hidden" name="galeria_id[]" value="{{$gal->id}}">
-                                                                <div class="card-body mx-auto">
-                                                                    <div class="custom-file">
-                                                                        <input type="file" name="galeria_upd[]" class="filestyle" data-input="false" data-btnClass="btn-primary" data-text="Modificar" accept="image/x-png,image/gif,image/jpeg">
+                                                                <div class="card-body">
+                                                                    <div class="custom-file mb-3">
+                                                                        <input type="file" name="galeria_upd[]" class="filestyle" data-input="false" data-btnClass="btn-primary btn-sm" data-text="Cambiar imagen" accept="image/x-png,image/gif,image/jpeg">
                                                                     </div>
+                                                                    <label for="">URL</label>
+                                                                    <input type="text" name="url[]" id="url" class="form-control" value="{{$gal -> url}}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -362,6 +368,10 @@
                     <div class="form-group">
                         <label class="form-control-label" for="fecha-hora-{id}">Hora</label>
                         <input type="hour" name="fecha-hora[{id}]" id="fecha-hora-{id}" class="form-control" autocomplete="off" value="">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="fecha-cupo-{id}">Cupo</label>
+                        <input type="number" name="fecha-cupo[{id}]" id="fecha-cupo-{id}" class="form-control" autocomplete="off" value="">
                     </div>
                 </div>
             </div>

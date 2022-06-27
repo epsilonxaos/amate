@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Asiento;
 use App\Concurso;
+use App\Cupon;
 use App\Documental;
 use App\Evento;
 use App\EventoCategoria;
@@ -13,6 +14,7 @@ use App\Galeria;
 use App\Gira;
 use App\Mail\AliadoMail;
 use App\Mail\ContactoMail;
+use App\Mail\PagoCompletado;
 use App\Mail\PagoCompletadoStaff;
 use App\Mail\PostulanteMail;
 use App\Noticia;
@@ -296,7 +298,8 @@ class FrontController extends Controller
         -> leftJoin('evento_categorias as evc', 'ev.categoria_id', '=', 'evc.id')
         -> where([
             ['ev.status', '=', 1],
-            ['evc.status', '=', 1]
+            ['evc.status', '=', 1],
+            ['evh.cupo', '>', 0],
         ])
         -> whereRaw("evh.fecha >= CAST('".$now."' AS DATE)")
         -> orderBy('evh.fecha', 'ASC')
@@ -332,7 +335,8 @@ class FrontController extends Controller
         -> whereRaw("evh.fecha >= CAST('".$now."' AS DATE) AND evh.fecha <= CAST('".$future."' AS DATE) ")
         -> where([
             ['ev.status', '=', 1],
-            ['evc.status', '=', 1]
+            ['evc.status', '=', 1],
+            ['evh.cupo', '>', 0],
         ])
         -> orderBy('evh.hora', 'ASC')
         -> get();
@@ -376,6 +380,7 @@ class FrontController extends Controller
         $galeria      = Galeria::where('rel_id', $id) -> where('tipo',1)->get();
         $horarios     = Evento::find($id)
         -> horarios()
+        -> where("cupo", ">", 0)
         -> whereRaw("fecha >= CAST('".$now."' AS DATE) AND status = 1")
         -> groupBy('fecha')
         -> orderBy('fecha', 'ASC')
@@ -479,6 +484,7 @@ class FrontController extends Controller
                 // foreach ($precios  as $precio){
                 //     $precios -> precio_final = (($precios -> precio * $precios -> comision) / 100) + $precios -> precio;
                 // }
+
 
                 $data['orden'] = $orden;
                 $data['asientos'] = OrdenPerAsiento::select(['asiento.num', 'asiento.letra'])->join('asiento', 'asiento.id', '=', 'orden_per_asiento.asiento_id')->where('orden_per_asiento.orden_id', $orden_id)->get()->toArray();
@@ -707,20 +713,30 @@ class FrontController extends Controller
             $orden -> save();
             //dd($request -> precio_boleto);
             if($request -> evento_tipo == 0){
-                return response() ->json(['success' => true]);
-                // $orden_controller = new OrdenController();
-                // if($orden_controller -> validarDisponibilidadLugares($orden -> id, $request -> precio_id)){
-                //     return response() ->json(['success' => true]);
-                // }else{
-                //     return response() ->json(['success' => false, 'msg' => 'La cantidad de boletos solicitada sobrepasa la disponibilidad actual']);
-                // }
+                $valid_asientos = $this -> validarDisponibilidadLugares();
+                if($valid_asientos['response']){
+                    return response() ->json(['success' => true]);
+                }else{
+                    // $asientos_string = self::asientosToString($valid_asientos['asientos_ya_ocupados']);
+                    // return response() ->json(['success' => false, 'msg' => 'Los asientos: '.$asientos_string.' ya no estan disponibles, para poder continuar regrese a la seleccion de asientos.']);
+                    if($valid_asientos['lugares'] == 0) {
+                        return response() ->json(['success' => false, 'msg' => 'Lo sentimos, ya no hay cupo disponible para el evento en este horario, regrese y revise otra fecha.']);
+                    }
+                    $text = $valid_asientos['lugares'] == 1 ? "lugar" : "lugares";
+                    return response() ->json(['success' => false, 'msg' => 'Solo contamos con '.$valid_asientos['lugares'].' '.$text.' disponible, si deseas más lugares regrese y revise otra fecha.']);
+                }
             }else{
                 $valid_asientos = $this -> validarDisponibilidadLugares();
                 if($valid_asientos['response']){
                     return response() ->json(['success' => true]);
                 }else{
-                    $asientos_string = self::asientosToString($valid_asientos['asientos_ya_ocupados']);
-                    return response() ->json(['success' => false, 'msg' => 'Los asientos: '.$asientos_string.' ya no estan disponibles, para poder continuar regrese a la seleccion de asientos.']);
+                    // $asientos_string = self::asientosToString($valid_asientos['asientos_ya_ocupados']);
+                    // return response() ->json(['success' => false, 'msg' => 'Los asientos: '.$asientos_string.' ya no estan disponibles, para poder continuar regrese a la seleccion de asientos.']);
+                    if($valid_asientos['lugares'] == 0) {
+                        return response() ->json(['success' => false, 'msg' => 'Lo sentimos, ya no hay cupo disponible para el evento en este horario, regrese y revise otra fecha.']);
+                    }
+
+                    return response() ->json(['success' => false, 'msg' => 'Solo contamos con '.$valid_asientos['lugares'].' '.$valid_asientos['lugares'] == 1 ? "lugar" : "lugares".' disponible, si deseas mas lugares regrese y revise otra fecha.']);
                 }
             }
         }else{
@@ -732,20 +748,28 @@ class FrontController extends Controller
         $id_orden = Session::get('orden_id');
         $orden = Orden::find($id_orden);
 
-        $asientos_ocupados = OrdenPerAsiento::select(['orden_per_asiento.id','asiento.num', 'asiento.letra'])
-            ->join('asiento', 'asiento.id', '=', 'orden_per_asiento.asiento_id')
-            ->join('orden', 'orden.id', '=', 'orden_per_asiento.orden_id')
-            ->where('orden.evento_id', $orden -> evento_id)->where('orden.horario_id', $orden -> horario_id)->where('orden.status', 2)->get();
+        // $asientos_ocupados = OrdenPerAsiento::select(['orden_per_asiento.id','asiento.num', 'asiento.letra'])
+        //     ->join('asiento', 'asiento.id', '=', 'orden_per_asiento.asiento_id')
+        //     ->join('orden', 'orden.id', '=', 'orden_per_asiento.orden_id')
+        //     ->where('orden.evento_id', $orden -> evento_id)->where('orden.horario_id', $orden -> horario_id)->where('orden.status', 2)->get();
+
+        $lugares = EventoHorario::find($orden -> horario_id);
 
         $flag = true;
-        $asientos_no_disponibles = [];
-        foreach ($asientos_ocupados as $asiento){
-            if(OrdenPerAsiento::select(['asiento.num', 'asiento.letra'])->join('asiento', 'asiento.id', '=', 'orden_per_asiento.asiento_id')->where('orden_per_asiento.orden_id', $id_orden)->where('orden_per_asiento.asiento_id', $asiento->id)->exists()){
-                $flag = false;
-                array_push($asientos_no_disponibles, ['id' => $asiento->id, 'num' => $asiento->num, 'letra' => $asiento->letra]);
-            }
+        $asientos_no_disponibles = 0;
+        // foreach ($asientos_ocupados as $asiento){
+        //     if(OrdenPerAsiento::select(['asiento.num', 'asiento.letra'])->join('asiento', 'asiento.id', '=', 'orden_per_asiento.asiento_id')->where('orden_per_asiento.orden_id', $id_orden)->where('orden_per_asiento.asiento_id', $asiento->id)->exists()){
+        //         $flag = false;
+        //         array_push($asientos_no_disponibles, ['id' => $asiento->id, 'num' => $asiento->num, 'letra' => $asiento->letra]);
+        //     }
+        // }
+
+        if($lugares -> cupo < $orden -> no_boletos || $lugares -> cupo == 0) {
+            $flag = false;
+            $asientos_no_disponibles = $lugares -> cupo;
         }
-        return ['response' => $flag, 'asientos_ya_ocuapdos' => $asientos_no_disponibles];
+
+        return ['response' => $flag, 'lugares' => $lugares -> cupo];
     }
 
     public function freePayment(Optimus $optimus){
@@ -757,18 +781,23 @@ class FrontController extends Controller
             $orden -> pago_hora = date('Y-m-d H:i:s');
             $orden -> save();
 
+            $lugares = EventoHorario::find($orden -> horario_id);
+            $lugares -> cupo = $lugares -> cupo - $orden -> no_boletos;
+            $lugares -> save();
+
             if($orden -> descuento > 0){
                 $cupon = Cupon::where('titulo', $orden -> cupon)->first();
                 $cupon -> usos = $cupon -> usos + 1;
                 $cupon -> save();
             }
-            $subtotal =  OrdenPerAsiento::where('orden_id', $orden->id)->sum('precio');
-            $asientos = OrdenPerAsiento::select(['asiento.num', 'asiento.letra'])->join('asiento', 'asiento.id', '=', 'orden_per_asiento.asiento_id')->where('orden_per_asiento.orden_id', $orden->id)->get()->toArray();
+            $subtotal = $orden -> precio_boleto * $orden -> no_boletos;
+            // $subtotal =  OrdenPerAsiento::where('orden_id', $orden->id)->sum('precio');
+            // $asientos = OrdenPerAsiento::select(['asiento.num', 'asiento.letra'])->join('asiento', 'asiento.id', '=', 'orden_per_asiento.asiento_id')->where('orden_per_asiento.orden_id', $orden->id)->get()->toArray();
             $data = [
                 'orden' => $orden,
                 'evento' => Evento::find($orden -> evento_id),
-                'asientos' => FrontController::asientosToString($asientos),
-                'no_asientos' => count($asientos),
+                // 'asientos' => FrontController::asientosToString($asientos),
+                'no_asientos' => $orden -> no_boletos,
                 'fecha' => FrontController::ParseDate($orden -> dia),
                 'subtotal' => $subtotal,
                 'descuento' => $orden -> descuento,
@@ -786,17 +815,17 @@ class FrontController extends Controller
     }
 
     public function ipn(Request $request){
-        Mail::to('luisjcaamal@gmail.com') -> send(new test_webhook('entre'));
+        // Mail::to('luisjcaamal@gmail.com') -> send(new test_webhook('entre'));
         $enable_sandbox = true;
         $ipn = new PaypalIPN();
         if ($enable_sandbox) {
             $ipn->useSandbox();
         }
-        Mail::to('luisjcaamal@gmail.com') -> send(new test_webhook('entre_2'));
-        //$verified = $ipn->verifyIPN();
+        // Mail::to('luisjcaamal@gmail.com') -> send(new test_webhook('entre_2'));
+        //$verified = $ipn->verifyIPN(); -- Comentado
         $verified = true;
         $body = @"";
-        Mail::to('luisjcaamal@gmail.com') -> send(new test_webhook($request -> payment_status));
+        // Mail::to('luisjcaamal@gmail.com') -> send(new test_webhook($request -> payment_status));
         if ($verified) {
             $payment_status = $request -> payment_status;
             $item_number = $request -> item_number;
@@ -813,13 +842,19 @@ class FrontController extends Controller
                         $cupon -> usos = $cupon -> usos + 1;
                         $cupon -> save();
                     }
-                    $subtotal =  OrdenPerAsiento::where('orden_id', $orden->id)->sum('precio');
-                    $asientos = OrdenPerAsiento::select(['asiento.num', 'asiento.letra'])->join('asiento', 'asiento.id', '=', 'orden_per_asiento.asiento_id')->where('orden_per_asiento.orden_id', $orden->id)->get()->toArray();
+
+                    $lugares = EventoHorario::find($orden -> horario_id);
+                    $lugares -> cupo = $lugares -> cupo - $orden -> no_boletos;
+                    $lugares -> save();
+
+                    $subtotal = $orden -> precio_boleto * $orden -> no_boletos;
+                    // $subtotal =  OrdenPerAsiento::where('orden_id', $orden->id)->sum('precio');
+                    // $asientos = OrdenPerAsiento::select(['asiento.num', 'asiento.letra'])->join('asiento', 'asiento.id', '=', 'orden_per_asiento.asiento_id')->where('orden_per_asiento.orden_id', $orden->id)->get()->toArray();
                     $data = [
                         'orden' => $orden,
                         'evento' => Evento::find($orden -> evento_id),
-                        'asientos' => FrontController::asientosToString($asientos),
-                        'no_asientos' => count($asientos),
+                        // 'asientos' => FrontController::asientosToString($asientos),
+                        'no_asientos' => $orden -> no_boletos,
                         'fecha' => FrontController::ParseDate($orden -> dia),
                         'subtotal' => $subtotal,
                         'descuento' => $orden -> descuento,

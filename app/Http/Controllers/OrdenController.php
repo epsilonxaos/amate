@@ -43,8 +43,8 @@ class OrdenController extends Controller
         ];
         $orden = Orden::orderBy('id', 'DESC')->get();
         foreach ($orden as $o){
-            $asientos =  OrdenPerAsiento::select(['asiento.num', 'asiento.letra'])->join('asiento', 'asiento.id', '=', 'orden_per_asiento.asiento_id')->where('orden_per_asiento.orden_id', $o->id)->get()->toArray();
-            $o->no_boletos = count($asientos);
+            // $asientos =  OrdenPerAsiento::select(['asiento.num', 'asiento.letra'])->join('asiento', 'asiento.id', '=', 'orden_per_asiento.asiento_id')->where('orden_per_asiento.orden_id', $o->id)->get()->toArray();
+            // $o->no_boletos = count($asientos);
             $o -> status_string = self::getStatus($o->status);
             $o -> fecha_string = self::formatedDate($o->created_at);
         }
@@ -71,7 +71,10 @@ class OrdenController extends Controller
         ];
         $eventos = Evento::select(['id', 'titulo',  'lugar',  'tipo'])->get();
         foreach ($eventos as $ev){
-            $horarios = EventoHorario::where('evento_id', $ev -> id)->orderBy('fecha', 'ASC')->orderBy('hora', 'ASC')->get();
+            $horarios = EventoHorario::where([
+                ['evento_id', '=', $ev -> id],
+                ['cupo', '>', 0]
+            ])->orderBy('fecha', 'ASC')->orderBy('hora', 'ASC')->get();
             foreach ($horarios as $horario){
                 $horario->fecha = self::formatedDate($horario -> fecha);
             }
@@ -157,48 +160,56 @@ class OrdenController extends Controller
 
     function validarDisponibilidadLugares($id_orden, $precio_id){
         $orden = Orden::find($id_orden);
-        OrdenPerAsiento::where('orden_id', $id_orden)->delete();
+        // OrdenPerAsiento::where('orden_id', $id_orden)->delete();
         //Recuperamos todos los asientos por el precio seleccionado
-        $asientos_per_precio = Asiento::select(['asiento.*', 'evento_precios.precio', 'evento_precios.comision'])
-            ->join('precio_per_asiento', 'precio_per_asiento.asiento_id', '=', 'asiento.id')
-            ->join('evento_precios', 'evento_precios.id', '=', 'precio_per_asiento.precio_id')
-            ->where('asiento.evento_id', $orden -> evento_id)
-            ->where('evento_precios.id', $precio_id)->get();
+        // $asientos_per_precio = Asiento::select(['asiento.*', 'evento_precios.precio', 'evento_precios.comision'])
+        //     ->join('precio_per_asiento', 'precio_per_asiento.asiento_id', '=', 'asiento.id')
+        //     ->join('evento_precios', 'evento_precios.id', '=', 'precio_per_asiento.precio_id')
+        //     ->where('asiento.evento_id', $orden -> evento_id)
+            // ->where('evento_precios.id', $precio_id)->get();
+
+        $lugares = EventoHorario::find($orden -> horario_id);
+
+        if($lugares -> cupo < $orden -> no_boletos || $lugares -> cupo == 0) {
+            return false;
+        }
+
+        return true;
 
         //Aqui guardaremos los IDS que esten disponibles aun
         $asientos_disponibles = [];
         //dd($asientos_per_precio);
         //Recorremos esos haciendos validando cuales ya no estan disponibles
-        foreach ($asientos_per_precio as $asiento){
-            //verificacmos los asientos que no esten ocupados en el horario seleccionado
-            if(!OrdenPerAsiento::join('orden', 'orden.id', '=', 'orden_per_asiento.orden_id')->where('orden.horario_id', $orden -> horario_id) -> where('orden.evento_id', $orden-> evento_id) -> whereIn('orden.status', [2,4])->where('asiento_id', $asiento -> id)->exists()){
-                //Si no existe, guardamos el ID en el arreglo
-                array_push($asientos_disponibles,  ['asiento_id' => $asiento->id, 'precio' => (($asiento -> precio * $asiento -> comsion) / 100) + $asiento -> precio]);
-            }
-        }
+        // foreach ($asientos_per_precio as $asiento){
+        //     //verificacmos los asientos que no esten ocupados en el horario seleccionado
+        //     if(!OrdenPerAsiento::join('orden', 'orden.id', '=', 'orden_per_asiento.orden_id')->where('orden.horario_id', $orden -> horario_id) -> where('orden.evento_id', $orden-> evento_id) -> whereIn('orden.status', [2,4])->where('asiento_id', $asiento -> id)->exists()){
+        //         //Si no existe, guardamos el ID en el arreglo
+        //         array_push($asientos_disponibles,  ['asiento_id' => $asiento->id, 'precio' => (($asiento -> precio * $asiento -> comsion) / 100) + $asiento -> precio]);
+        //     }
+        // }
         //Verificamos que existan lugares disponibles
-        if(count($asientos_disponibles)){
-            //Verificamos que la solicitud de boletos no supere los asientos disponibles
-            if($orden -> no_boletos > count($asientos_disponibles)){
-                return false;
-            }else{
-                foreach ($asientos_disponibles as $i => $as){
-                    if(($i+1) <= $orden -> no_boletos){
-                        //Asignamos los asientos a la orden
-                        OrdenPerAsiento::insert([
-                            'asiento_id' => $as['asiento_id'],
-                            'precio' => $as['precio'],
-                            'orden_id' => $orden -> id
-                        ]);
-                    }else{
-                        break;
-                    }
-                }
-                return true;
-            }
-        }else{
-            return false;
-        }
+        // if(count($asientos_disponibles)){
+        //     //Verificamos que la solicitud de boletos no supere los asientos disponibles
+        //     if($orden -> no_boletos > count($asientos_disponibles)){
+        //         return false;
+        //     }else{
+        //         foreach ($asientos_disponibles as $i => $as){
+        //             if(($i+1) <= $orden -> no_boletos){
+        //                 //Asignamos los asientos a la orden
+        //                 OrdenPerAsiento::insert([
+        //                     'asiento_id' => $as['asiento_id'],
+        //                     'precio' => $as['precio'],
+        //                     'orden_id' => $orden -> id
+        //                 ]);
+        //             }else{
+        //                 break;
+        //             }
+        //         }
+        //         return true;
+        //     }
+        // }else{
+        //     return false;
+        // }
     }
 
     public function download($orden_id){

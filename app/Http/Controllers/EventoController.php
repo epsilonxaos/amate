@@ -170,6 +170,7 @@ class EventoController extends Controller
                         'evento_id' => $evento->id,
                         'fecha' => $request->input('fecha-dia')[$id],
                         'hora' => $request->input('fecha-hora')[$id],
+                        'cupo' => $request->input('fecha-cupo')[$id],
                         'status' => 1
                     ]);
                 }
@@ -308,7 +309,6 @@ class EventoController extends Controller
                 ]);
             }
         }
-
         if($request->file('galeria_upd')){
             foreach($request->file('galeria_upd') as $i => $image)
             {
@@ -321,8 +321,17 @@ class EventoController extends Controller
                 $_exploded[0] = 'storage';
                 $path_slide = implode('/', $_exploded);
                 $galeria -> imagen = basename($path_slide);
+                $galeria -> url = $request -> url[$i];
                 $galeria -> save();
             }
+        }
+
+        foreach($request -> url as $i => $image)
+        {
+            $galeria = Galeria::find($request['galeria_id'][$i]);
+            
+            $galeria -> url = $request -> url[$i];
+            $galeria -> save();
         }
 
         if($request->has('new_content_id')){
@@ -331,6 +340,7 @@ class EventoController extends Controller
                     'evento_id' => $evento -> id,
                     'hora' => $request->input('fecha-hora')[$id],
                     'fecha' => $request->input('fecha-dia')[$id],
+                    'cupo' => $request->input('fecha-cupo')[$id],
                     'status' => 1
                 ]);
             }
@@ -341,6 +351,7 @@ class EventoController extends Controller
                 $pieza_contenido = EventoHorario::find($id);
                 $pieza_contenido -> hora = $request->input('fecha-hora-upd')[$id];
                 $pieza_contenido -> fecha = $request->input('fecha-dia-upd')[$id];
+                $pieza_contenido -> cupo = $request->input('fecha-cupo-upd')[$id];
                 $pieza_contenido -> save();
             }
         }

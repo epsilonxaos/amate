@@ -885,6 +885,12 @@ nav.menu-escritorio ul.menu li {
   font-weight: normal;
 }
 
+@media screen and (min-width: 992px) {
+  nav.menu-escritorio ul.menu li {
+    font-size: 12px;
+  }
+}
+
 @media screen and (min-width: 1200px) {
   nav.menu-escritorio ul.menu li {
     font-size: 14px;
@@ -903,13 +909,7 @@ nav.menu-escritorio ul.menu li + li {
 
 @media screen and (min-width: 1200px) {
   nav.menu-escritorio ul.menu li + li {
-    margin-left: 40px;
-  }
-}
-
-@media screen and (min-width: 1366px) {
-  nav.menu-escritorio ul.menu li + li {
-    margin-left: 50px;
+    margin-left: 35px;
   }
 }
 

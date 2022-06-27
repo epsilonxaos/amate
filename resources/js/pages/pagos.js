@@ -196,6 +196,7 @@ function pay(btn){
             if(data.success){
                 payMethod()
             }else{
+                swal('', data.msg, "info");
                 validate.serverNotification(false, data.msg);
             }
         });

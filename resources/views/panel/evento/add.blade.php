@@ -213,6 +213,10 @@
                         <label class="form-control-label" for="fecha-hora-{id}">Hora</label>
                         <input type="hour" name="fecha-hora[{id}]" id="fecha-hora-{id}" class="form-control" autocomplete="off" value="">
                     </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="fecha-cupo-{id}">Cupo</label>
+                        <input type="number" name="fecha-cupo[{id}]" id="fecha-cupo-{id}" class="form-control" autocomplete="off" value="">
+                    </div>
                 </div>
             </div>
         </div>

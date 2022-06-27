@@ -144,7 +144,9 @@ class ConektaTarjeta extends Controller
                                 $cupon -> usos = $cupon -> usos + 1;
                                 $cupon -> save();
                             }
-
+                            $lugares = EventoHorario::find($orden -> horario_id);
+                            $lugares -> cupo = $lugares -> cupo - $orden -> no_boletos;
+                            $lugares -> save();
                             $subtotal =  OrdenPerAsiento::where('orden_id', $orden->id)->sum('precio');
                             $asientos = OrdenPerAsiento::select(['asiento.num', 'asiento.letra'])->join('asiento', 'asiento.id', '=', 'orden_per_asiento.asiento_id')->where('orden_per_asiento.orden_id', $orden->id)->get()->toArray();
                             $data = [

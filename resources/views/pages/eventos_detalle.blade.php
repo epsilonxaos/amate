@@ -12,8 +12,16 @@
                     <div class="swiper-container" id="swiperSlide">
                         <div class="swiper-wrapper">
                             @foreach ($galeria as $item)
-                                <div class="swiper-slide">
+                                <div class="swiper-slide position-relative">
                                     <img src="{{ asset('storage/evento/galeria/'.$item -> imagen) }}" alt="galeria">
+
+                                    @if ($item -> url)
+                                        <div class="video position-absolute d-flex align-items-center justify-content-center" style="top: 0; left:0; width: 100%; height: 100%; background-color: #00000033">
+                                            <a data-fancybox href="{{$item -> url}}">
+                                                <img src="{{asset('images/play-button.png')}}" alt="play" style="width: 128px; height: auto">
+                                            </a>
+                                        </div>
+                                    @endif
                                 </div>
                             @endforeach
                         </div>
@@ -159,6 +167,8 @@
 @endsection
 
 @push('js')
+    <link rel="stylesheet" href="{{asset('plugins/@fancyapps/jquery.fancybox.min.css')}}">
+    <script src="{{asset('plugins/@fancyapps/jquery.fancybox.min.js')}}"></script>
     <script type="text/javascript">
         const EVENTO_VIEW_DETAIL = true;
         const EHORARIOS = @json($horarios);
