@@ -114,9 +114,11 @@ class FrontController extends Controller
             $wheRaw = "evh.fecha >= CAST('".$now -> format('Y-m-d')."' AS DATE) AND evh.fecha <= CAST('".$future -> format('Y-m-d')."' AS DATE) ";
         }
 
+        $cat = [];
+
         if(isset($request -> categoria)) {
             $cat = ['categoria_id', '=', $request -> categoria];
-        }
+        } 
         
 
         $params =  DB::table('evento as ev')
