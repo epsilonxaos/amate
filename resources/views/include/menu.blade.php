@@ -17,7 +17,7 @@
     <div class="sidebar-left">
         <ul class="menu-list">
             <li class="{{(request() -> is('eventos*')) ? 'active' : ''}} text-center"><a href="{{route('front.eventos')}}">Experiencias</a></li>
-            <li class="text-center"><a href="">Calendario</a></li>
+            <li class="text-center"><a href="{{route('front.eventos')}}?calendario=1">Calendario</a></li>
             <li class="text-center"><a href="">Galería</a></li>
             <li class="text-center"><a href="">Arma tu experiencia</a></li>
             <li class="text-center"><a href="">About Us</a></li>
@@ -64,7 +64,7 @@
             <div class="col-md-8">
                 <ul class="menu">
                     <li class="{{(request() -> is('eventos*')) ? 'active' : ''}} text-center"><a href="{{route('front.eventos')}}">Experiencias</a></li>
-                    <li class="text-center"><a href="">Calendario</a></li>
+                    <li class="text-center"><a href="{{route('front.eventos')}}?calendario=1">Calendario</a></li>
                     <li class="text-center"><a href="">Galería</a></li>
                     <li class="text-center"><a href="">Arma tu experiencia</a></li>
                     <li class="text-center"><a href="">About Us</a></li>

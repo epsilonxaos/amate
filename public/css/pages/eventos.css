@@ -43,7 +43,7 @@ Fuentes tipograficas
 
 .calendar-week-pilar:empty::before {
   content: "Sin actividades";
-  color: #000000;
+  color: #ffffff;
   display: block;
   text-align: center;
   font-size: calc(.4rem + .5vw);

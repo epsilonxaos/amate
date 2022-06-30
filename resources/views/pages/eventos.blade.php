@@ -34,13 +34,13 @@
             </div>
         </div>
 
-        <div class="eventos-informacion position-relative p-0">
+        <div class="eventos-informacion position-relative p-0" id="listEventos">
 
             <div class="bg-verde">
                 <h2 class="titulo decoracion text-center d-flex align-items-center justify-content-center w-100 mb-4">EXPERIENCIAS</h2>
             </div>
 
-            <div class="container-fluid w12 pt-4 pb-4" id="eventosContainer">
+            <div class="container-fluid w12 pt-4 pb-4 {{Request::get('calendario') == 0 ? '' : 'd-none'}}" id="eventosContainer">
                 <div class="text-center mb-4">
                     <button class="btn btn-gold toggleEventos">Ver Calendario</button>
                 </div>
@@ -75,12 +75,14 @@
 
 
             <div class="fondo-verde position-relative overflow-hidden" style="z-index: 1">
-                <div class="pt-2 position-relative d-none" id="CalendarioContainer">
+                <div class="pt-2 position-relative {{Request::get('calendario') == 1 ? '' : 'd-none'}}" id="CalendarioContainer">
 
                     <div class="container-fluid w16">
                         <div class="row justify-content-end align-items-center">
-                            <div class="col-12 col-md-6 mb-3">
-                                <h5 class="text-center text-white font-weight-bold">Del {{$fechas[0]}} al {{$fechas[1]}} de {{$mes}}</h5>
+                            <div class="col-12 col-md-6 mb-3 d-flex align-items-center justify-content-center">
+                                <a href="{{route('front.eventos').'?calendario=1&dates='.(Request::get('dates') - 1).(Request::get('categoria') ? '&categoria='.Request::get('categoria') : '')}}" class="btn btn-sm btn-gold border-0 shadow-none" style="{{Request::get('dates') == 0 ? 'opacity: 0; pointer-events: none' : ''}}"><</a>
+                                <h5 class="text-center text-white font-weight-bold mx-4 mb-0">Del {{$fechas[0]}} al {{$fechas[1]}} de {{$mes}}</h5>
+                                <a href="{{route('front.eventos').'?calendario=1&dates='.(Request::get('dates') + 1).(Request::get('categoria') ? '&categoria='.Request::get('categoria') : '')}}" class="btn btn-sm btn-gold border-0 shadow-none">></a>
                             </div>
                             <div class="col-12 col-md-3 text-center mb-3">
                                 <button class="btn btn-gold toggleEventos">Ver Listado</button>
@@ -114,7 +116,7 @@
                                         <h5>{{$calendario[6][0]}}.<span>{{$calendario[6][1]}}</span></h5>
                                     </div>
                                 </div>
-                                <div class="calendar-week-body d-flex">
+                                <div class="calendar-week-body d-flex" style="min-height: 450px">
                                     <div class="calendar-week-pilar">
                                         @foreach ($params as $ev)
                                             @if (date('d', strtotime($ev -> fechaEvento)) === $calendario[0][1])
@@ -220,7 +222,11 @@
                                 <div class="col-12 col-lg-9 col-xl-10">
                                     <ul class="list-unstyled d-flex justify-content-between justify-content-sm-center justify-content-md-between">
                                         @foreach ($categorias as $item)
-                                            <li class="card text-center align-items-center"> <img class="mb-2" src="{{asset($item -> portada)}}" alt="{{$item -> titulo}}"> <p>{{$item -> titulo}}</p> </li>
+                                            <li class="card text-center align-items-center">
+                                                <a href="{{route('front.eventos').'?calendario=1&categoria='.$item -> id}}">
+                                                    <img class="mb-2" src="{{asset($item -> portada)}}" alt="{{$item -> titulo}}"> <p>{{$item -> titulo}}</p>
+                                                </a>
+                                            </li>
                                         @endforeach
                                         {{-- <li class="card text-center align-items-center"> <img class="mb-2" src="{{asset('img/frame-1.svg')}}" alt="Gastronomia"> <p>Gastronomia</p> </li>
                                         <li class="card text-center align-items-center"> <img class="mb-2" src="{{asset('img/frame-2.svg')}}" alt="Naturaleza"> <p>Naturaleza</p> </li>
@@ -273,6 +279,20 @@
         });
         
         
+        document.querySelectorAll(".calendar-week-body .calendar-week-pilar").forEach(item => {
+            if(!item.querySelector(".calendar-week-card")){
+                item.innerHTML = "";
+            }
+        });
+    
+        
     </script>
+    @if (Request::get('calendario') == 1)
+        <script>
+            $('html, body').animate({
+                scrollTop: $("#listEventos").offset().top
+            }, 100);
+        </script>
+    @endif
     <script src="{{mix('js/pages/eventos.js')}}"></script>
 @endpush

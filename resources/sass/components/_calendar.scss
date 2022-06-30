@@ -33,7 +33,7 @@ $elements: 7;
             min-height: 350px;
             &::before{
                 content: "Sin actividades";
-                color: $negro;
+                color: $blanco;
                 display: block;
                 text-align: center;
                 font-size: calc(.4rem + .5vw);

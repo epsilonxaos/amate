@@ -326,12 +326,14 @@ class EventoController extends Controller
             }
         }
 
-        foreach($request -> url as $i => $image)
-        {
-            $galeria = Galeria::find($request['galeria_id'][$i]);
-            
-            $galeria -> url = $request -> url[$i];
-            $galeria -> save();
+        if($request -> has('url')) {
+            foreach($request -> url as $i => $image)
+            {
+                $galeria = Galeria::find($request['galeria_id'][$i]);
+                
+                $galeria -> url = $request -> url[$i];
+                $galeria -> save();
+            }
         }
 
         if($request->has('new_content_id')){

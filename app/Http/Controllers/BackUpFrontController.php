@@ -26,7 +26,6 @@ use App\Taller;
 use Carbon\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -37,14 +36,231 @@ use phpDocumentor\Reflection\Types\Self_;
 
 class FrontController extends Controller
 {
-    public function eventos(Optimus $optimus, Request $request){
-        if($request -> dates == 0) {
-            $now    = Date::parse('today') -> format('Y-m-d');
-            $future = Date::parse("+7 days") -> format('Y-m-d');
-        } else {
-            $now    = Date::parse('+'.(7*$request -> dates).' days');
-            $future = Date::parse('+'.(7*($request -> dates + 1)).' days');
+    public function index(Optimus $optimus) {
+        $concurso = Concurso::where('status', 1)->first();
+        if(Concurso::where('status', 1)->exists()){
+            $concurso -> id = $optimus -> encode($concurso -> id);
+            $concurso -> url_amigable = Str::slug($concurso -> titulo);
+            $concurso -> fecha = OrdenController::formatedDate($concurso -> fecha);
         }
+        $noticia = Noticia::orderBy('id','DESC')->limit('3')->get();
+        foreach ($noticia as $n){
+            $n -> id = $optimus->encode($n -> id);
+            $n -> url_amigable = Str::slug($n -> titulo);
+            $n -> s_desc = Str::limit(strip_tags($n -> descripcion), 150, '...');
+            $n -> f_format = OrdenController::formatedDate($n->created_at);
+        }
+        return view('pages.index', ['concurso' => $concurso, 'noticias' => $noticia]);
+    }
+    public function nosotros_quienes_somos(){
+        $path = resource_path('js/json/nosotros/linea_tiempo.json');
+        $content = json_decode(file_get_contents($path), true);
+
+        return view('pages.nosotros.quienes_somos', ["linea" => $content]);
+    }
+    public function nosotros_mumurantes(){
+        $path = resource_path('js/json/nosotros/los_murmurantes.json');
+        $content = json_decode(file_get_contents($path), true);
+
+        return view('pages.nosotros.los_murmurantes', ["equipo" => $content]);
+    }
+    public function nosotros_mumurantes_detalle($url){
+        $path = resource_path('js/json/nosotros/los_murmurantes.json');
+        $content = json_decode(file_get_contents($path), true);
+
+        $info = '';
+        foreach ($content as $num => $temp) {
+            if($temp['url'] == $url){
+                $info = $temp;
+            }
+        }
+
+        return view('pages.nosotros.los_murmurantes_detalle', ['equipo' => $info, "integrantes" => $content]);
+    }
+    public function nosotros_reconocimientos(){
+        $path = resource_path('js/json/nosotros/comentarios.json');
+        $content = json_decode(file_get_contents($path), true);
+
+        return view('pages.nosotros.reconocimientos', ["comentarios" => $content]);
+    }
+    public function nosotros_aliados_culturales(){
+        return view('pages.nosotros.aliados_culturales');
+    }
+    public function laboratorio_laboratorio(){
+        return view('pages.laboratorio.laboratorio');
+    }
+    public function laboratorio_talleres(Optimus $optimus){
+        /*$path = resource_path('js/json/laboratorio/talleres.json');
+        $content = json_decode(file_get_contents($path), true);*/
+        $talleres = Taller::where('status', 1)->paginate(9);
+        foreach ($talleres as $t){
+            $t -> id = $optimus->encode($t-> id);
+            $t -> url_amigable = Str::slug($t-> titulo);
+        }
+
+        return view('pages.laboratorio.talleres', ["talleres" => $talleres]);
+    }
+    public function laboratorio_talleres_detalle($id, Optimus $optimus){
+        /*$path = resource_path('js/json/laboratorio/talleres.json');
+        $content = json_decode(file_get_contents($path), true);
+
+        $info = '';
+        foreach ($content as $num => $temp) {
+            if($temp['url'] == $url){
+                $info = $temp;
+            }
+        }*/
+        $id = $optimus -> decode($id);
+        $taller = Taller::find($id);
+        $galerias = Galeria::where('tipo', 1)->where('rel_id', $id)->get();
+
+        return view('pages.laboratorio.talleres_detalle', ["taller" => $taller, 'galerias' => $galerias]);
+    }
+    public function artes_piezas(Optimus $optimus){
+        /*$path = resource_path('js/json/artes/piezas_escenicas.json');
+        $content = json_decode(file_get_contents($path), true);*/
+        $piezas = Pieza::where('status', 1)->paginate(9);
+        foreach ($piezas as $p){
+            $p -> id = $optimus->encode($p-> id);
+            $p -> url_amigable = Str::slug($p-> titulo);
+        }
+        return view('pages.artes.piezas', ["piezas" => $piezas]);
+    }
+    public function artes_piezas_detalle($id, Optimus $optimus){
+        $id = $optimus -> decode($id);
+        $pieza = Pieza::find($id);
+        $galeria = Galeria::where('rel_id', $id) -> where('tipo',2)->get();
+        $pieza_contenido = PiezaContenido::where('pieza_id', $id)->get();
+        /*$path = resource_path('js/json/artes/piezas_escenicas.json');
+        $content = json_decode(file_get_contents($path), true);
+
+        $info = '';
+        foreach ($content as $num => $temp) {
+            if($temp['url'] == $url){
+                $info = $temp;
+            }
+        }*/
+
+        return view('pages.artes.piezas_detalle', ["pieza" => $pieza, 'galerias' => $galeria, 'contenido' => $pieza_contenido]);
+    }
+    public function artes_giras(Optimus $optimus){
+       /* $path = resource_path('js/json/artes/giras.json');
+        $content = json_decode(file_get_contents($path), true);*/
+        $giras = Gira::where('status', 1)->paginate(9);
+        foreach ($giras as $p){
+            $p -> id = $optimus->encode($p-> id);
+            $p -> url_amigable = Str::slug($p-> titulo);
+        }
+        return view('pages.artes.giras', ["giras" => $giras]);
+    }
+    public function artes_giras_detalle($id, Optimus $optimus){
+        $id = $optimus -> decode($id);
+        $gira = Gira::find($id);
+        $galeria = Galeria::where('rel_id', $id) -> where('tipo',3)->get();
+       /* $path = resource_path('js/json/artes/giras.json');
+        $content = json_decode(file_get_contents($path), true);
+
+        $info = '';
+        foreach ($content as $num => $temp) {
+            if($temp['url'] == $url){
+                $info = $temp;
+            }
+        }*/
+
+        return view('pages.artes.giras_detalle', ["gira" => $gira, 'galerias' => $galeria]);
+    }
+    public function cine_documentales(Optimus $optimus){
+        /*$path = resource_path('js/json/cine/documentales.json');
+        $content = json_decode(file_get_contents($path), true);*/
+
+        $documental = Documental::where('status', 1)->paginate(9);
+        foreach ($documental as $p){
+            $p -> id = $optimus->encode($p-> id);
+            $p -> url_amigable = Str::slug($p-> titulo);
+        }
+        return view('pages.cine.documentales', ["documentales" => $documental]);
+    }
+    public function cine_documentales_detalle($id, Optimus $optimus){
+        /*$path = resource_path('js/json/cine/documentales.json');
+        $content = json_decode(file_get_contents($path), true);
+
+        $info = '';
+        foreach ($content as $num => $temp) {
+            if($temp['url'] == $url){
+                $info = $temp;
+            }
+        }*/
+        $id = $optimus->decode($id);
+        $documental = Documental::find($id);
+        $galeria = Galeria::where('rel_id', $id) -> where('tipo',4)->get();
+        return view('pages.cine.documentales_detalle', ["documental" => $documental, 'galerias' => $galeria]);
+    }
+    public function cine_cineclub(){
+        return view('pages.cine.cineclub');
+    }
+    public function blog(Optimus $optimus){
+        /*$path = resource_path('js/json/blog/blog.json');
+        $content = json_decode(file_get_contents($path), true);*/
+
+        $noticia = Noticia::where('status', 1)->paginate(9);
+        foreach ($noticia as $p){
+            $p -> id = $optimus->encode($p-> id);
+            $p -> url_amigable = Str::slug($p-> titulo);
+            $p -> s_desc = Str::limit(strip_tags($p -> descripcion), 150, '...');
+            $p -> f_format = OrdenController::formatedDate($p->created_at);
+        }
+
+        return view('pages.blog.blog', ["notas" => $noticia]);
+    }
+    public function blog_detalle($id, Optimus $optimus){
+        /*$path = resource_path('js/json/blog/blog.json');
+        $content = json_decode(file_get_contents($path), true);
+
+        $info = '';
+        foreach ($content as $num => $temp) {
+            if($temp['url'] == $url){
+                $info = $temp;
+            }
+        }*/
+
+        $id = $optimus->decode($id);
+        $noticia = Noticia::find($id);
+
+        $similares = Noticia::where('status', 1)->where('id', '!=', $id)->orderBy('id', 'desc')->limit(3)->get();
+        foreach ($similares as $n){
+            $n -> id = $optimus -> encode($n -> id);
+            $n -> url_amigable = Str::slug($n -> titulo);
+            $n -> s_desc = Str::limit(strip_tags($n -> descripcion), 150, '...');
+            $n -> f_format = OrdenController::formatedDate($n->created_at);
+        }
+
+        return view('pages.blog.blog_detalle', ["nota" => $noticia, "similares" => $similares]);
+    }
+    public function contacto(){
+        return view('pages.contacto');
+    }
+    public function concursos(Optimus $optimus){
+        $concursos = Concurso::where('status',1)->get();
+        foreach ($concursos  as $concurso){
+            $concurso -> id = $optimus -> encode($concurso -> id);
+            $concurso -> url_amigable = Str::slug($concurso-> titulo);
+            $concurso -> fecha = OrdenController::formatedDate($concurso -> fecha);
+            $concurso -> descripcion = strip_tags($concurso -> descripcion);
+        }
+        return view('pages.concursos.concurso', ['concursos' => $concursos]);
+    }
+    public function concursos_detalle($id, Optimus $optimus){
+        $id = $optimus -> decode($id);
+        $concurso = Concurso::find($id);
+        $video_type = self::videoType($concurso -> link);
+        $concurso -> embed = self::embedVideo($concurso -> link, $video_type);
+        $galerias = Galeria::where('rel_id', $id)->where('tipo',5)->get();
+
+        return view('pages.concursos.consurso_detalle', ['concurso' => $concurso, 'galerias' => $galerias]);
+    }
+    public function eventos(Optimus $optimus){
+        $now    = Date::parse('today') -> format('Y-m-d');
+        $future = Date::parse("+7 days") -> format('Y-m-d');
 
         $existDestacados = Evento::select('id') -> where([
             ['status', '=', 1],
@@ -85,12 +301,10 @@ class FrontController extends Controller
             ['evc.status', '=', 1],
             ['evh.cupo', '>', 0],
         ])
-        -> whereRaw("evh.fecha >= CAST('".Date::parse('today') -> format('Y-m-d')."' AS DATE)")
+        -> whereRaw("evh.fecha >= CAST('".$now."' AS DATE)")
         -> orderBy('evh.fecha', 'ASC')
         -> groupBy('ev.id')
         -> paginate(12);
-        // -> toSql();
-        // dd($eventos);
 
 
         foreach ($eventos as $pr){
@@ -108,18 +322,7 @@ class FrontController extends Controller
         -> groupBy('evc.id')
         -> orderBy('evc.orden', 'ASC') -> get();
 
-        if($request -> dates == 0) {
-            $wheRaw = "evh.fecha >= CAST('".$now."' AS DATE) AND evh.fecha <= CAST('".$future."' AS DATE) ";
-        } else {
-            $wheRaw = "evh.fecha >= CAST('".$now -> format('Y-m-d')."' AS DATE) AND evh.fecha <= CAST('".$future -> format('Y-m-d')."' AS DATE) ";
-        }
-
-        if(isset($request -> categoria)) {
-            $cat = ['categoria_id', '=', $request -> categoria];
-        }
-        
-
-        $params =  DB::table('evento as ev')
+        $params = Evento::from('evento as ev')
         -> select(
             'ev.*',
             'evh.fecha as fechaEvento',
@@ -129,12 +332,11 @@ class FrontController extends Controller
         )
         -> leftJoin('evento_horarios as evh', 'ev.id', '=', 'evh.evento_id')
         -> leftJoin('evento_categorias as evc', 'ev.categoria_id', '=', 'evc.id')
-        -> whereRaw($wheRaw)
+        -> whereRaw("evh.fecha >= CAST('".$now."' AS DATE) AND evh.fecha <= CAST('".$future."' AS DATE) ")
         -> where([
             ['ev.status', '=', 1],
             ['evc.status', '=', 1],
             ['evh.cupo', '>', 0],
-            $cat
         ])
         -> orderBy('evh.hora', 'ASC')
         -> get();
@@ -144,29 +346,19 @@ class FrontController extends Controller
             $pr -> url_amigable = Str::slug($pr -> titulo);
         }
         //dd(DB::getQueryLog());
-        if($request -> dates == 0) {
-            $fechas = [Date::parse('today')->format('d'),Date::parse("+6 days")->format('d')];
-            $mes    = Date::parse("+6 days")->format('F');
-        } else {
-            $fechas = [$now -> format('d'), $future -> subDay() -> format('d')];
-            $mes    =  Date::parse('+'.(7*($request -> dates+1)).' days')->format('F');
-        }
-        
-        if($request -> dates == 0) {
-            $calendario =[
-                [Date::now()->format('D'),Date::now()->format('d')],
-                [Date::parse('+1 day')->format('D'),Date::parse('+1 day')->format('d')],
-                [Date::parse('+2 day')->format('D'),Date::parse('+2 day')->format('d')],
-                [Date::parse('+3 day')->format('D'),Date::parse('+3 day')->format('d')],
-                [Date::parse('+4 day')->format('D'),Date::parse('+4 day')->format('d')],
-                [Date::parse('+5 day')->format('D'),Date::parse('+5 day')->format('d')],
-                [Date::parse('+6 day')->format('D'),Date::parse('+6 day')->format('d')],
-            ];
-        } else {
-            for($date = $now; $date->lte($future); $date->addDay()) {
-                $calendario[] = [$date->format('D'),$date->format('d')];
-            }
-        }
+        $fechas = [Date::parse('today')->format('d'),Date::parse("+6 days")->format('d')];
+        $mes = Date::parse("+6 days")->format('F');
+       
+
+        $calendario =[
+            [Date::now()->format('D'),Date::now()->format('d')],
+            [Date::parse('+1 day')->format('D'),Date::parse('+1 day')->format('d')],
+            [Date::parse('+2 day')->format('D'),Date::parse('+2 day')->format('d')],
+            [Date::parse('+3 day')->format('D'),Date::parse('+3 day')->format('d')],
+            [Date::parse('+4 day')->format('D'),Date::parse('+4 day')->format('d')],
+            [Date::parse('+5 day')->format('D'),Date::parse('+5 day')->format('d')],
+            [Date::parse('+6 day')->format('D'),Date::parse('+6 day')->format('d')],
+        ];
 
         return view('pages.eventos', [
             'destacados' => $destacados,
