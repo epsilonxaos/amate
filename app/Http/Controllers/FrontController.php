@@ -114,10 +114,19 @@ class FrontController extends Controller
             $wheRaw = "evh.fecha >= CAST('".$now -> format('Y-m-d')."' AS DATE) AND evh.fecha <= CAST('".$future -> format('Y-m-d')."' AS DATE) ";
         }
 
-        $cat = [];
+        $cat = [
+            ['ev.status', '=', 1],
+            ['evc.status', '=', 1],
+            ['evh.cupo', '>', 0]
+        ];
 
         if(isset($request -> categoria)) {
-            $cat = ['categoria_id', '=', $request -> categoria];
+            $cat = [
+                ['ev.status', '=', 1],
+                ['evc.status', '=', 1],
+                ['evh.cupo', '>', 0],
+                ['categoria_id', '=', $request -> categoria]
+            ];
         } 
         
 
@@ -132,12 +141,7 @@ class FrontController extends Controller
         -> leftJoin('evento_horarios as evh', 'ev.id', '=', 'evh.evento_id')
         -> leftJoin('evento_categorias as evc', 'ev.categoria_id', '=', 'evc.id')
         -> whereRaw($wheRaw)
-        -> where([
-            ['ev.status', '=', 1],
-            ['evc.status', '=', 1],
-            ['evh.cupo', '>', 0],
-            $cat
-        ])
+        -> where($cat)
         -> orderBy('evh.hora', 'ASC')
         -> get();
 
