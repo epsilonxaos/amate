@@ -14,7 +14,7 @@
     <div class="eventos-detalle pt-5">
         <div class="container">
 
-            <h2 class="titulo mb-3">Aviso de privacidad</h2>
+            <h2 class="titulo mb-3">{{(App::getLocale() == 'en') ? 'Privacy Policy' : 'Aviso de privacidad'}}</h2>
     
             <p>Amate Experiences, con domicilio en Calle 1H x 8 y 12 #142, México Nte., 98127, Mérida, Yucatán, México y portal de internet casaamate.com, es el responsable del uso y protección de sus datos personales, y al respecto le informamos lo siguiente:</p>
     

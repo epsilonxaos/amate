@@ -29,6 +29,10 @@
             <li class="text-center">
                 <a class="btn btn-white" href="#mdSuscripcion" data-toggle="modal">@lang('menu.btn_reservacion')</a>
             </li>
+            <li class="text-center pt-3">
+                <a href="{{ route('change_lang', ['lang' => 'en']) }}" class="text-white mb-0" style="{{(App::getLocale() == 'en') ? 'color: #AC7A43 !important' : ''}}">EN</a> /
+                <a href="{{ route('change_lang', ['lang' => 'es']) }}" class="text-white mb-0" style="{{(App::getLocale() == 'es') ? 'color: #AC7A43 !important' : ''}}">ES</a>
+            </li>
             {{-- <li class="text-uppercase text-center"><a href="">Inicio</a></li>
             <li class="text-uppercase text-center"><a href="">Torneos</a></li>
             <li class="text-uppercase {{(request() -> is('eventos*')) ? 'active' : ''}} text-center"><a href="{{route('front.eventos')}}">Eventos</a></li> --}}
@@ -69,6 +73,10 @@
                     <li class="text-center"><a href="">@lang('menu.arma_exp')</a></li>
                     <li class="text-center"><a href="{{route('front.nosotros')}}">@lang('menu.nosotros')</a></li>
                     <li class="text-center"><a href="">@lang('menu.contacto')</a></li>
+                    <li class="text-center">
+                        <a href="{{ route('change_lang', ['lang' => 'en']) }}" class="text-white mb-0" style="{{(App::getLocale() == 'en') ? 'color: #AC7A43 !important' : ''}}">EN</a> /
+                        <a href="{{ route('change_lang', ['lang' => 'es']) }}" class="text-white mb-0" style="{{(App::getLocale() == 'es') ? 'color: #AC7A43 !important' : ''}}">ES</a>
+                    </li>
                     
                     {{-- <li class=""><a href="#mdSuscripcion" data-toggle="modal">Consultar reservación</a></li> --}}
                     {{--<li class="text-uppercase text-center {{(request() -> is('/')) ? 'active' : ''}}"><a href="{{route('front.inicio')}}">Inicio</a></li>
@@ -125,8 +133,6 @@
                 </ul>
             </div>
             <div class="col-md-2 text-right">
-                <a href="{{ route('change_lang', ['lang' => 'en']) }}" class="{{(App::getLocale() == 'en') ? 'text-white' : ''}} mb-0">EN</a>
-                <a href="{{ route('change_lang', ['lang' => 'es']) }}" class="{{(App::getLocale() == 'es') ? 'text-white' : ''}} mb-0">ES</a>
                 <a style="width: max-content" class="btn btn-white btn-sm" href="#mdSuscripcion" data-toggle="modal">@lang('menu.btn_reservacion')</a>
                 {{-- <div style="max-width: min-content" class="ml-auto mr-0">
                     <a href="#" class="btn btn-gold w-100 btn-sm mb-2">Reservar</a>
