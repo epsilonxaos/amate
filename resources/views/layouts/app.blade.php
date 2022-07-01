@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{App::getLocale()}}">
 <head>
     @include('include.metas')
     <link rel="stylesheet" href="{{asset('plugins/bootstrap/bootstrap.min.css')}}">

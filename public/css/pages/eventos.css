@@ -41,8 +41,15 @@ Fuentes tipograficas
   min-height: 350px;
 }
 
-.calendar-week-pilar:empty::before {
+.calendar-week-pilar:empty:lang(en)::before {
+  content: "No activities";
+}
+
+.calendar-week-pilar:empty:lang(es)::before {
   content: "Sin actividades";
+}
+
+.calendar-week-pilar:empty::before {
   color: #ffffff;
   display: block;
   text-align: center;
