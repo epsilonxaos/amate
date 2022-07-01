@@ -124,7 +124,7 @@
                         <input type="text" class="form-control in" placeholder="En que hotel estas hospedado?" name="p_hospedado" id="p_hospedado">
                     </div>
                     <div class="col-12 form-group">
-                        <label for="" class="grey">Favor de escribir el número de talla de las aletas / accesorios de todos los participantes al evento</label>
+                        <label for="" class="grey">Favor de escribir el número de talla de las aletas / accesorios de todos los participantes al evento <img src="{{asset('images/interrogation-mark.png')}}" alt="Guia de ayuda" title="Guia de ayuda" data-toggle="modal" data-target="#mdSize" class="ml-3" style="cursor: help"></label>
                         <textarea class="form-control tx" placeholder="Ejemplo: Talla Mediana o 32..." name="p_talla" id="p_talla" cols="30" rows="5"></textarea>
                     </div>
                     <div class="col-12 form-group">
@@ -193,6 +193,8 @@
             </form>
         </div>
     </section>
+
+    @include('modals.mdInfoSize')
 
 
     <form id="paypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" style="display:none">

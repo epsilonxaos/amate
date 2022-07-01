@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'FrontController@eventos') -> name('eventos');
 Route::name('front.') -> group(function(){
+    Route::get('/aviso', 'FrontController@aviso') -> name('aviso');
+    Route::get('/reservaciones', 'FrontController@reservaciones') -> name('reservaciones');
+    Route::get('/faqs', 'FrontController@faqs') -> name('faqs');
+
+
+
     Route::get('/eventos', 'FrontController@eventos') -> name('eventos');
     Route::get('/pago', 'FrontController@pago') -> name('pagos');
     Route::get('/eventos/detalle/{id}/{titulo}', 'FrontController@eventos_detalle') -> name('eventos.detalle');

@@ -773,4 +773,17 @@ class FrontController extends Controller
         return $string;
     }
 
+    public function aviso()
+    {
+        return view('pages.legales.aviso');
+    }
+    public function reservaciones()
+    {
+        return view('pages.legales.reservaciones_cancelaciones');
+    }
+    public function faqs()
+    {
+        return view('pages.legales.faqs');
+    }
+
 }
