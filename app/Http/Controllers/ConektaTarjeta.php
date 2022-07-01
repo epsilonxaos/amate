@@ -161,8 +161,8 @@ class ConektaTarjeta extends Controller
                             ];
 
                             $orden -> json_informacion = json_decode($orden ->informacion);
-                            //Mail::to($orden->correo)->send(new PagoCompletado($data));
-                           // Mail::to('aguila-josue@hotmail.com')->send(new PagoCompletadoStaff($data, true));
+                            Mail::to($orden->correo)->send(new PagoCompletado($data));
+                            Mail::to('jesusgleztr94@gmail.com')->send(new PagoCompletadoStaff($data, true));
                             $info['id'] = $optimus ->encode(Session::get('orden_id'));
                             return redirect()->route('front.eventos.pago.completado', $info);
                         break;

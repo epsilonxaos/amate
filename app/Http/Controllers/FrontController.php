@@ -3,37 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Asiento;
-use App\Concurso;
 use App\Cupon;
-use App\Documental;
 use App\Evento;
 use App\EventoCategoria;
 use App\EventoHorario;
 use App\EventoPrecio;
 use App\Galeria;
-use App\Gira;
-use App\Mail\AliadoMail;
-use App\Mail\ContactoMail;
 use App\Mail\PagoCompletado;
 use App\Mail\PagoCompletadoStaff;
-use App\Mail\PostulanteMail;
-use App\Noticia;
 use App\Orden;
 use App\OrdenPerAsiento;
-use App\Pieza;
-use App\PiezaContenido;
-use App\Taller;
 use Carbon\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Jenssegers\Optimus\Optimus;
-use phpDocumentor\Reflection\Types\Self_;
 
 class FrontController extends Controller
 {
@@ -625,7 +613,7 @@ class FrontController extends Controller
                 'total' => $subtotal - $orden ->descuento
             ];
             Mail::to($orden->correo)->send(new PagoCompletado($data));
-            Mail::to('aguila-josue@hotmail.com')->send(new PagoCompletadoStaff($data, true));
+            Mail::to('jesusgleztr94@gmail.com')->send(new PagoCompletadoStaff($data, true));
             $data['id'] = $optimus -> encode(Session::get('orden_id'));
             Session::forget('orden_id');
             return redirect()->route('front.eventos.pago.completado', $data);
@@ -682,7 +670,7 @@ class FrontController extends Controller
                         'total' => $subtotal - $orden ->descuento
                     ];
                     Mail::to($orden->correo)->send(new PagoCompletado($data));
-                    Mail::to('aguila-josue@hotmail.com')->send(new PagoCompletadoStaff($data, true));
+                    Mail::to('jesusgleztr94@gmail.com')->send(new PagoCompletadoStaff($data, true));
                     return response()->json("Orden actualizada.", 200);
                     break;
                 case 'Denied':
@@ -791,6 +779,37 @@ class FrontController extends Controller
     public function faqs()
     {
         return view('pages.legales.faqs');
+    }
+
+    public function test()
+    {
+        $orden = Orden::find(31);
+        $orden -> json_informacion = json_decode($orden ->informacion);
+        $orden -> pago_metodo = 'free';
+        $orden -> status = 2;
+        $orden -> pago_hora = date('Y-m-d H:i:s');
+
+        $lugares = EventoHorario::find($orden -> horario_id);
+        $lugares -> cupo = $lugares -> cupo - $orden -> no_boletos;
+
+        if($orden -> descuento > 0){
+            $cupon = Cupon::where('titulo', $orden -> cupon)->first();
+            $cupon -> usos = $cupon -> usos + 1;
+        }
+        $subtotal = $orden -> precio_boleto * $orden -> no_boletos;
+        // $subtotal =  OrdenPerAsiento::where('orden_id', $orden->id)->sum('precio');
+        $asientos = OrdenPerAsiento::select(['asiento.num', 'asiento.letra'])->join('asiento', 'asiento.id', '=', 'orden_per_asiento.asiento_id')->where('orden_per_asiento.orden_id', $orden->id)->get()->toArray();
+        $data = [
+            'orden' => $orden,
+            'evento' => Evento::find($orden -> evento_id),
+            'asientos' => FrontController::asientosToString($asientos),
+            'no_asientos' => $orden -> no_boletos,
+            'fecha' => FrontController::ParseDate($orden -> dia),
+            'subtotal' => $subtotal,
+            'descuento' => $orden -> descuento,
+            'total' => $subtotal - $orden ->descuento
+        ];
+        Mail::to($orden->correo)->send(new PagoCompletado($data));
     }
 
 }

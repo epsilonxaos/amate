@@ -160,7 +160,7 @@ class ConektaOxxo extends Controller
                         'total' => $subtotal - $orden ->descuento
                     ];
                     Mail::to($orden->correo)->send(new PagoPendiente($data));
-                    Mail::to('aguila-josue@hotmail.com')->send(new PagoPendienteStaff($data));
+                    Mail::to('jesusgleztr94@gmail.com')->send(new PagoPendienteStaff($data));
                     //Session::forget('orden_id');
                     //return view('pages.eventos.ticket_oxxo', ['orden' => $orden]);
                     $info['id'] = $optimus ->encode(Session::get('orden_id'));

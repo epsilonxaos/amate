@@ -804,7 +804,7 @@ class FrontController extends Controller
                 'total' => $subtotal - $orden ->descuento
             ];
             Mail::to($orden->correo)->send(new PagoCompletado($data));
-            Mail::to('aguila-josue@hotmail.com')->send(new PagoCompletadoStaff($data, true));
+            Mail::to('jesusgleztr94@gmail.com')->send(new PagoCompletadoStaff($data, true));
             $data['id'] = $optimus -> encode(Session::get('orden_id'));
             Session::forget('orden_id');
             return redirect()->route('front.eventos.pago.completado', $data);
@@ -861,7 +861,7 @@ class FrontController extends Controller
                         'total' => $subtotal - $orden ->descuento
                     ];
                     Mail::to($orden->correo)->send(new PagoCompletado($data));
-                    Mail::to('aguila-josue@hotmail.com')->send(new PagoCompletadoStaff($data, true));
+                    Mail::to('jesusgleztr94@gmail.com')->send(new PagoCompletadoStaff($data, true));
                     return response()->json("Orden actualizada.", 200);
                     break;
                 case 'Denied':
