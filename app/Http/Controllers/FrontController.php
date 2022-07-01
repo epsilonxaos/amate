@@ -221,7 +221,8 @@ class FrontController extends Controller
             'url_amigable' => $url_amigable,
             'evento'       => $evento,
             'galeria'      => $galeria,
-            'horarios'     => $horarios
+            'horarios'     => $horarios,
+            'precios'      => EventoPrecio::where([['evento_id', '=' , $id], ['tipo', '=' , 1]])
         ]);
     }
 

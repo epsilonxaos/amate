@@ -67,8 +67,6 @@
                                         </select>
                                     </div>
                                 </div>
-
-                                <button type="submit" class="btn btn-gold">¡Quiero ir!</button>
                             @else
                                 @if (isset($horarios))
                                     <input type="hidden" name="dia" value="{{$horarios[0] -> fecha}}">
@@ -78,8 +76,11 @@
                                     <p class="date mb-0">{{App\Helpers::dateSpanishComplete($horarios[0] -> fecha)}}</p>
                                     <p class="date">{{App\Helpers::dateTo12Hrs($horarios[0] -> hora)}}</p>
 
-                                    <button type="submit" class="btn btn-gold">¡Quiero ir!</button>
                                 @endif
+                            @endif
+                            
+                            @if (count($precios) > 0)
+                                <button type="submit" class="btn btn-gold">¡Quiero ir!</button>
                             @endif
                         </form>
 
