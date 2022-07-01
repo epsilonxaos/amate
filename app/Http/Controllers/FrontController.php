@@ -52,12 +52,18 @@ class FrontController extends Controller
         ]) -> count();
         
         if($existDestacados > 0) {
-            $destacados = Evento::select('titulo', 'portada', 'id') -> where([
-                ['status', '=', 1],
-                ['destacado', '=', 1]
-            ]) -> get();
+            $destacados = Evento::select('evento.titulo', 'evento.portada', 'evento.id') -> where([
+                ['evento.status', '=', 1],
+                ['evento.destacado', '=', 1]
+            ])
+            -> leftJoin('evento_horarios', 'evento.id', '=', 'evento_horarios.evento_id')
+            -> whereRaw("evento_horarios.fecha >= CAST('".Date::parse('today') -> format('Y-m-d')."' AS DATE)") 
+            -> get();
         } else {
-            $destacados = Evento::select('titulo', 'portada', 'id') -> where('status', 1) -> inRandomOrder() -> limit(4) -> get();
+            $destacados = Evento::select('evento.titulo', 'evento.portada', 'evento.id')
+            -> where('evento.status', 1)
+            -> leftJoin('evento_horarios', 'evento.id', '=', 'evento_horarios.evento_id')
+            -> whereRaw("evento_horarios.fecha >= CAST('".Date::parse('today') -> format('Y-m-d')."' AS DATE)")  -> inRandomOrder() -> limit(4) -> get();
         }
 
         foreach ($destacados as $pr){

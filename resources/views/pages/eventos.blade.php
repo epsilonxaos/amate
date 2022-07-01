@@ -54,8 +54,10 @@
                                         <div class="footer text-left p-3">
                                             <h5>{{$evento -> titulo}}</h5>
                                             {{-- <h6 class="mb-1">Fecha: {{\App\Helpers::dateSpanishComplete($evento -> fechaEvento)}}</h6> --}}
-                                            <small>Precio</small>
-                                            <p class="font-weight-bold text-black mb-0">${{number_format($evento -> precioEvento)}} MXN por persona</p>
+                                            @if (isset($evento -> precioEvento) && ($evento -> precioEvento > 0))
+                                                <small>Precio</small>
+                                                <p class="font-weight-bold text-black mb-0">${{number_format($evento -> precioEvento)}} MXN por persona</p>
+                                            @endif
                                         </div>
                                     </div>
                                 </a>
