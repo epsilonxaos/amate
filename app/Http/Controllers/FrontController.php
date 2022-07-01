@@ -222,7 +222,7 @@ class FrontController extends Controller
             'evento'       => $evento,
             'galeria'      => $galeria,
             'horarios'     => $horarios,
-            'precios'      => EventoPrecio::where([['evento_id', '=' , $id], ['tipo', '=' , 1]])
+            'precios'      => EventoPrecio::where([['evento_id', '=' , $id], ['tipo', '=' , 1]]) -> get()
         ]);
     }
 
