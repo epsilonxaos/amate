@@ -20,7 +20,7 @@
             <li class="text-center"><a href="{{route('front.eventos')}}?calendario=1">Calendario</a></li>
             <li class="text-center"><a href="">Galería</a></li>
             <li class="text-center"><a href="">Arma tu experiencia</a></li>
-            <li class="text-center"><a href="">About Us</a></li>
+            <li class="text-center"><a href="{{route('front.nosotros')}}">About Us</a></li>
             <li class="text-center"><a href="">Contacto</a></li>
             {{-- <li class="text-center"><a href="">Idioma</a></li> --}}
             {{-- <li class="text-center">
@@ -67,7 +67,7 @@
                     <li class="text-center"><a href="{{route('front.eventos')}}?calendario=1">Calendario</a></li>
                     <li class="text-center"><a href="">Galería</a></li>
                     <li class="text-center"><a href="">Arma tu experiencia</a></li>
-                    <li class="text-center"><a href="">About Us</a></li>
+                    <li class="text-center"><a href="{{route('front.nosotros')}}">About Us</a></li>
                     <li class="text-center"><a href="">Contacto</a></li>
                     
                     {{-- <li class=""><a href="#mdSuscripcion" data-toggle="modal">Consultar reservación</a></li> --}}
