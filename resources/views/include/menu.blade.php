@@ -16,18 +16,18 @@
 
     <div class="sidebar-left">
         <ul class="menu-list">
-            <li class="{{(request() -> is('eventos*')) ? 'active' : ''}} text-center"><a href="{{route('front.eventos')}}">Experiencias</a></li>
-            <li class="text-center"><a href="{{route('front.eventos')}}?calendario=1">Calendario</a></li>
-            <li class="text-center"><a href="">Galería</a></li>
-            <li class="text-center"><a href="">Arma tu experiencia</a></li>
-            <li class="text-center"><a href="{{route('front.nosotros')}}">About Us</a></li>
-            <li class="text-center"><a href="">Contacto</a></li>
+            <li class="{{(request() -> is('eventos*')) ? 'active' : ''}} text-center"><a href="{{route('front.eventos')}}">@lang('menu.experiencias')</a></li>
+            <li class="text-center"><a href="{{route('front.eventos')}}?calendario=1">@lang('menu.calendario')</a></li>
+            <li class="text-center"><a href="">@lang('menu.galeria')</a></li>
+            <li class="text-center"><a href="">@lang('menu.arma_exp')</a></li>
+            <li class="text-center"><a href="{{route('front.nosotros')}}">@lang('menu.nosotros')</a></li>
+            <li class="text-center"><a href="">@lang('menu.contacto')</a></li>
             {{-- <li class="text-center"><a href="">Idioma</a></li> --}}
             {{-- <li class="text-center">
                 <a href="#" class="btn btn-gold" style="min-width: 197px">Reservar</a>
             </li> --}}
             <li class="text-center">
-                <a class="btn btn-white" href="#mdSuscripcion" data-toggle="modal">Consultar reservación</a>
+                <a class="btn btn-white" href="#mdSuscripcion" data-toggle="modal">@lang('menu.btn_reservacion')</a>
             </li>
             {{-- <li class="text-uppercase text-center"><a href="">Inicio</a></li>
             <li class="text-uppercase text-center"><a href="">Torneos</a></li>
@@ -63,12 +63,12 @@
             </div>
             <div class="col-md-8">
                 <ul class="menu">
-                    <li class="{{(request() -> is('eventos*')) ? 'active' : ''}} text-center"><a href="{{route('front.eventos')}}">Experiencias</a></li>
-                    <li class="text-center"><a href="{{route('front.eventos')}}?calendario=1">Calendario</a></li>
-                    <li class="text-center"><a href="">Galería</a></li>
-                    <li class="text-center"><a href="">Arma tu experiencia</a></li>
-                    <li class="text-center"><a href="{{route('front.nosotros')}}">About Us</a></li>
-                    <li class="text-center"><a href="">Contacto</a></li>
+                    <li class="{{(request() -> is('eventos*')) ? 'active' : ''}} text-center"><a href="{{route('front.eventos')}}">@lang('menu.experiencias')</a></li>
+                    <li class="text-center"><a href="{{route('front.eventos')}}?calendario=1">@lang('menu.calendario')</a></li>
+                    <li class="text-center"><a href="">@lang('menu.galeria')</a></li>
+                    <li class="text-center"><a href="">@lang('menu.arma_exp')</a></li>
+                    <li class="text-center"><a href="{{route('front.nosotros')}}">@lang('menu.nosotros')</a></li>
+                    <li class="text-center"><a href="">@lang('menu.contacto')</a></li>
                     
                     {{-- <li class=""><a href="#mdSuscripcion" data-toggle="modal">Consultar reservación</a></li> --}}
                     {{--<li class="text-uppercase text-center {{(request() -> is('/')) ? 'active' : ''}}"><a href="{{route('front.inicio')}}">Inicio</a></li>
@@ -125,7 +125,9 @@
                 </ul>
             </div>
             <div class="col-md-2 text-right">
-                <a style="width: max-content" class="btn btn-white btn-sm" href="#mdSuscripcion" data-toggle="modal">Consultar reservación</a>
+                <a href="{{ route('change_lang', ['lang' => 'en']) }}" class="{{(App::getLocale() == 'en') ? 'text-white' : ''}} mb-0">EN</a>
+                <a href="{{ route('change_lang', ['lang' => 'es']) }}" class="{{(App::getLocale() == 'es') ? 'text-white' : ''}} mb-0">ES</a>
+                <a style="width: max-content" class="btn btn-white btn-sm" href="#mdSuscripcion" data-toggle="modal">@lang('menu.btn_reservacion')</a>
                 {{-- <div style="max-width: min-content" class="ml-auto mr-0">
                     <a href="#" class="btn btn-gold w-100 btn-sm mb-2">Reservar</a>
                 </div> --}}

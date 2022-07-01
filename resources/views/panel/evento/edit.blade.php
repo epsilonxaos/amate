@@ -78,8 +78,14 @@
 
                                                     <div class="col-lg-12">
                                                         <div class="form-group @error('titulo') invalid @enderror">
-                                                            <label class="form-control-label" for="title">Título</label>
-                                                            <input type="text" name="titulo" id="title" class="form-control" autocomplete="off" value="{{ old('titulo') ? old('titulo') : $evento -> titulo  }}">
+                                                            <label class="form-control-label" for="title">Título [es] <span class="text-danger">*</span></label>
+                                                            <input type="text" name="titulo[es]" required id="title" class="form-control" autocomplete="off" value="{{ old('titulo[es]') ? old('titulo[es]') : $evento -> titulo  }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group @error('titulo') invalid @enderror">
+                                                            <label class="form-control-label" for="title">Título [en] <span class="text-danger">*</span></label>
+                                                            <input type="text" name="titulo[en]" required id="title" class="form-control" autocomplete="off" value="{{ old('titulo[en]') ? old('titulo[en]') : $evento -> titulo_en  }}">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
@@ -139,14 +145,26 @@
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="form-group @error('descripcion') invalid @enderror">
-                                                            <label class="form-control-label" for="descripcion">Descripción</label>
-                                                            <textarea name="descripcion" rel="summer" id="descripcion" class="form-control">{{ old('descripcion') ? old('descripcion') : $evento -> descripcion }}</textarea>
+                                                            <label class="form-control-label" for="descripcion">Descripción corta [es] <span class="text-danger">*</span></label>
+                                                            <textarea name="descripcion[es]" rel="summer" id="descripcion_es" required class="form-control">{{ old('descripcion[es]') ? old('descripcion[es]') : $evento -> descripcion }}</textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="form-group @error('descripcion_2') invalid @enderror">
-                                                            <label class="form-control-label" for="descripcion_2">Descripción 2</label>
-                                                            <textarea name="descripcion_2" rel="summer" id="descripcion_2" class="form-control">{{ old('descripcion_2') ? old('descripcion_2') : $evento -> descripcion_2 }}</textarea>
+                                                            <label class="form-control-label" for="descripcion_2">Contenido [es]</label>
+                                                            <textarea name="descripcion_2[es]" rel="summer" id="descripcion_2_es" class="form-control">{{ old('descripcion_2[es]') ? old('descripcion_2[es]') : $evento -> descripcion_2 }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group @error('descripcion') invalid @enderror">
+                                                            <label class="form-control-label" for="descripcion">Descripción corta [en] <span class="text-danger">*</span></label>
+                                                            <textarea name="descripcion[en]" rel="summer" id="descripcion" required class="form-control">{{ old('descripcion[en]') ? old('descripcion[en]') : $evento -> descripcion_en }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group @error('descripcion_2') invalid @enderror">
+                                                            <label class="form-control-label" for="descripcion_2">Contenido [en]</label>
+                                                            <textarea name="descripcion_2[en]" rel="summer" id="descripcion_2" class="form-control">{{ old('descripcion_2[en]') ? old('descripcion_2[en]') : $evento -> descripcion2_en }}</textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -214,8 +232,12 @@
                                                                             </div>
                                                                             <div class="card-body" style="background-color: #e9f5fd">
                                                                                 <div class="form-group">
-                                                                                    <label class="form-control-label" for="precio-concepto-upd-{{$precio -> id}}">Concepto</label>
-                                                                                    <input type="text" name="precio-concepto-upd[{{$precio -> id}}]" id="precio-concepto-upd-{{$precio -> id}}" class="form-control" autocomplete="off" value="{{$precio -> concepto}}">
+                                                                                    <label class="form-control-label" for="precio-concepto-upd-{{$precio -> id}}">Concepto [es] <span class="text-danger">*</span></label>
+                                                                                    <input type="text" name="precio-concepto-upd[{{$precio -> id}}][es]" id="precio-concepto-upd-{{$precio -> id}}-es" class="form-control" required autocomplete="off" value="{{$precio -> concepto}}">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="form-control-label" for="precio-concepto-upd-{{$precio -> id}}">Concepto [en] <span class="text-danger">*</span></label>
+                                                                                    <input type="text" name="precio-concepto-upd[{{$precio -> id}}][en]" id="precio-concepto-upd-{{$precio -> id}}-en" class="form-control" required autocomplete="off" value="{{$precio -> concepto_en}}">
                                                                                 </div>
 
                                                                                 <div class="form-group">
@@ -387,8 +409,12 @@
                 </div>
                 <div class="card-body" style="background-color: #e9f5fd">
                     <div class="form-group">
-                        <label class="form-control-label" for="precio-concepto-{id}">Concepto</label>
-                        <input type="text" name="precio-concepto[{id}]" id="precio-concepto-{id}" class="form-control" autocomplete="off" value="">
+                        <label class="form-control-label" for="precio-concepto-{id}">Concepto [es] <span class="text-danger">*</span></label>
+                        <input type="text" name="precio-concepto[{id}][es]" id="precio-concepto-{id}-es" class="form-control" autocomplete="off" value="" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="precio-concepto-{id}">Concepto [en] <span class="text-danger">*</span></label>
+                        <input type="text" name="precio-concepto[{id}][en]" id="precio-concepto-{id}-en" class="form-control" autocomplete="off" value="" required>
                     </div>
                     <div class="form-group">
                         <label for="precio-tipo-{id}">Tipo</label>

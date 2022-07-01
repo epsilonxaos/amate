@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Evento extends Model
 {
     protected $table = 'evento';
-    protected $fillable = ['titulo', 'portada', 'descripcion', 'descripcion_2', 'lugar', 'latitud', 'longitud', 'tipo', 'categoria_id'];
+    protected $fillable = ['titulo', 'titulo_en', 'portada', 'descripcion', 'descripcion_en', 'descripcion_2', 'descripcion_2_en', 'lugar', 'latitud', 'longitud', 'tipo', 'categoria_id'];
 
     function horarios(){
         return $this -> hasMany('App\EventoHorario');

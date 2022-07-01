@@ -17,16 +17,16 @@
                 <div class="col-lg-7 col-md-8 col-sm-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title mb-5"><b>{{$evento -> titulo}}</b></h5>
+                            <h5 class="card-title mb-5"><b>{{(App::getLocale() == 'en') ? $evento -> titulo_en : $evento -> titulo}}</b></h5>
                             <p class="card-text">
-                                Día: {{App\Helpers::dateSpanishComplete($orden -> dia)}} <br>
-                                Hora: {{$orden -> hora}} hrs <br>
-                                Ubicacion: {{$evento -> lugar}} <br>
-                                Número de boletos: {{$orden -> no_boletos}}
+                                {{(App::getLocale() == 'en') ? 'Day' : 'Día'}}: {{(App::getLocale() == 'en') ? \App\Helpers::dateComplete($orden -> dia) : \App\Helpers::dateSpanishShort($orden -> dia)}} <br>
+                                {{(App::getLocale() == 'en') ? 'Hour' : 'Hora'}}: {{$orden -> hora}} hrs <br>
+                                {{(App::getLocale() == 'en') ? 'Location' : 'Ubicacion'}}: {{$evento -> lugar}} <br>
+                                {{(App::getLocale() == 'en') ? 'Number of tickets' : 'Número de boletos'}}: {{$orden -> no_boletos}}
                         </div>
                         <div class="card-footer" style="background-color: #153D3C">
                             <p>Subtotal <span class="float-right">${{number_format($subtotal, 2)}} MXN</span></p>
-                            <p>Descuento <span class="float-right">${{number_format($descuento, 2)}}</span></p>
+                            <p>{{(App::getLocale() == 'en') ? 'Discount' : 'Descuento'}} <span class="float-right">${{number_format($descuento, 2)}}</span></p>
                             <p>Total <span class="float-right">${{number_format($total, 2)}} MXN</span></p>
                         </div>
                         <div class="row justify-content-center">
@@ -41,9 +41,9 @@
                         </div>
                     </div>
                     <p class="mt-5 text-center text-dark">
-                        Se ha enviado a tu correo este comprobante <br> <br>
-                        <a class="btn btn-gold rounded-pill px-4" target="_blank" href="{{route('front.boleto.download', ['orden_id'=>$orden -> id])}}">DESCARGAR BOLETOS</a>
-                        <a class="btn btn-info rounded-pill px-4 ml-3" href="{{route('front.eventos')}}">REGRESAR</a>
+                        {{(App::getLocale() == 'en') ? 'This receipt has been sent to your email' : 'Se ha enviado a tu correo este comprobante'}} <br> <br>
+                        <a class="btn btn-gold rounded-pill px-4" target="_blank" href="{{route('front.boleto.download', ['orden_id'=>$orden -> id])}}">{{(App::getLocale() == 'en') ? 'DOWNLOAD' : 'DESCARGAR BOLETOS'}}</a>
+                        <a class="btn btn-info rounded-pill px-4 ml-3" href="{{route('front.eventos')}}">{{(App::getLocale() == 'en') ? 'BACK' : 'REGRESAR'}}</a>
                     </p>
                 </div>
             </div>
@@ -52,5 +52,8 @@
 @endsection
 
 @push('js')
+    <script type="text/javascript">
+        const EVENTO_VIEW_DETAIL = false;
+    </script>
     <script src="{{mix('js/pages/eventos.js')}}"></script>
 @endpush

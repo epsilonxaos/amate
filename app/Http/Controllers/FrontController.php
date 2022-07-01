@@ -19,12 +19,19 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Jenssegers\Optimus\Optimus;
 
 class FrontController extends Controller
 {
+    public function changeLang($lang)
+    {
+        Session::put('lang', $lang);
+        return Redirect::back();
+    }
+
     public function eventos(Optimus $optimus, Request $request){
         if($request -> dates == 0) {
             $now    = Date::parse('today') -> format('Y-m-d');
@@ -40,7 +47,7 @@ class FrontController extends Controller
         ]) -> count();
         
         if($existDestacados > 0) {
-            $destacados = Evento::select('evento.titulo', 'evento.portada', 'evento.id') -> where([
+            $destacados = Evento::select('evento.titulo', 'evento.titulo_en', 'evento.portada', 'evento.id') -> where([
                 ['evento.status', '=', 1],
                 ['evento.destacado', '=', 1]
             ])
@@ -48,7 +55,7 @@ class FrontController extends Controller
             -> whereRaw("evento_horarios.fecha >= CAST('".Date::parse('today') -> format('Y-m-d')."' AS DATE)") 
             -> get();
         } else {
-            $destacados = Evento::select('evento.titulo', 'evento.portada', 'evento.id')
+            $destacados = Evento::select('evento.titulo', 'evento.titulo_en', 'evento.portada', 'evento.id')
             -> where('evento.status', 1)
             -> leftJoin('evento_horarios', 'evento.id', '=', 'evento_horarios.evento_id')
             -> whereRaw("evento_horarios.fecha >= CAST('".Date::parse('today') -> format('Y-m-d')."' AS DATE)")  -> inRandomOrder() -> limit(4) -> get();
@@ -65,7 +72,8 @@ class FrontController extends Controller
             'ev.*', 
             'evh.fecha as fechaEvento',
             'evh.hora as horaEvento',
-            'evc.titulo as categoriaEvento'
+            'evc.titulo as categoriaEvento',
+            'evc.titulo_en as categoriaEventoEn'
         )
         -> selectRaw("(SELECT ((p.precio * p.comision) / 100) + p.precio
             FROM evento_precios p
@@ -130,7 +138,8 @@ class FrontController extends Controller
             'evh.fecha as fechaEvento',
             'evh.hora as horaEvento',
             'evc.id as idCategoriaEvento',
-            'evc.titulo as categoriaEvento'
+            'evc.titulo as categoriaEvento',
+            'evc.titulo_en as categoriaEventoEn'
         )
         -> leftJoin('evento_horarios as evh', 'ev.id', '=', 'evh.evento_id')
         -> leftJoin('evento_categorias as evc', 'ev.categoria_id', '=', 'evc.id')

@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class EventoPrecio extends Model
 {
     protected $table = 'evento_precios';
-    protected $fillable = ['evento_id', 'precio', 'concepto', 'tipo', 'comision'];
+    protected $fillable = ['evento_id', 'precio', 'concepto', 'concepto_en', 'tipo', 'comision'];
 }

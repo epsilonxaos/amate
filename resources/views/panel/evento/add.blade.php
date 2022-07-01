@@ -47,7 +47,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-12 mb-3">
                                                         <div class="custom-file @error('portada') invalid @enderror">
-                                                            <input type="file" name="portada" class="filestyle" data-text="Portada" id="portada" accept="image/x-png,image/gif,image/jpeg">
+                                                            <input required type="file" name="portada" class="filestyle" data-text="Portada" id="portada" accept="image/x-png,image/gif,image/jpeg">
                                                         </div>
                                                     </div>
                                                     {{-- <div class="col-lg-12">
@@ -72,8 +72,14 @@
 
                                                     <div class="col-lg-12">
                                                         <div class="form-group @error('titulo') invalid @enderror">
-                                                            <label class="form-control-label" for="title">Título</label>
-                                                            <input type="text" name="titulo" id="title" class="form-control" autocomplete="off" value="{{ old('titulo') }}">
+                                                            <label class="form-control-label" for="title">Título [es] <span class="text-danger">*</span></label>
+                                                            <input required type="text" name="titulo[es]" id="title" class="form-control" autocomplete="off" value="{{ old('titulo[es]') }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group @error('titulo') invalid @enderror">
+                                                            <label class="form-control-label" for="title">Título [en] <span class="text-danger">*</span></label>
+                                                            <input required type="text" name="titulo[en]" id="title" class="form-control" autocomplete="off" value="{{ old('titulo[en]') }}">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
@@ -124,14 +130,26 @@
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="form-group @error('descripcion') invalid @enderror">
-                                                            <label class="form-control-label" for="descripcion">Descripción corta</label>
-                                                            <textarea name="descripcion" rel="summer" id="descripcion" class="form-control" required>{{ old('descripcion') }}</textarea>
+                                                            <label class="form-control-label" for="descripcion">Descripción corta [es] <span class="text-danger">*</span></label>
+                                                            <textarea required name="descripcion[es]" rel="summer" id="descripcion_es" class="form-control" required>{{ old('descripcion[es]') }}</textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="form-group @error('descripcion_2') invalid @enderror">
-                                                            <label class="form-control-label" for="descripcion_2">Contenido</label>
-                                                            <textarea name="descripcion_2" rel="summer" id="descripcion_2" class="form-control">{{ old('descripcion_2') }}</textarea>
+                                                            <label class="form-control-label" for="descripcion_2">Contenido [es]</label>
+                                                            <textarea name="descripcion_2[es]" rel="summer" id="descripcion_2_es" class="form-control">{{ old('descripcion_2[es]') }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group @error('descripcion') invalid @enderror">
+                                                            <label class="form-control-label" for="descripcion">Descripción corta [en] <span class="text-danger">*</span></label>
+                                                            <textarea required name="descripcion[en]" rel="summer" id="descripcion" class="form-control" required>{{ old('descripcion[en]') }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group @error('descripcion_2') invalid @enderror">
+                                                            <label class="form-control-label" for="descripcion_2">Contenido [en]</label>
+                                                            <textarea name="descripcion_2[en]" rel="summer" id="descripcion_2" class="form-control">{{ old('descripcion_2[en]') }}</textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -231,8 +249,12 @@
                 </div>
                 <div class="card-body" style="background-color: #e9f5fd">
                     <div class="form-group">
-                        <label class="form-control-label" for="precio-concepto-{id}">Concepto</label>
-                        <input type="text" name="precio-concepto[{id}]" id="precio-concepto-{id}" class="form-control" autocomplete="off" value="">
+                        <label class="form-control-label" for="precio-concepto-{id}">Concepto [es] <span class="text-danger">*</span></label>
+                        <input type="text" name="precio-concepto[{id}][es]" id="precio-concepto-{id}-es" class="form-control" autocomplete="off" value="" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="precio-concepto-{id}">Concepto [en] <span class="text-danger">*</span></label>
+                        <input type="text" name="precio-concepto[{id}][en]" id="precio-concepto-{id}-en" class="form-control" autocomplete="off" value="" required>
                     </div>
                     <div class="form-group">
                         <label for="precio-tipo-{id}">Tipo</label>

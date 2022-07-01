@@ -6,7 +6,7 @@
     <section class="pagos pt-5 pb-5">
         <div class="container">
 
-            <h3 class="text-center titulo mb-3"> {{$evento -> titulo}} </h3>
+            <h3 class="text-center titulo mb-3"> {{(App::getLocale() == 'en') ? $evento -> titulo_en : $evento -> titulo}} </h3>
             
             @if(session()->has('message'))
                 <div class="col-12 col-md-12">
@@ -16,7 +16,7 @@
                 </div>
             @endif
             
-            <h5 class="text-center">Tiempo restante para completar la compra:</h5>
+            <h5 class="text-center">{{(App::getLocale() == 'en') ? 'Remaining time to complete the purchase' : 'Tiempo restante para completar la compra:'}}</h5>
             <p class="text-center text-dark font-weight-bold mb-5" data-countdown="{{\App\Http\Controllers\FrontController::sumMinutes($orden -> created_at)}}" id="getting-started"></p>
 
             <form action="" method="POST" id="form_pago">
@@ -32,14 +32,14 @@
                                     <div class="form-group">
                                         <input class="custom-radio radio-validate" type="radio" id="precio_id-{{$idx}}" name="precio_id" data-precio="{{$item -> precio_final}}" {{$idx == 0 ? 'checked' : ''}} value="{{$item -> concepto}}">
                                         <label for="precio_id-{{$idx}}" class="dorado font-weight-bold">
-                                            <span style="margin-top: -6px;"></span> {{$item -> concepto}} - ${{number_format($item -> precio_final, 2)}} MXN
+                                            <span style="margin-top: -6px;"></span> {{(App::getLocale() == 'en') ? $item -> concepto_en : $item -> concepto}} - ${{number_format($item -> precio_final, 2)}} MXN
                                         </label>
                                     </div>
                                 @endforeach
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="" class="dorado font-weight-bold mb-3">Cantidad de boletos</label>
+                                    <label for="" class="dorado font-weight-bold mb-3">{{(App::getLocale() == 'en') ? 'Number of tickets' : 'Cantidad de boletos'}}</label>
                                     <input type="number" class="form-control" name="boletos" id="boletos" required min="1" max="100" value="1" style="max-width: 80px">
                                 </div>
                             </div>
@@ -54,9 +54,9 @@
                             <input type="hidden" name="descuento" value="0">
                             <input type="hidden" name="evento_tipo" value="{{$evento -> tipo}}">
                             <input type="hidden" name="precio_boleto" value="{{$precios[0] -> precio_final}}">
-                            <input type="text" name="cupon" id="cupon" class="form-control in" placeholder="Escribir cupón de descuento" aria-label="Escribir cupón de descuento" aria-describedby="button-addon2">
+                            <input type="text" name="cupon" id="cupon" class="form-control in" placeholder="{{(App::getLocale() == 'en') ? 'Write discount coupon' : 'Escribir cupón de descuento'}}" aria-label="Escribir cupón de descuento" aria-describedby="button-addon2">
                             <div class="input-group-append rounded-0">
-                                <button class="btn btn-gold apply-cupon" type="button" id="button-addon2">Aplicar</button>
+                                <button class="btn btn-gold apply-cupon" type="button" id="button-addon2">{{(App::getLocale() == 'en') ? 'Apply' : 'Aplicar'}}</button>
                             </div>
                         </div>
                     </div>
@@ -67,11 +67,11 @@
                     <div class="card-body border-0 rounded-0 pt-4 pb-4">
                         <div class="row justify-content-center no-gutter">
                             <div class="col-12 col-md-11 col-lg-10">
-                                <p class="mb-0"><span class="font-weight-bold">Día: {{\App\Helpers::dateSpanishShort($horario -> fecha)}}</p>
-                                <p class="mb-0"><span class="font-weight-bold">Hora: {{$horario -> hora}} hrs</p>
-                                <p class="mb-4"><span class="font-weight-bold">Ubicacion: {{$evento -> lugar}}</p>
+                                <p class="mb-0"><span class="font-weight-bold">{{(App::getLocale() == 'en') ? 'Day' : 'Día'}}: {{(App::getLocale() == 'en') ? \App\Helpers::dateComplete($horario -> fecha) : \App\Helpers::dateSpanishShort($horario -> fecha)}}</p>
+                                <p class="mb-0"><span class="font-weight-bold">{{(App::getLocale() == 'en') ? 'Hour' : 'Hora'}}: {{$horario -> hora}} hrs</p>
+                                <p class="mb-4"><span class="font-weight-bold">{{(App::getLocale() == 'en') ? 'Location' : 'Ubicacion'}}: {{$evento -> lugar}}</p>
                                 
-                                <p><span class="font-weight-bold">Número de boletos:</span> <span id="no_boletos">1</span></p>
+                                <p><span class="font-weight-bold">{{(App::getLocale() == 'en') ? 'Number of tickets' : 'Número de boletos'}}:</span> <span id="no_boletos">1</span></p>
                             </div>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                                             <td>$<span id="s_subtotal">{{number_format((($precios -> precio * $precios -> comision) / 100), 2)}} MXN</td>
                                         </tr> --}}
                                         <tr>
-                                            <td class="font-weight-bold">Descuento</td>
+                                            <td class="font-weight-bold">{{(App::getLocale() == 'en') ? 'Discount' : 'Descuento'}}</td>
                                             <td>-$ <span id="s_descuento">0.00</span> MXN</td>
                                         </tr>
                                         <tr class="pt-5">
@@ -106,35 +106,35 @@
                 {{-- Informacion del comprador --}}
                 <div class="row mb-4">
                     <div class="col-12">
-                        <label for="" class="dorado font-weight-bold">Información del comprador</label>
+                        <label for="" class="dorado font-weight-bold">{{(App::getLocale() == 'en') ? 'Buyer Information' : 'Información del comprador'}}</label>
                     </div>
                     <div class="col-12 form-group">
-                        <input type="text" class="form-control in" placeholder="Nombre" name="nombre" id="nombre">
+                        <input type="text" class="form-control in" placeholder="{{(App::getLocale() == 'en') ? 'Name' : 'Nombre'}}" name="nombre" id="nombre">
                     </div>
                     <div class="col-12 form-group">
-                        <input type="text" class="form-control in" placeholder="Correo" name="email" id="email">
+                        <input type="text" class="form-control in" placeholder="{{(App::getLocale() == 'en') ? 'Email' : 'Correo'}}" name="email" id="email">
                     </div>
                     <div class="col-12 form-group">
-                        <input type="text" class="form-control in" placeholder="Celular" name="pago_telefono" id="pago_telefono">
+                        <input type="text" class="form-control in" placeholder="{{(App::getLocale() == 'en') ? 'Phone' : 'Celular'}}" name="pago_telefono" id="pago_telefono">
                     </div>
                     <div class="col-12 form-group">
-                        <textarea class="form-control tx" placeholder="Comentarios" name="comentarios" id="comentarios" cols="30" rows="5"></textarea>
+                        <textarea class="form-control tx" placeholder="{{(App::getLocale() == 'en') ? 'Message' : 'Comentarios'}}" name="comentarios" id="comentarios" cols="30" rows="5"></textarea>
                     </div>
                     <div class="col-12 form-group">
-                        <input type="text" class="form-control in" placeholder="En que hotel estas hospedado?" name="p_hospedado" id="p_hospedado">
+                        <input type="text" class="form-control in" placeholder="{{(App::getLocale() == 'en') ? 'In which hotel are you staying?' : 'En que hotel estas hospedado?'}}" name="p_hospedado" id="p_hospedado">
                     </div>
                     <div class="col-12 form-group">
-                        <label for="" class="grey">Favor de escribir el número de talla de las aletas / accesorios de todos los participantes al evento <img src="{{asset('images/interrogation-mark.png')}}" alt="Guia de ayuda" title="Guia de ayuda" data-toggle="modal" data-target="#mdSize" class="ml-3" style="cursor: help"></label>
-                        <textarea class="form-control tx" placeholder="Ejemplo: Talla Mediana o 32..." name="p_talla" id="p_talla" cols="30" rows="5"></textarea>
+                        <label for="" class="grey">{{(App::getLocale() == 'en') ? 'Please write the size number of the fins / accessories of all the participants to the event' : 'Favor de escribir el número de talla de las aletas / accesorios de todos los participantes al evento'}} <img src="{{asset('images/interrogation-mark.png')}}" alt="Guia de ayuda" title="Guia de ayuda" data-toggle="modal" data-target="#mdSize" class="ml-3" style="cursor: help"></label>
+                        <textarea class="form-control tx" placeholder="{{(App::getLocale() == 'en') ? 'Example: Size Medium or 32...' : 'Ejemplo: Talla Mediana o 32...'}}" name="p_talla" id="p_talla" cols="30" rows="5"></textarea>
                     </div>
                     <div class="col-12 form-group">
-                        <label for="" class="grey">Favor de escribir el las alergías de los participantes a algun alimento</label>
+                        <label for="" class="grey">{{(App::getLocale() == 'en') ? 'Please write the allergies of the participants to any food' : 'Favor de escribir el las alergías de los participantes a algun alimento'}}</label>
                         <textarea class="form-control tx" placeholder="Ejemplo:  Alergia a los mariscos..." name="p_alergia" id="p_alergia" cols="30" rows="5"></textarea>
                     </div>
                 </div>
     
                 {{-- Forma de pago --}}
-                <label for="" class="dorado font-weight-bold mb-3">Metodo de compra</label>
+                <label for="" class="dorado font-weight-bold mb-3">{{(App::getLocale() == 'en') ? 'Purchase method' : 'Metodo de compra'}}</label>
                 <div class="card border-0 rounded-0 mb-5">
                     <div class="card-footer border-0 rounded-0 pt-4 pb-4">
                         <div class="row no-gutter">
@@ -168,27 +168,27 @@
     
                 <div class="row d-none mb-5" id="content_tarjeta">
                     <div class="col-12 m15">
-                        <input type="text" class="in form-control" name="nombre_tarjeta" placeholder="Nombre en la tarjeta">
+                        <input type="text" class="in form-control" name="nombre_tarjeta" placeholder="{{(App::getLocale() == 'en') ? 'Name on the card' : 'Nombre en la tarjeta'}}">
                     </div>
                     <div class="col-12 m15">
-                        <input type="text" class="in form-control" name="numero_tarjeta" id="tarjeta_show" placeholder="Número en la tarjeta">
+                        <input type="text" class="in form-control" name="numero_tarjeta" id="tarjeta_show" placeholder="{{(App::getLocale() == 'en') ? 'Number on the card' : 'Número en la tarjeta'}}">
                     </div>
                     <div class="col-6 m15">
-                        <input type="text" class="in form-control" name="mes_exp" id="mes_show" placeholder="Mes de expiración (MM)">
+                        <input type="text" class="in form-control" name="mes_exp" id="mes_show" placeholder="{{(App::getLocale() == 'en') ? 'Expiration month' : 'Mes de expiración'}} (MM)">
                     </div>
                     <div class="col-6 m15">
-                        <input type="text" class="in form-control" name="anio_exp" id="anio_show" placeholder="Año de expiración (YYYY)">
+                        <input type="text" class="in form-control" name="anio_exp" id="anio_show" placeholder="{{(App::getLocale() == 'en') ? 'Expiration year' : 'Año de expiración'}} (YYYY)">
                     </div>
                     <div class="col-12 m15">
                         <input type="text" class="in form-control" name="cvc" id="cvv_show_" placeholder="CVC">
                     </div>
                     <div class="col-12 m15 d-none" id="content-error-tarjeta">
-                        <p class="text-red" style="color: red !important;" id="error-tarjeta">Error Tarjeta: alksdjkasjdlaksj</p>
+                        <p class="text-red" style="color: red !important;" id="error-tarjeta">Error Tarjeta</p>
                     </div>
                 </div>
     
                 <div class="text-center">
-                    <button type="button" class="btn btn-gold do-pay" data-route="{{route('front.pago.save')}}" style="box-shadow: 0px 4px 30px rgba(252, 69, 0, 0.5);">PAGAR</button>
+                    <button type="button" class="btn btn-gold do-pay" data-route="{{route('front.pago.save')}}" style="box-shadow: 0px 4px 30px rgba(252, 69, 0, 0.5);">{{(App::getLocale() == 'en') ? 'PAY' : 'PAGAR'}}</button>
                 </div>
             </form>
         </div>

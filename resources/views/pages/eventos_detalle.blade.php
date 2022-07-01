@@ -39,8 +39,13 @@
             <div class="container-fluid w12">
                 <div class="row justify-content-center">
                     <div class="col-12 text-center mb-5">
-                        <h2 class="titulo mb-3">{{$evento -> titulo}}</h2>
-                        <p class="mb-4">{!! $evento -> descripcion !!}</p>
+                        <h2 class="titulo mb-3">{{(App::getLocale() == 'en') ? $evento -> titulo_en : $evento -> titulo}}</h2>
+
+                        @if (App::getLocale() == 'en')
+                            <p class="mb-4">{!! $evento -> descripcion_en !!}</p>
+                        @else
+                            <p class="mb-4">{!! $evento -> descripcion !!}</p>
+                        @endif
 
 
                         <form action="{{$evento -> tipo == 0 ? route('front.eventos.boletos') : route('front.eventos.butacas')}}" method="post">
@@ -55,7 +60,7 @@
                                     <div class="col-12 col-md-6 mb-3">
                                         <select name="dia" id="dia" class="form-control">
                                             @foreach ($horarios as $num => $item)
-                                                <option value="{{$item -> id}}" {{$num === 0 ? 'selected' : ''}}>{{App\Helpers::dateSpanishComplete($item -> fecha)}}</option>
+                                                <option value="{{$item -> id}}" {{$num === 0 ? 'selected' : ''}}>{{(App::getLocale() == 'en') ? App\Helpers::dateComplete($item -> fecha) : App\Helpers::dateSpanishComplete($item -> fecha)}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -69,7 +74,7 @@
                                 </div>
 
                                 @if (count($precios) > 0)
-                                    <button type="submit" class="btn btn-gold">¡Quiero ir!</button>
+                                    <button type="submit" class="btn btn-gold">@lang('global.btn_ir')</button>
                                 @endif
                             @else
                                 @if (isset($horarios))
@@ -77,11 +82,11 @@
                                     <input type="hidden" name="horario" value="{{$horarios[0] -> hora}}">
                                     <input type="hidden" name="horario_id" id="horario_id" value="{{$horarios[0] -> id}}">
 
-                                    <p class="date mb-0">{{App\Helpers::dateSpanishComplete($horarios[0] -> fecha)}}</p>
+                                    <p class="date mb-0">{{(App::getLocale() == 'en') ? App\Helpers::dateComplete($horarios[0] -> fecha) : App\Helpers::dateSpanishComplete($horarios[0] -> fecha)}}</p>
                                     <p class="date">{{App\Helpers::dateTo12Hrs($horarios[0] -> hora)}}</p>
 
                                     @if (count($precios) > 0)
-                                        <button type="submit" class="btn btn-gold">¡Quiero ir!</button>
+                                        <button type="submit" class="btn btn-gold">@lang('global.btn_ir')</button>
                                     @endif
 
                                 @endif
@@ -91,7 +96,11 @@
                     </div>
                     <div class="col-12 {{($evento -> imagen_lateral_1 || $evento -> imagen_lateral_2 || $evento -> imagen_lateral_3) ? 'col-md-6' : 'col-md-11'}}">
                         <div class="information-extra">
-                            {!! $evento -> descripcion_2 !!}
+                            @if (App::getLocale() == 'en')
+                                {!! $evento -> descripcion2_en !!}
+                            @else
+                                {!! $evento -> descripcion_2 !!}
+                            @endif
                         </div>
                     </div>
                     @if ($evento -> imagen_lateral_1 || $evento -> imagen_lateral_2 || $evento -> imagen_lateral_3)

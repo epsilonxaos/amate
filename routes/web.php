@@ -14,6 +14,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'FrontController@eventos') -> name('eventos');
+Route::get('/lang/{lang}', 'FrontController@changeLang') -> middleware('web') -> name('change_lang');
 Route::name('front.') -> group(function(){
     Route::get('/aviso', 'FrontController@aviso') -> name('aviso');
     Route::get('/reservaciones', 'FrontController@reservaciones') -> name('reservaciones');

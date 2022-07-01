@@ -116,14 +116,17 @@ class EventoController extends Controller
             'portada' => 'required',
         ]);
         $evento = Evento::create([
-            'titulo' => $request -> titulo,
+            'titulo' => $request -> titulo['es'],
+            'titulo_en' => $request -> titulo['en'],
             'tipo'   => $request -> tipo,
             'categoria_id'   => $request -> categoria_id,
             'lugar' => $request -> lugar,
             'latitud' => $request -> latitud,
             'longitud' => $request -> longitud,
-            'descripcion' => $request -> descripcion,
-            'descripcion_2' => $request -> descripcion_2,
+            'descripcion' => $request -> descripcion['es'],
+            'descripcion_2' => $request -> descripcion_2['es'],
+            'descripcion_en' => $request -> descripcion['en'],
+            'descripcion2_en' => $request -> descripcion_2['en'],
             'status' => 0
         ]);
         if($evento -> id){
@@ -145,7 +148,7 @@ class EventoController extends Controller
                 $evento -> imagen_lateral_2 = $img;
                 $evento -> save();
             }
-            if($request -> hasFile('imagen_2')) {
+            if($request -> hasFile('imagen_3')) {
                 $img = Helpers::addFileStorage($request -> file('imagen_3'), $this -> directorio);
                 $evento -> imagen_lateral_3 = $img;
                 $evento -> save();
@@ -179,7 +182,8 @@ class EventoController extends Controller
                 foreach ($request->input('new_content_precio_id') as $k => $id){
                     EventoPrecio::create([
                         'evento_id' => $evento->id,
-                        'concepto' => $request->input('precio-concepto')[$id],
+                        'concepto' => $request->input('precio-concepto')[$id]['es'],
+                        'concepto_en' => $request->input('precio-concepto')[$id]['en'],
                         'tipo' => $request->input('precio-tipo')[$id],
                         'precio' => $request->input('precio-costo')[$id],
                         'comision' => $request->input('precio-comision')[$id]
@@ -256,14 +260,17 @@ class EventoController extends Controller
         ]);
 
         $evento = Evento::find($id);
-        $evento -> titulo           = $request -> titulo;
+        $evento -> titulo           = $request -> titulo['es'];
+        $evento -> titulo_en        = $request -> titulo['en'];
         $evento -> tipo             = $request -> tipo;
         $evento -> categoria_id     = $request -> categoria_id;
         $evento -> lugar            = $request -> lugar;
         $evento -> latitud          = $request -> latitud;
         $evento -> longitud         = $request -> longitud;
-        $evento -> descripcion      = $request -> descripcion;
-        $evento -> descripcion_2    = $request -> descripcion_2;
+        $evento -> descripcion      = $request -> descripcion['es'];
+        $evento -> descripcion_2    = $request -> descripcion_2['es'];
+        $evento -> descripcion_en   = $request -> descripcion['en'];
+        $evento -> descripcion2_en = $request -> descripcion_2['en'];
 
         if($request -> hasFile('portada')){
             if(file_exists('storage/evento/'.$evento -> portada)){
@@ -287,7 +294,7 @@ class EventoController extends Controller
             $img2 = Helpers::addFileStorage($request -> file('imagen_2'), $this -> directorio);
             $evento -> imagen_lateral_2 = $img2;
         }
-        if($request -> hasFile('imagen_2')) {
+        if($request -> hasFile('imagen_3')) {
             Helpers::deleteFileStorage('evento', 'imagen_lateral_3', $id);
             $img3 = Helpers::addFileStorage($request -> file('imagen_3'), $this -> directorio);
             $evento -> imagen_lateral_3 = $img3;
@@ -362,7 +369,8 @@ class EventoController extends Controller
             foreach ($request->input('new_content_precio_id') as $k => $id){
                 EventoPrecio::create([
                     'evento_id' => $evento->id,
-                    'concepto' => $request->input('precio-concepto')[$id],
+                    'concepto' => $request->input('precio-concepto')[$id]['es'],
+                    'concepto_en' => $request->input('precio-concepto')[$id]['en'],
                     'tipo' => $request->input('precio-tipo')[$id],
                     'comision' => $request->input('precio-comision')[$id],
                     'precio' => $request->input('precio-costo')[$id]
@@ -373,7 +381,8 @@ class EventoController extends Controller
         if($request->has('old_content_precio_id')){
             foreach ($request->input('old_content_precio_id') as $k => $id){
                 $pieza_contenido = EventoPrecio::find($id);
-                $pieza_contenido -> concepto = $request->input('precio-concepto-upd')[$id];
+                $pieza_contenido -> concepto = $request->input('precio-concepto-upd')[$id]['es'];
+                $pieza_contenido -> concepto_en = $request->input('precio-concepto-upd')[$id]['en'];
                 $pieza_contenido -> tipo = $request->input('precio-tipo-upd')[$id];
                 $pieza_contenido -> comision = $request->input('precio-comision-upd')[$id];
                 $pieza_contenido -> precio = $request->input('precio-costo-upd')[$id];

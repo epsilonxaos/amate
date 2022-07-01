@@ -7,8 +7,8 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-sm-10 col-md-10 text-center">
-                    <h2 class="titulo mb-5">EL TIEMPO DE LA SESIÓN SE HA AGOTADO</h2>
-                    <a class="btn btn-gold" href="{{route('front.eventos')}}">Ir a los eventos</a>
+                    <h2 class="titulo mb-5">{{(App::getLocale() == 'en') ? 'SESSION TIME HAS RUN OUT' : 'EL TIEMPO DE LA SESIÓN SE HA AGOTADO'}}</h2>
+                    <a class="btn btn-gold" href="{{route('front.eventos')}}">{{(App::getLocale() == 'en') ? 'Go to events' : 'Ir a los eventos'}}</a>
                 </div>
             </div>
         </div>

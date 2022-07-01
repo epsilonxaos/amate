@@ -67,6 +67,13 @@ class Helpers {
         $mes = $meses[($fecha->format('n')) - 1];
         return $fecha->format('d') . ' de ' . $mes . ' del ' . $fecha->format('Y') ;
     }
+    public static function dateComplete($fecha){
+        $meses = array("January","February","March","April","May","June","July","August","September","Octuber","November","December");
+
+        $fecha = Carbon::parse($fecha);
+        $mes = $meses[($fecha->format('n')) - 1];
+        return $mes . ' '. $fecha->format('d') . ', ' . $fecha->format('Y') ;
+    }
 
     /**
      * Return fecha en español corto - 01/Mar/2021
@@ -79,6 +86,39 @@ class Helpers {
         $fecha = Carbon::parse($fecha);
         $mes = $meses[($fecha->format('n')) - 1];
         return $fecha->format('d') . '/' . $mes . '/' . $fecha->format('Y') ;
+    }
+
+    public static function getMes($key) {
+        $mes = array(
+            'January' => 'Enero',
+            'February' => 'Febrero',
+            'March' => 'Marzo',
+            'April' => 'Abril',
+            'May' => 'Mayo',
+            'June' => 'Junio',
+            'July' => 'Julio',
+            'August' => 'Agosto',
+            'September' => 'Septiembre',
+            'Octuber' => 'Octubre',
+            'November' => 'Noviembre',
+            'December' => 'Diciembre',
+        );
+
+        return $mes[$key];
+    }
+
+    public static function getDia($key) {
+        $dias = array(
+            'Mon' => 'Lun',
+            'Tue' => 'Mar',
+            'Wed' => 'Mie',
+            'Thu' => 'Jue',
+            'Fri' => 'Vie',
+            'Sat' => 'Sab',
+            'Sun' => 'Dom',
+        );
+
+        return $dias[$key];
     }
 
     public static function inTime($time){

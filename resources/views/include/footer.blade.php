@@ -31,9 +31,9 @@
                 </div>
                 <div class="col-12">
                     <ul class="list-unstyled d-md-flex justify-content-md-center text-center">
-                        <li class="mb-2 mb-md-0"><a href="{{route('front.aviso')}}">Aviso de privacidad</a></li>
-                        <li class="mb-2 mb-md-0 ml-md-3 ml-lg-5"><a href="{{route('front.reservaciones')}}">Reservaciones</a></li>
-                        <li class="mb-2 mb-md-0 ml-md-3 ml-lg-5"><a href="{{route('front.reservaciones')}}?cancelaciones=1">Cancelaciones</a></li>
+                        <li class="mb-2 mb-md-0"><a href="{{route('front.aviso')}}">{{(App::getLocale() == 'en') ? 'Privacy Policy' : 'Aviso de privacidad'}}</a></li>
+                        <li class="mb-2 mb-md-0 ml-md-3 ml-lg-5"><a href="{{route('front.reservaciones')}}">{{(App::getLocale() == 'en') ? 'Reservations' : 'Reservaciones'}}</a></li>
+                        <li class="mb-2 mb-md-0 ml-md-3 ml-lg-5"><a href="{{route('front.reservaciones')}}?cancelaciones=1">{{(App::getLocale() == 'en') ? 'Return Policies' : 'Cancelaciones'}}</a></li>
                         <li class="mb-2 mb-md-0 ml-md-3 ml-lg-5"><a href="{{route('front.faqs')}}">FAQs</a></li>
                     </ul>
                 </div>
