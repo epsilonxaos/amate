@@ -19,6 +19,7 @@ Route::name('front.') -> group(function(){
     Route::get('/reservaciones', 'FrontController@reservaciones') -> name('reservaciones');
     Route::get('/faqs', 'FrontController@faqs') -> name('faqs');
     Route::get('/test', 'FrontController@test') -> name('test');
+    Route::get('/nosotros', 'FrontController@nosotros') -> name('nosotros');
 
 
 

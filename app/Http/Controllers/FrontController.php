@@ -780,6 +780,10 @@ class FrontController extends Controller
     {
         return view('pages.legales.faqs');
     }
+    public function nosotros()
+    {
+        return view('pages.nosotros');
+    }
 
     public function test()
     {
