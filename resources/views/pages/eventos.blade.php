@@ -206,6 +206,12 @@
 
         </div>
 
+        <div class="eventos-detalle pt-5 pb-5">
+            <div class="container">
+                <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+                <div class="elfsight-app-3f18c3e5-75ec-459a-8482-c6da8ab28d7b"></div>
+            </div>
+        </div>
         <div class="eventos-comentarios pt-5 pb-5 d-none">
             <div class="container">
                 <div class="row justify-content-center">

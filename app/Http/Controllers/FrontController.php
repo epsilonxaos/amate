@@ -192,13 +192,14 @@ class FrontController extends Controller
         $original_id = $id;
         $id          = $optimus -> decode($id);
         $now         = Date::parse('today') -> format('Y-m-d');
+        $tomorrow    = Date::parse('tomorrow') -> format('Y-m-d');
 
         $evento       = Evento::find($id);
         $galeria      = Galeria::where('rel_id', $id) -> where('tipo',1)->get();
         $horarios     = Evento::find($id)
         -> horarios()
         -> where("cupo", ">", 0)
-        -> whereRaw("fecha >= CAST('".$now."' AS DATE) AND status = 1")
+        -> whereRaw("fecha > CAST('".$tomorrow."' AS DATE) AND status = 1")
         -> groupBy('fecha')
         -> orderBy('fecha', 'ASC')
         -> get();

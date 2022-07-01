@@ -1,3 +1,8 @@
+<a href="https://api.whatsapp.com/send?phone=9995721178&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20." class="float" target="_blank">
+    <i class="fa fa-whatsapp my-float"></i>
+</a>
+
+
 <footer>
     <div class="ft-telefonos pt-5 pb-5 d-none">
         <div class="container">

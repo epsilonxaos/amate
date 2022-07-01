@@ -77,7 +77,7 @@
                                     <button type="submit" class="btn btn-gold">@lang('global.btn_ir')</button>
                                 @endif
                             @else
-                                @if (isset($horarios))
+                                @if (isset($horarios[0]))
                                     <input type="hidden" name="dia" value="{{$horarios[0] -> fecha}}">
                                     <input type="hidden" name="horario" value="{{$horarios[0] -> hora}}">
                                     <input type="hidden" name="horario_id" id="horario_id" value="{{$horarios[0] -> id}}">
@@ -88,7 +88,8 @@
                                     @if (count($precios) > 0)
                                         <button type="submit" class="btn btn-gold">@lang('global.btn_ir')</button>
                                     @endif
-
+                                @else
+                                    <p class="date">{{(App::getLocale() == 'en') ? 'No departures at the moment' : 'Sin salidas por el momento'}}</p>
                                 @endif
                             @endif
                         </form>
