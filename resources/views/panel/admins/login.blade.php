@@ -3,12 +3,12 @@
     <!-- Header -->
     <div class="header py-7 py-lg-8 pt-lg-9" style="    background: linear-gradient(87deg,#dadada 0,#ffffff 100%)!important;">
         <div class="container">
-            <div class="header-body text-center mb-5">
+            <div class="header-body text-center mb-5 ">
                 <div class="row justify-content-center">
-                    <div class="col-xl-5 col-lg-6 col-md-8 px-5">
+                    <div class="col-xl-5 col-lg-6 col-md-8 px-5 bg-dark py-3">
                         {{-- <h1 class="text-white">Welcome!</h1>
                         <p class="text-lead text-white">Use these awesome forms to login or create new account in your project for free.</p> --}}
-                        <img class="col-md-12" src="{{ asset('panel/img/brand/logo.png') }}" alt="">
+                        <img class="" style="max-width: 100%" src="{{ asset('img/logo-header.png') }}" alt="">
                     </div>
                 </div>
             </div>

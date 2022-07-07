@@ -186,9 +186,10 @@
                                 <div class="col-12 col-lg-9 col-xl-10">
                                     <ul class="list-unstyled d-flex justify-content-between justify-content-sm-center justify-content-md-between">
                                         @foreach ($categorias as $item)
-                                            <li class="card text-center align-items-center">
+                                            <li class="text-center">
                                                 <a href="{{route('front.eventos').'?calendario=1&categoria='.$item -> id}}">
-                                                    <img class="mb-2" src="{{asset($item -> portada)}}" alt="{{(App::getLocale() == 'en') ? $item -> titulo_en : $item -> titulo}}"> <p>{{(App::getLocale() == 'en') ? $item -> titulo_en : $item -> titulo}}</p>
+                                                    <img class="mb-2" src="{{asset($item -> portada)}}" alt="{{(App::getLocale() == 'en') ? $item -> titulo_en : $item -> titulo}}">
+                                                    {{-- <p>{{(App::getLocale() == 'en') ? $item -> titulo_en : $item -> titulo}}</p> --}}
                                                 </a>
                                             </li>
                                         @endforeach

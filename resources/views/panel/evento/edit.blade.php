@@ -233,11 +233,11 @@
                                                                             <div class="card-body" style="background-color: #e9f5fd">
                                                                                 <div class="form-group">
                                                                                     <label class="form-control-label" for="precio-concepto-upd-{{$precio -> id}}">Concepto [es] <span class="text-danger">*</span></label>
-                                                                                    <input type="text" name="precio-concepto-upd[{{$precio -> id}}][es]" id="precio-concepto-upd-{{$precio -> id}}-es" class="form-control" required autocomplete="off" value="{{$precio -> concepto}}">
+                                                                                    <input type="text" name="precio-concepto-upd[{{$precio -> id}}][es]" id="precio-concepto-upd-{{$precio -> id}}-es" class="form-control" autocomplete="off" value="{{$precio -> concepto}}">
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label class="form-control-label" for="precio-concepto-upd-{{$precio -> id}}">Concepto [en] <span class="text-danger">*</span></label>
-                                                                                    <input type="text" name="precio-concepto-upd[{{$precio -> id}}][en]" id="precio-concepto-upd-{{$precio -> id}}-en" class="form-control" required autocomplete="off" value="{{$precio -> concepto_en}}">
+                                                                                    <input type="text" name="precio-concepto-upd[{{$precio -> id}}][en]" id="precio-concepto-upd-{{$precio -> id}}-en" class="form-control" autocomplete="off" value="{{$precio -> concepto_en}}">
                                                                                 </div>
 
                                                                                 <div class="form-group">
@@ -410,11 +410,11 @@
                 <div class="card-body" style="background-color: #e9f5fd">
                     <div class="form-group">
                         <label class="form-control-label" for="precio-concepto-{id}">Concepto [es] <span class="text-danger">*</span></label>
-                        <input type="text" name="precio-concepto[{id}][es]" id="precio-concepto-{id}-es" class="form-control" autocomplete="off" value="" required>
+                        <input type="text" name="precio-concepto[{id}][es]" id="precio-concepto-{id}-es" class="form-control" autocomplete="off" value="">
                     </div>
                     <div class="form-group">
                         <label class="form-control-label" for="precio-concepto-{id}">Concepto [en] <span class="text-danger">*</span></label>
-                        <input type="text" name="precio-concepto[{id}][en]" id="precio-concepto-{id}-en" class="form-control" autocomplete="off" value="" required>
+                        <input type="text" name="precio-concepto[{id}][en]" id="precio-concepto-{id}-en" class="form-control" autocomplete="off" value="">
                     </div>
                     <div class="form-group">
                         <label for="precio-tipo-{id}">Tipo</label>
