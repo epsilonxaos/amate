@@ -19,9 +19,9 @@
             <li class="{{(request() -> is('eventos*')) ? 'active' : ''}} text-center"><a href="{{route('front.eventos')}}">@lang('menu.experiencias')</a></li>
             <li class="text-center"><a href="{{route('front.eventos')}}?calendario=1">@lang('menu.calendario')</a></li>
             <li class="text-center"><a href="">@lang('menu.galeria')</a></li>
-            <li class="text-center"><a href="">@lang('menu.arma_exp')</a></li>
+            <li class="text-center"><a href="{{route('front.arma')}}">@lang('menu.arma_exp')</a></li>
             <li class="text-center"><a href="{{route('front.nosotros')}}">@lang('menu.nosotros')</a></li>
-            <li class="text-center"><a href="">@lang('menu.contacto')</a></li>
+            <li class="text-center"><a href="{{route('front.contacto')}}">@lang('menu.contacto')</a></li>
             {{-- <li class="text-center"><a href="">Idioma</a></li> --}}
             {{-- <li class="text-center">
                 <a href="#" class="btn btn-gold" style="min-width: 197px">Reservar</a>
@@ -70,66 +70,13 @@
                     <li class="{{(request() -> is('eventos*')) ? 'active' : ''}} text-center"><a href="{{route('front.eventos')}}">@lang('menu.experiencias')</a></li>
                     <li class="text-center"><a href="{{route('front.eventos')}}?calendario=1">@lang('menu.calendario')</a></li>
                     <li class="text-center"><a href="">@lang('menu.galeria')</a></li>
-                    <li class="text-center"><a href="">@lang('menu.arma_exp')</a></li>
+                    <li class="text-center"><a href="{{route('front.arma')}}">@lang('menu.arma_exp')</a></li>
                     <li class="text-center"><a href="{{route('front.nosotros')}}">@lang('menu.nosotros')</a></li>
-                    <li class="text-center"><a href="">@lang('menu.contacto')</a></li>
+                    <li class="text-center"><a href="{{route('front.contacto')}}">@lang('menu.contacto')</a></li>
                     <li class="text-center">
                         <a href="{{ route('change_lang', ['lang' => 'en']) }}" class="text-white mb-0" style="{{(App::getLocale() == 'en') ? 'color: #AC7A43 !important' : ''}}">EN</a> /
                         <a href="{{ route('change_lang', ['lang' => 'es']) }}" class="text-white mb-0" style="{{(App::getLocale() == 'es') ? 'color: #AC7A43 !important' : ''}}">ES</a>
                     </li>
-                    
-                    {{-- <li class=""><a href="#mdSuscripcion" data-toggle="modal">Consultar reservación</a></li> --}}
-                    {{--<li class="text-uppercase text-center {{(request() -> is('/')) ? 'active' : ''}}"><a href="{{route('front.inicio')}}">Inicio</a></li>
-                    <li class="text-uppercase text-center {{(request() -> is('nosotros*')) ? 'active' : ''}}">
-                        <div class="dropdown">
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Nosotros
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="{{route('front.nosotros.quienes_somos')}}">¿QUIÉNES SOMOS?</a>
-                                <a class="dropdown-item" href="{{route('front.nosotros.mumurantes')}}">Los murmurantes</a>
-                                <a class="dropdown-item" href="{{route('front.nosotros.reconocimientos')}}">Reconocimientos</a>
-                                <a class="dropdown-item" href="{{route('front.nosotros.aliados_culturales')}}">Aliados Culturales</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="text-uppercase text-center {{(request() -> is('laboratorio*')) ? 'active' : ''}}">
-                        <div class="dropdown">
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Laboratorio
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="{{route('front.laboratorio.laboratorio')}}">Laboratorio</a>
-                                <a class="dropdown-item" href="{{route('front.laboratorio.talleres')}}">Talleres</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="text-uppercase text-center {{(request() -> is('artes*')) ? 'active' : ''}}">
-                        <div class="dropdown dos-lineas">
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Artes<br>Escénicas
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="{{route('front.artes.piezas')}}">Piezas Escénicas</a>
-                                <a class="dropdown-item" href="{{route('front.artes.giras')}}">Giras</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="text-uppercase text-center {{(request() -> is('cine*')) ? 'active' : ''}}">
-                        <div class="dropdown">
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Cine
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="{{route('front.cine.documentales')}}">Documentales</a>
-                                <a class="dropdown-item" href="{{route('front.cine.cineclub')}}">El cineclub de la méxico</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="text-uppercase text-center {{(request() -> is('concursos*')) ? 'active' : ''}}"><a href="{{route('front.concursos')}}">Concursos</a></li>
-                    <li class="text-uppercase text-center {{(request() -> is('blog*')) ? 'active' : ''}}"><a href="{{route('front.blog')}}">Blog</a></li>
-                    <li class="text-uppercase text-center {{(request() -> is('contacto')) ? 'active' : ''}}"><a href="{{route('front.contacto')}}">Contacto</a></li>
-                    <li><a href="{{route('front.eventos')}}" class="btn {{$tema_btn}} text-uppercase">Eventos</a></li>--}}
                 </ul>
             </div>
             <div class="col-md-2 text-right">

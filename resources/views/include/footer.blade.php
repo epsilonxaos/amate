@@ -29,9 +29,10 @@
                 <div class="col-12 text-center mb-5">
                     <img src="{{asset('img/logo-footer.png')}}" alt="Casa Amate" class="mb-4">
                     <div class="d-block">
-                        <a href="#" target="_blank" rel="noopener noreferrer"><img src="{{asset('img/twitter.png')}}" alt="Twitter"></a>
+                        <a href="https://www.instagram.com/amateexperiences/" target="_blank" rel="noopener noreferrer"><img src="{{asset('img/instragram_footer.svg')}}" alt="Instagram"></a>
+                        {{-- <a href="#" target="_blank" rel="noopener noreferrer"><img src="{{asset('img/twitter.png')}}" alt="Twitter"></a>
                         <a href="#" target="_blank" rel="noopener noreferrer"><img class="ml-3" src="{{asset('img/facebook.png')}}" alt="Facebook"></a>
-                        <a href="#" target="_blank" rel="noopener noreferrer"><img class="ml-3" src="{{asset('img/googleplus.png')}}" alt="Google Plus"></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer"><img class="ml-3" src="{{asset('img/googleplus.png')}}" alt="Google Plus"></a> --}}
                     </div>
                 </div>
                 <div class="col-12">

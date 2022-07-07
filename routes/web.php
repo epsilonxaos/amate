@@ -21,6 +21,8 @@ Route::name('front.') -> group(function(){
     Route::get('/faqs', 'FrontController@faqs') -> name('faqs');
     Route::get('/test', 'FrontController@test') -> name('test');
     Route::get('/nosotros', 'FrontController@nosotros') -> name('nosotros');
+    Route::get('/arma-tu-experiencia', 'FrontController@arma') -> name('arma');
+    Route::get('/contacto', 'FrontController@contacto') -> name('contacto');
 
 
 

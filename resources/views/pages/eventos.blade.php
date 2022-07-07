@@ -209,6 +209,7 @@
 
         <div class="eventos-detalle pt-5 pb-5">
             <div class="container">
+                <h3 class="titulo text-center mb-5"><a href="https://www.instagram.com/amateexperiences/" target="_blank" rel="noopener noreferrer">@amateexperiences</a></h3>
                 <script src="https://apps.elfsight.com/p/platform.js" defer></script>
                 <div class="elfsight-app-3f18c3e5-75ec-459a-8482-c6da8ab28d7b"></div>
             </div>

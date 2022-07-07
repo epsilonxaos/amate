@@ -20,4 +20,4 @@
 <meta property="og:title" content="Casa Amate" />
 <meta property="og:url" content="{{route('front.eventos')}}" />
 <meta property="og:description" content="Amate experiences busca ser el puente entre Yucat&aacute;n, su cultura, sus ra&iacute;ces y los viajeros que buscan algo m&aacute;s que un viaje convencional, aquellos que buscan disfrutar la experiencia de convertirse en un local m&aacute;s." />
-<meta property="og:image" content="{{asset('images/fb.jpg')}}" />
+<meta property="og:image" content="{{asset('img/exp.jpg')}}" />

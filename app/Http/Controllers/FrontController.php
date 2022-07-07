@@ -794,6 +794,15 @@ class FrontController extends Controller
     {
         return view('pages.nosotros');
     }
+    public function arma()
+    {
+        return view('pages.arma');
+    }
+
+    public function contacto()
+    {
+        return view('pages.contacto');
+    }
 
     public function test()
     {
