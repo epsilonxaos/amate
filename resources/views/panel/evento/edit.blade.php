@@ -79,13 +79,13 @@
                                                     <div class="col-lg-12">
                                                         <div class="form-group @error('titulo') invalid @enderror">
                                                             <label class="form-control-label" for="title">Título [es] <span class="text-danger">*</span></label>
-                                                            <input type="text" name="titulo[es]" required id="title" class="form-control" autocomplete="off" value="{{ old('titulo[es]') ? old('titulo[es]') : $evento -> titulo  }}">
+                                                            <input type="text" name="titulo[es]"  id="title" class="form-control" autocomplete="off" value="{{ old('titulo[es]') ? old('titulo[es]') : $evento -> titulo  }}">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="form-group @error('titulo') invalid @enderror">
                                                             <label class="form-control-label" for="title">Título [en] <span class="text-danger">*</span></label>
-                                                            <input type="text" name="titulo[en]" required id="title" class="form-control" autocomplete="off" value="{{ old('titulo[en]') ? old('titulo[en]') : $evento -> titulo_en  }}">
+                                                            <input type="text" name="titulo[en]"  id="title" class="form-control" autocomplete="off" value="{{ old('titulo[en]') ? old('titulo[en]') : $evento -> titulo_en  }}">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
@@ -146,7 +146,7 @@
                                                     <div class="col-lg-12">
                                                         <div class="form-group @error('descripcion') invalid @enderror">
                                                             <label class="form-control-label" for="descripcion">Descripción corta [es] <span class="text-danger">*</span></label>
-                                                            <textarea name="descripcion[es]" rel="summer" id="descripcion_es" required class="form-control">{{ old('descripcion[es]') ? old('descripcion[es]') : $evento -> descripcion }}</textarea>
+                                                            <textarea name="descripcion[es]" rel="summer" id="descripcion_es"  class="form-control">{{ old('descripcion[es]') ? old('descripcion[es]') : $evento -> descripcion }}</textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
@@ -158,7 +158,7 @@
                                                     <div class="col-lg-12">
                                                         <div class="form-group @error('descripcion') invalid @enderror">
                                                             <label class="form-control-label" for="descripcion">Descripción corta [en] <span class="text-danger">*</span></label>
-                                                            <textarea name="descripcion[en]" rel="summer" id="descripcion" required class="form-control">{{ old('descripcion[en]') ? old('descripcion[en]') : $evento -> descripcion_en }}</textarea>
+                                                            <textarea name="descripcion[en]" rel="summer" id="descripcion"  class="form-control">{{ old('descripcion[en]') ? old('descripcion[en]') : $evento -> descripcion_en }}</textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
