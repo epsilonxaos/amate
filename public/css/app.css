@@ -869,6 +869,24 @@ nav.menu-escritorio img.logo {
   }
 }
 
+@media screen and (min-width: 992px) {
+  nav.menu-escritorio .btn.btn-white {
+    font-size: 10px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  nav.menu-escritorio .btn.btn-white {
+    font-size: 12px;
+  }
+}
+
+@media screen and (min-width: 1366px) {
+  nav.menu-escritorio .btn.btn-white {
+    font-size: 14px;
+  }
+}
+
 nav.menu-escritorio ul.menu {
   list-style: none;
   padding: 0px;
@@ -887,19 +905,31 @@ nav.menu-escritorio ul.menu li {
 
 @media screen and (min-width: 992px) {
   nav.menu-escritorio ul.menu li {
-    font-size: 12px;
+    font-size: 10px;
+  }
+
+  nav.menu-escritorio ul.menu li .btn.btn-white {
+    font-size: 10px;
   }
 }
 
 @media screen and (min-width: 1200px) {
   nav.menu-escritorio ul.menu li {
-    font-size: 14px;
+    font-size: 12px;
+  }
+
+  nav.menu-escritorio ul.menu li .btn.btn-white {
+    font-size: 12px;
   }
 }
 
 @media screen and (min-width: 1366px) {
   nav.menu-escritorio ul.menu li {
     font-size: 16px;
+  }
+
+  nav.menu-escritorio ul.menu li .btn.btn-white {
+    font-size: 14px;
   }
 }
 

@@ -18,7 +18,7 @@
         <ul class="menu-list">
             <li class="{{(request() -> is('eventos*')) ? 'active' : ''}} text-center"><a href="{{route('front.eventos')}}">@lang('menu.experiencias')</a></li>
             <li class="text-center"><a href="{{route('front.eventos')}}?calendario=1">@lang('menu.calendario')</a></li>
-            <li class="text-center"><a href="">@lang('menu.galeria')</a></li>
+            <li class="text-center"><a href="{{route('front.galeria')}}">@lang('menu.galeria')</a></li>
             <li class="text-center"><a href="{{route('front.arma')}}">@lang('menu.arma_exp')</a></li>
             <li class="text-center"><a href="{{route('front.nosotros')}}">@lang('menu.nosotros')</a></li>
             <li class="text-center"><a href="{{route('front.contacto')}}">@lang('menu.contacto')</a></li>
@@ -69,7 +69,7 @@
                 <ul class="menu">
                     <li class="{{(request() -> is('eventos*')) ? 'active' : ''}} text-center"><a href="{{route('front.eventos')}}">@lang('menu.experiencias')</a></li>
                     <li class="text-center"><a href="{{route('front.eventos')}}?calendario=1">@lang('menu.calendario')</a></li>
-                    <li class="text-center"><a href="">@lang('menu.galeria')</a></li>
+                    <li class="text-center"><a href="{{route('front.galeria')}}">@lang('menu.galeria')</a></li>
                     <li class="text-center"><a href="{{route('front.arma')}}">@lang('menu.arma_exp')</a></li>
                     <li class="text-center"><a href="{{route('front.nosotros')}}">@lang('menu.nosotros')</a></li>
                     <li class="text-center"><a href="{{route('front.contacto')}}">@lang('menu.contacto')</a></li>
