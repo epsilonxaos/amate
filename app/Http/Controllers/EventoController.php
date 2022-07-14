@@ -192,8 +192,11 @@ class EventoController extends Controller
             }
         }
         return redirect()
-            -> route('panel.evento.list')
+            -> back()
             -> with('message', 'Se ha creado el registro correctamente');
+        // return redirect()
+        //     -> route('panel.evento.list')
+        //     -> with('message', 'Se ha creado el registro correctamente');
     }
 
     /**
@@ -392,8 +395,11 @@ class EventoController extends Controller
 
 
         return redirect()
-            -> route('panel.evento.list')
+            -> back()
             -> with('message', 'Se ha modificado el registro correctamente');
+        // return redirect()
+        //     -> route('panel.evento.list')
+        //     -> with('message', 'Se ha modificado el registro correctamente');
     }
 
     /**

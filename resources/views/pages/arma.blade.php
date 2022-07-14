@@ -25,12 +25,13 @@
         <div class="container py-5">
             <div class="row">
                 <div class="col-12 col-md-6">
-                    <h2 class="titulo mb-3">{{(App::getLocale() == 'en') ? 'Build your experience' : 'Arma tu Experiencia'}}</h2>
+                    <h2 class="titulo mb-3">{{(App::getLocale() == 'en') ? 'Design your own experience' : 'Arma tu Experiencia'}}</h2>
                     <p>
-                        <span class="font-weight-bold">Whatsapp</span> <a href="tel:+529995721178">999 572 1178</a> <br>
+                        <span class="font-weight-bold">Whatsapp</span> <a href="tel:+529995721178">+52 999 572 1178</a> <br>
                         <span class="font-weight-bold">Correo</span> <a href="mailto:amatexperiencia@gmail.com">amatexperiencia@gmail.com</a> <br>
                         <span class="font-weight-bold">Instagram</span> <a href="https://www.instagram.com/amateexperiences/" target="_blank" rel="noopener noreferrer">@amateexperiences</a>
                     </p>
+                    <a href="{{route('front.contacto')}}" class="btn btn-gold">{{(App::getLocale() == 'en') ? 'Contact' : 'Contáctanos'}}</a>
                 </div>
                 <div class="col-12 col-md-6">
 

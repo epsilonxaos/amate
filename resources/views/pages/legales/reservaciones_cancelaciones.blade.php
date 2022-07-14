@@ -28,7 +28,7 @@
     <div class="eventos-detalle pt-5" id="cancelaciones">
         <div class="container">
 
-            <h2 class="titulo mb-3">{{(App::getLocale() == 'en') ? 'Return Policies' : 'Cancelaciones'}}</h2>
+            <h2 class="titulo mb-3">{{(App::getLocale() == 'en') ? 'Cancelation' : 'Cancelaciones'}}</h2>
     
             @if (App::getLocale() == 'en')
                 <p>It is possible to cancel the reservation with a minimum of 48 hours before the day of the experience. Cancellations made more than 48 hours before reservations will be charged

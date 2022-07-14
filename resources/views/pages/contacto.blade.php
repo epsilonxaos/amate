@@ -20,7 +20,7 @@
         <div class="container-fluid" style="max-width: 1600px">
 
             <div class="wrapper position-relative">
-                <img src="{{asset('img/contac.png')}}" alt="" class="w-100" style="height: 60vh; object-fit: cover">
+                <img src="{{asset('img/contac.jpg')}}" alt="" class="w-100" style="height: 60vh; object-fit: cover">
             </div>
         </div>
 

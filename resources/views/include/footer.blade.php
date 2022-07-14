@@ -27,7 +27,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center mb-5">
-                    <img src="{{asset('img/logo-footer.png')}}" alt="Casa Amate" class="mb-4">
+                    <img src="{{asset('img/logo-footer.svg')}}" alt="Casa Amate" class="mb-4" style="max-width: 100%">
                     <div class="d-block">
                         <a href="https://www.instagram.com/amateexperiences/" target="_blank" rel="noopener noreferrer"><img src="{{asset('img/instragram_footer.svg')}}" alt="Instagram"></a>
                         {{-- <a href="#" target="_blank" rel="noopener noreferrer"><img src="{{asset('img/twitter.png')}}" alt="Twitter"></a>
@@ -39,7 +39,7 @@
                     <ul class="list-unstyled d-md-flex justify-content-md-center text-center">
                         <li class="mb-2 mb-md-0"><a href="{{route('front.aviso')}}">{{(App::getLocale() == 'en') ? 'Privacy Policy' : 'Aviso de privacidad'}}</a></li>
                         <li class="mb-2 mb-md-0 ml-md-3 ml-lg-5"><a href="{{route('front.reservaciones')}}">{{(App::getLocale() == 'en') ? 'Reservations' : 'Reservaciones'}}</a></li>
-                        <li class="mb-2 mb-md-0 ml-md-3 ml-lg-5"><a href="{{route('front.reservaciones')}}?cancelaciones=1">{{(App::getLocale() == 'en') ? 'Return Policies' : 'Cancelaciones'}}</a></li>
+                        <li class="mb-2 mb-md-0 ml-md-3 ml-lg-5"><a href="{{route('front.reservaciones')}}?cancelaciones=1">{{(App::getLocale() == 'en') ? 'Cancelation' : 'Cancelaciones'}}</a></li>
                         <li class="mb-2 mb-md-0 ml-md-3 ml-lg-5"><a href="{{route('front.faqs')}}">FAQs</a></li>
                     </ul>
                 </div>

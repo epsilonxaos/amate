@@ -188,7 +188,7 @@
                                         @foreach ($categorias as $item)
                                             <li class="text-center">
                                                 <a href="{{route('front.eventos').'?calendario=1&categoria='.$item -> id}}">
-                                                    <img class="mb-2" src="{{asset($item -> portada)}}" alt="{{(App::getLocale() == 'en') ? $item -> titulo_en : $item -> titulo}}">
+                                                    <img class="mb-2" src="{{asset("img/categorias/".App::getLocale()."/".$item -> portada)}}" alt="{{(App::getLocale() == 'en') ? $item -> titulo_en : $item -> titulo}}">
                                                     {{-- <p>{{(App::getLocale() == 'en') ? $item -> titulo_en : $item -> titulo}}</p> --}}
                                                 </a>
                                             </li>

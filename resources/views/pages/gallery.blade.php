@@ -17,7 +17,7 @@
             <h2 class="titulo text-center mb-5">{{(App::getLocale() == 'en') ? 'Gallery' : 'Galeria'}}</h2>
 
             <div class="row">
-                @for ($i = 1; $i <= 31; $i++)
+                @for ($i = 1; $i <= 29; $i++)
                     <div class="col-12 col-sm-6 col-md-4 mb-4">
                         <img src="{{asset('img/galeria/'.$i.'.jpg')}}" alt="Galeria" data-fancybox="Galeria" data-src="{{asset('img/galeria/'.$i.'.jpg')}}" style="cursor: zoom-in; object-fit: cover;" height="220px" width="100%">
                     </div>

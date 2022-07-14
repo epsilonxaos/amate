@@ -106,7 +106,7 @@
                 {{-- Informacion del comprador --}}
                 <div class="row mb-4">
                     <div class="col-12">
-                        <label for="" class="dorado font-weight-bold">{{(App::getLocale() == 'en') ? 'Buyer Information' : 'Información del comprador'}}</label>
+                        <label for="" class="dorado font-weight-bold">{{(App::getLocale() == 'en') ? 'Personal information' : 'Información del comprador'}}</label>
                     </div>
                     <div class="col-12 form-group">
                         <input type="text" class="form-control in" placeholder="{{(App::getLocale() == 'en') ? 'Name' : 'Nombre'}}" name="nombre" id="nombre">
@@ -121,15 +121,15 @@
                         <textarea class="form-control tx" placeholder="{{(App::getLocale() == 'en') ? 'Message' : 'Comentarios'}}" name="comentarios" id="comentarios" cols="30" rows="5"></textarea>
                     </div>
                     <div class="col-12 form-group">
-                        <input type="text" class="form-control in" placeholder="{{(App::getLocale() == 'en') ? 'In which hotel are you staying?' : 'En que hotel estas hospedado?'}}" name="p_hospedado" id="p_hospedado">
+                        <input type="text" class="form-control in" placeholder="{{(App::getLocale() == 'en') ? 'Which hotel are you staying at?' : 'En que hotel estas hospedado?'}}" name="p_hospedado" id="p_hospedado">
                     </div>
                     <div class="col-12 form-group">
-                        <label for="" class="grey">{{(App::getLocale() == 'en') ? 'Please write the size number of the fins / accessories of all the participants to the event' : 'Favor de escribir el número de talla de las aletas / accesorios de todos los participantes al evento'}} <img src="{{asset('images/interrogation-mark.png')}}" alt="Guia de ayuda" title="Guia de ayuda" data-toggle="modal" data-target="#mdSize" class="ml-3" style="cursor: help"></label>
-                        <textarea class="form-control tx" placeholder="{{(App::getLocale() == 'en') ? 'Example: Size Medium or 32...' : 'Ejemplo: Talla Mediana o 32...'}}" name="p_talla" id="p_talla" cols="30" rows="5"></textarea>
+                        <label for="" class="grey">{{(App::getLocale() == 'en') ? 'Please specify fins and wetsuit size for every participant (freediving experience only)' : 'Favor de escribir el número de talla de las aletas / accesorios de todos los participantes al evento'}} <img src="{{asset('images/interrogation-mark.png')}}" alt="Guia de ayuda" title="Guia de ayuda" data-toggle="modal" data-target="#mdSize" class="ml-3" style="cursor: help"></label>
+                        <textarea class="form-control tx" placeholder="{{(App::getLocale() == 'en') ? 'Example: Fins: 36 EU, wetsuit: M woman…' : 'Ejemplo: Talla Mediana o 32...'}}" name="p_talla" id="p_talla" cols="30" rows="5"></textarea>
                     </div>
                     <div class="col-12 form-group">
-                        <label for="" class="grey">{{(App::getLocale() == 'en') ? 'Please write the allergies of the participants to any food' : 'Favor de escribir el las alergías de los participantes a algun alimento'}}</label>
-                        <textarea class="form-control tx" placeholder="Ejemplo:  Alergia a los mariscos..." name="p_alergia" id="p_alergia" cols="30" rows="5"></textarea>
+                        <label for="" class="grey">{{(App::getLocale() == 'en') ? 'Please specify food restristricions and allergies for every participant' : 'Favor de escribir el las alergías de los participantes a algun alimento'}}</label>
+                        <textarea class="form-control tx" placeholder="{{(App::getLocale() == 'en') ? 'Example: vegan, no seafood, lactose intolerant, none…' : 'Ejemplo:  Alergia a los mariscos...'}}" name="p_alergia" id="p_alergia" cols="30" rows="5"></textarea>
                     </div>
                 </div>
     
